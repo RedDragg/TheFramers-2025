@@ -3,7 +3,7 @@
 Opdracht:
 Nieuwe website met maken met database van opdrachtgever uit het oogpunt van toegankelijkheid om de data te visualiseren en verbanden in de data weer te leggen.
 
-Een website maken voor Framers Framed in html css en javascript. Dit toegankelijker maken volgens de WCAG richtlijnen en data uit een database beter visualiseren voor de gebruiker/gebruikers. Is de website alleen voor Cas of voor iedereen???????????
+Een website maken voor Framers Framed in html css en javascript. Dit toegankelijker maken volgens de WCAG richtlijnen en data uit een database beter visualiseren voor de gebruiker/gebruikers.
 
 
 
@@ -32,7 +32,7 @@ Vragenlijst:
 - Moet er per se Wordpress gebruikt worden?
 - Voor wie is de website?
 - Kunnen we GitHub gebruiken?
-- - Hoe gaat het met je
+- Hoe gaat het met je
 - Team voorstellen
 - Wat heb je gedaan voor Moederdag (Drunen be like)
 - Wat zijn je plannen voor de vakantie (altijd die Drunen’s weer)
