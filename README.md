@@ -21,12 +21,14 @@ Focus voor iedereen:
 
 - Kim
     - Visuele gebruiksvriendelijkheid (view transitions) (CSS/API)
-    - 
+    - Actievere vragen stellen (samenwerken)
+    - Out of the box denken & werken, voornamelijk op CSS gebied (CSS)
 
 
 Briefing:
 - Onszelf voorstellen
 - Opdracht in onze woorden
+- Vragenlijst
 
 Vragenlijst:
 - Moet er per se Wordpress gebruikt worden?
