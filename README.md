@@ -32,23 +32,16 @@ Briefing:
 
 Vragenlijst:
 - Moet er per se Wordpress gebruikt worden?
-- Voor wie is de website?
 - Kunnen we GitHub gebruiken?
-- Hoe gaat het met je
-- Team voorstellen
-- Wat heb je gedaan voor Moederdag (Drunen be like)
-- Wat zijn je plannen voor de vakantie (altijd die Drunen’s weer)
-- Wat zijn je eisen (Als je 3 eisen kon opgeven, wat zouden ze zijn)
-- Wanneer ben je blij
-- Wat verwacht je van ons? In communicatie/updates, resultaat
-- Heb je liever front-end of back-end
-- Heb je al ideeën voor de vormgeving (druk/chaotisch of rustig, kleurtjes, etc)
-- Heb je nog dingen die wij moeten bekijken (fonts, toegang tot, etc)
-- Welke dagen kan je afspraken maken (en hoelang)
-- Zijn er nog contacten met ander personeel die belangrijk voor ons is om mee in contact te komen
-- Wat hoop jij dat de website precies bereikt/wat is het doel van de website
-- Via welk platform zou je het liefst willen communiceren
-- Welke doelgroep zou je willen bereiken
-- Welke informatie is allemaal van belang
+- Wat voor product verwacht u?
+- Mogen we de presentatie doorgestuurd krijgen?
+- Wat zijn soortgelijke producten?
+- Hoe zit het met de vaste afspraken op vrijdag?
+- Wat is precies de doelgroep?
+- Hoe zit het met de toegang tot de database/code?
+- Wat zijn uw eisen voor het project?
+- Wat is precies het doel van de website?
+- De prioriteiten van de website, wat zijn die? Functionaliteit/vormgeving/toegankelijkheid
+- Hoe communiceren we als we vragen hebben? 
 - Hoeveel vrijheid hebben wij in vormgeving, code architectuur, design, etc. 
 - Hoe wil je testen? Alleen met opdrachtgever of testgroep regelen, wie doet dat?
