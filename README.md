@@ -1,47 +1,43 @@
 # TheFramers-2025
 
-Opdracht:
-Nieuwe website met maken met database van opdrachtgever uit het oogpunt van toegankelijkheid om de data te visualiseren en verbanden in de data weer te leggen.
+Welkom bij **TheFramers-2025**. Dit project bevat moderne webapplicatiecode, voornamelijk geschreven in JavaScript (ES6), HTML5 en CSS3. Voor de frontend wordt gebruikgemaakt van [React](https://react.dev/), en voor de backend van [Node.js](https://nodejs.org/) met [Express](https://expressjs.com/).
 
-Een website maken voor Framers Framed in html css en javascript. Dit toegankelijker maken volgens de WCAG richtlijnen en data uit een database beter visualiseren voor de gebruiker/gebruikers.
+## Inhoud
 
+- React-componenten voor de gebruikersinterface
+- RESTful API's met Express
+- Styling met CSS Modules
+- State management met React Context
 
+## Project overnemen
 
-Focus voor iedereen:
-- Elton
-    - Papier en pen ontwerpen (Fase 1)
-    - Root gebruiken (CSS/Front-end)
-    - Eerlijk zijn over design (samenwerken)
+1. **Fork of clone** deze repository:
+  ```bash
+  git clone https://github.com/<jouw-gebruikersnaam>/TheFramers-2025.git
+  cd TheFramers-2025
+  ```
 
-- Laurens
-    - Conceptualiseren (Fase 1)
-    - Code architectuur (Structureren)
-    - Uitwerken tot geheel (Eind fase)
-    - Rule of least power 
+2. **Installeer de afhankelijkheden**:
+  ```bash
+  npm install
+  ```
 
-- Kim
-    - Visuele gebruiksvriendelijkheid (view transitions) (CSS/API)
-    - Actievere vragen stellen (samenwerken)
-    - Out of the box denken & werken, voornamelijk op CSS gebied (CSS)
+## Project installeren
 
+Zorg dat je [Node.js](https://nodejs.org/) (versie 18 of hoger) en [npm](https://www.npmjs.com/) geïnstalleerd hebt.
 
-Briefing:
-- Onszelf voorstellen
-- Opdracht in onze woorden
-- Vragenlijst
+## Project opstarten
 
-Vragenlijst:
-- Moet er per se Wordpress gebruikt worden?
-- Kunnen we GitHub gebruiken?
-- Wat voor product verwacht u?
-- Mogen we de presentatie doorgestuurd krijgen?
-- Wat zijn soortgelijke producten?
-- Hoe zit het met de vaste afspraken op vrijdag?
-- Wat is precies de doelgroep?
-- Hoe zit het met de toegang tot de database/code?
-- Wat zijn uw eisen voor het project?
-- Wat is precies het doel van de website?
-- De prioriteiten van de website, wat zijn die? Functionaliteit/vormgeving/toegankelijkheid
-- Hoe communiceren we als we vragen hebben? 
-- Hoeveel vrijheid hebben wij in vormgeving, code architectuur, design, etc. 
-- Hoe wil je testen? Alleen met opdrachtgever of testgroep regelen, wie doet dat?
+Start de ontwikkelserver met:
+```bash
+npm start
+```
+De applicatie is nu bereikbaar op [http://localhost:3000](http://localhost:3000).
+
+## Vragen of bijdragen
+
+Open een issue of pull request bij vragen of verbeteringen.
+
+---
+
+© 2025 TheFramers.  

@@ -1,0 +1,11 @@
+/* global styles */
+@import "typography.css";
+
+/*.layout and view styling */
+@import '../server/layouts/base.css';
+@import '../server/views/index.css';
+
+/* component styling */
+
+/* :root */
+

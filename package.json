@@ -1,0 +1,33 @@
+{
+  "name": "api-2425",
+  "version": "1.0.0",
+  "description": "In dit vier weken durende vak zullen we de kracht van het web ervaren en kijken hoe we (mobiele) web apps kunnen maken die\nnet zo aantrekkelijk zijn als native mobiele apps.",
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf dist && mkdir dist",
+    "start": "node server/server.js",
+    "predev": "npm run clean",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:client": "vite --config vite.config.js",
+    "dev:server": "nodemon server/server.js --ext js,liquid",
+    "prebuild": "npm run clean",
+    "build": "npm-run-all build:*",
+    "build:client": "vite build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@tinyhttp/app": "^2.5.2",
+    "@tinyhttp/logger": "^2.1.0",
+    "body-parser": "^2.2.0",
+    "dotenv": "^16.4.7",
+    "liquidjs": "^10.21.0",
+    "lowdb": "^2.1.0",
+    "nodemon": "^3.1.9",
+    "npm-run-all": "^4.1.5",
+    "sirv": "^3.0.1",
+    "vite": "^6.2.3"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
+}
