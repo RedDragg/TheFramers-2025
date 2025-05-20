@@ -1,6 +1,21 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
-<h1>Titel</h1>
+<main> 
+    <h1>Titel</h1>
+    <h2>Collections</h2>
+        <ul>
+            {% for collection in allCollections %}
+              <li>
+                <strong>{{ collection.name }}</strong><br>
+                UUID: {{ collection.uuid }}<br>
+                Code: {{ collection.code }}
+              </li>
+            {% endfor %}
+          </ul>   
+    <h2></h2>
+</main>
+
+
 
 {% endblock %}

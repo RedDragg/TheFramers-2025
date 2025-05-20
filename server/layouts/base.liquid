@@ -10,8 +10,8 @@
     <script type="module" src="http://localhost:5173/@vite/client" defer></script>
     <script type="module" src="http://localhost:5173/client/index.js" defer></script>
   {% else %}
-    <link rel="stylesheet" href="/index.css">
-    <script src="/index.js" defer></script>
+    {% comment %} <link rel="stylesheet" href="/index.css"> {% endcomment %}
+    {% comment %} <script src="/index.js" defer></script> {% endcomment %}
   {% endif %}
   {% block styles %}{% endblock %}
   {% block scripts %}{% endblock %}

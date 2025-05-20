@@ -17,6 +17,8 @@ import sirv from 'sirv';
 
 const collectionAPI = `https://archive.framerframed.nl/api/collections`;
 
+const wordPressAPI = `https://framerframed.nl/en/wp-json/wp/v2/pages`;
+
 const engine = new Liquid({
   extname: '.liquid',
 });
@@ -32,9 +34,9 @@ app
   app.get('/', async (req, res) => {
     const dataCollection = await fetch(collectionAPI);
     const allCollections = await dataCollection.json();
-    console.log(allCollections);
+    // console.log(allCollections)
 
-    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allCollections: allCollections.data }));
+    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allCollections: allCollections }));
   });
 
 
