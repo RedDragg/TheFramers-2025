@@ -5,11 +5,11 @@ Welcome to **TheFramers-2025**. This project contains modern webapplication code
 *Screenhot*
 
 ## Table of contents
-### [Installation project](#👇-installation-project)
-### [Questions or contributions](#💥-questions-or-contributions)
-### [The team members](#👩🏼‍💻the-team-members)
-### [The tools](#🔧-tools)
-### [Code conventions](#🤎-code-conventions)
+### [👇 Installation project](#👇-installation-project)
+### [💥 Questions or contributions](#💥-questions-or-contributions)
+### [👩🏼‍💻 The team members](#👩🏼‍💻the-team-members)
+### [🔧 The tools](#🔧-tools)
+### [🤎 Code conventions](#🤎-code-conventions)
 ### [🎞️ Week 1](#🎞️-week-1)
 
 
