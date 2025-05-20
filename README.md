@@ -4,13 +4,8 @@ Welcome to **TheFramers-2025**. This project contains modern webapplication code
 
 *Screenhot*
 
-## Table of contents
 ### [👇 Installation project](#👇-installation-project)
 ### [💥 Questions or contributions](#💥-questions-or-contributions)
-### [👩🏼‍💻 The team members](#👩🏼‍💻the-team-members)
-### [🔧 The tools](#🔧-tools)
-### [🤎 Code conventions](#🤎-code-conventions)
-### [🎞️ Week 1](#🎞️-week-1)
 
 
 ## 👇 Installation project
@@ -41,64 +36,5 @@ The application is now available on [http://localhost:3000](http://localhost:300
 ## 💥 Questions or contributions
 
 Open an issue or pull request at questions or improvements.
-
-## 👩🏼‍💻 The team members
-
-The team members of the project and their roles during.
-
-### [Abby de Best](https://github.com/abbydebest)
-* Front-end development
-* Code conventions
-
-### [Elton Irokromo]()
-* Front-end development
-* Back-end development
-
-### [Kim van Zuilen]()
-* Front-end development
-
-### [Laurens Mudde]()
-* Back-end development
-
-## 🔧 Tools
-
-## 🤎 Code conventions
-### HTML
-* Semantic HTML code
-* The rule of least power
-* Use Liquid
-
-### CSS
-* The rule of least power
-* Use CSS file per feature(base, typography and features)
-* Organise CSS with comments like this:
-
-```
-/* //////////////////////////////////////////////////////////////// */
-/* 🪩🪩🪩 CSS PART ALL CAPS 🪩🪩🪩 */
-/* //////////////////////////////////////////////////////////////// */
-```
-
-* Use Kebab-case
-* Use CSS nesting
-* Clear and specific class and id names
-* Class and id names in English
-* Use clamp() if possible and @media-queries
-* Use tabs for spacing from baseline
-* /* 🔗 SOURCE: link gebruiken voor sources
-
-### JS
-* Use CamelCase 
-* Use arrow function
-* JS functie in twee regels uitleggen wat het doet ENG
-* Use consoleLog() with every function
-* Use Tiny Http and Node
-
-### GitHub
-* Use feature branches
-* Commit and push messages with description of what code and functions changed 
-* Use the issues board, with labels and types(feature, bug, priority)
-* Use the project board, with labels and types
-* Write read me in English
 
 © 2025 TheFramers.  
