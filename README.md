@@ -1,43 +1,104 @@
 # TheFramers-2025
 
-Welkom bij **TheFramers-2025**. Dit project bevat moderne webapplicatiecode, voornamelijk geschreven in JavaScript (ES6), HTML5 en CSS3. Voor de frontend wordt gebruikgemaakt van [React](https://react.dev/), en voor de backend van [Node.js](https://nodejs.org/) met [Express](https://expressjs.com/).
+Welcome to **TheFramers-2025**. This project contains modern webapplication code, mainly written in JavaScript (ES6), HTML5 and CSS3. For the front-end, [Liquid](https://shopify.github.io/liquid/tags/iteration/) is being used, and for the back-end [Node.js](https://nodejs.org/) with [Tiny-http](https://docs.rs/tiny_http/latest/tiny_http/).
 
-## Inhoud
+*Screenhot*
 
-- React-componenten voor de gebruikersinterface
-- RESTful API's met Express
-- Styling met CSS Modules
-- State management met React Context
+## Table of contents
+### [👇 Installation project](#👇-installation-project)
+### [💥 Questions or contributions](#💥-questions-or-contributions)
+### [👩🏼‍💻 The team members](#👩🏼‍💻the-team-members)
+### [🔧 The tools](#🔧-tools)
+### [🤎 Code conventions](#🤎-code-conventions)
+### [🎞️ Week 1](#🎞️-week-1)
 
-## Project overnemen
 
-1. **Fork of clone** deze repository:
+## 👇 Installation project
+
+1. **Fork or clone** this repository:
   ```bash
-  git clone https://github.com/<jouw-gebruikersnaam>/TheFramers-2025.git
+  git clone https://github.com/<your-username>/TheFramers-2025.git
   cd TheFramers-2025
   ```
 
-2. **Installeer de afhankelijkheden**:
+2. **install the dependencies**:
   ```bash
   npm install
   ```
 
-## Project installeren
+## Install project
 
-Zorg dat je [Node.js](https://nodejs.org/) (versie 18 of hoger) en [npm](https://www.npmjs.com/) geïnstalleerd hebt.
+Make sure that [Node.js](https://nodejs.org/) (version 18 or higher) and [npm](https://www.npmjs.com/) are installed.
 
 ## Project opstarten
 
-Start de ontwikkelserver met:
+Start the server with:
 ```bash
 npm start
 ```
-De applicatie is nu bereikbaar op [http://localhost:3000](http://localhost:3000).
+The application is now available on [http://localhost:3000](http://localhost:3000).
 
-## Vragen of bijdragen
+## 💥 Questions or contributions
 
-Open een issue of pull request bij vragen of verbeteringen.
+Open an issue or pull request at questions or improvements.
 
----
+## 👩🏼‍💻 The team members
+
+The team members of the project and their roles during.
+
+### [Abby de Best](https://github.com/abbydebest)
+* Front-end development
+* Code conventions
+
+### [Elton Irokromo]()
+* Front-end development
+* Back-end development
+
+### [Kim van Zuilen]()
+* Front-end development
+
+### [Laurens Mudde]()
+* Back-end development
+
+## 🔧 Tools
+
+## 🤎 Code conventions
+### HTML
+* Semantic HTML code
+* The rule of least power
+* Use Liquid
+
+### CSS
+* The rule of least power
+* Use CSS file per feature(base, typography and features)
+* Organise CSS with comments like this:
+
+```
+/* //////////////////////////////////////////////////////////////// */
+/* 🪩🪩🪩 CSS PART ALL CAPS 🪩🪩🪩 */
+/* //////////////////////////////////////////////////////////////// */
+```
+
+* Use Kebab-case
+* Use CSS nesting
+* Clear and specific class and id names
+* Class and id names in English
+* Use clamp() if possible and @media-queries
+* Use tabs for spacing from baseline
+* /* 🔗 SOURCE: link gebruiken voor sources
+
+### JS
+* Use CamelCase 
+* Use arrow function
+* JS functie in twee regels uitleggen wat het doet ENG
+* Use consoleLog() with every function
+* Use Tiny Http and Node
+
+### GitHub
+* Use feature branches
+* Commit and push messages with description of what code and functions changed 
+* Use the issues board, with labels and types(feature, bug, priority)
+* Use the project board, with labels and types
+* Write read me in English
 
 © 2025 TheFramers.  
