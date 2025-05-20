@@ -25,7 +25,7 @@ Welcome to **TheFramers-2025**. This project contains modern webapplication code
 
 Make sure that [Node.js](https://nodejs.org/) (version 18 or higher) and [npm](https://www.npmjs.com/) are installed.
 
-## Project opstarten
+## Start project
 
 Start the server with:
 ```bash
