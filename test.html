@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        ul{
+            list-style: none;
+            perspective: 1000px;
+            position: relative;
+        }
+
+            li:nth-of-type(1){
+                --index-archief:0;
+            }
+            li:nth-of-type(2){
+                --index-archief:1;
+            }
+            li:nth-of-type(3){
+                --index-archief:2;
+            }
+            li:nth-of-type(4){
+                --index-archief:3;
+            }
+            li:nth-of-type(5){
+                --index-archief:4;
+            }
+            li:nth-of-type(6){
+                --index-archief:5;
+            }
+
+        li{
+            position: absolute;
+            width: 30rem;
+            height: 30rem;
+            background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+            position: absolute;
+            transition: .5s;
+    
+
+
+
+            label{
+                position: absolute;
+                width: 200px;
+                height: 300px;
+                background: red;
+            }
+
+
+            
+        }
+
+        ul:has(#box1:checked) li{
+            transition: .5s;
+            transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+
+        }
+
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li> <label for="box1"><input type="checkbox" id="box1" hidden></label></li>
+       
+    </ul>
+   
+</body>
+</html>
