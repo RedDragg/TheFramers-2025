@@ -1,89 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        ul{
-            list-style: none;
-            perspective: 1000px;
-            position: relative;
-        }
+    .closet {
+      background-color: pink;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 100px;
+      padding: 20px;
+      justify-content: center;
+      max-width: 500px;
+    }
 
-            li:nth-of-type(1){
-                --index-archief:0;
-            }
-            li:nth-of-type(2){
-                --index-archief:1;
-            }
-            li:nth-of-type(3){
-                --index-archief:2;
-            }
-            li:nth-of-type(4){
-                --index-archief:3;
-            }
-            li:nth-of-type(5){
-                --index-archief:4;
-            }
-            li:nth-of-type(6){
-                --index-archief:5;
-            }
+    ul {
+      list-style: none;
+      perspective: 1000px;
+      position: relative;
+      width: 30rem;
+      height: 30rem;
+    }
 
-        li{
-            position: absolute;
-            width: 30rem;
-            height: 30rem;
-            background: linear-gradient(to bottom, #ff7e5f, #feb47b);
-            position: absolute;
-            transition: .5s;
-    
+    li:nth-of-type(1) {
+      --index-archief: 0;
+    }
 
+    li:nth-of-type(2) {
+      --index-archief: 1;
+    }
 
+    li:nth-of-type(3) {
+      --index-archief: 2;
+    }
 
-            label{
-                position: absolute;
-                width: 200px;
-                height: 300px;
-                background: red;
-            }
+    li:nth-of-type(4) {
+      --index-archief: 3;
+    }
 
+    li:nth-of-type(5) {
+      --index-archief: 4;
+    }
 
-            
-        }
+    li:nth-of-type(6) {
+      --index-archief: 5;
+    }
 
-        ul:has(#box1:checked) li{
-            transition: .5s;
-            transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+    li {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+      transition: 0.5s;
+      transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -10px)) translateY(calc(var(--index-archief) * 10px));
+    }
 
-        }
+    li label {
+      position: absolute;
+      width: 200px;
+      height: 300px;
+      background: red;
+      cursor: pointer;
+    }
 
+    /* Voor elke checkbox een aparte transform */
+    ul:has(#box1:checked) li {
+      transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+    }
 
-    </style>
+    ul:has(#box2:checked) li {
+        transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+    }
+
+    ul:has(#box3:checked) li {
+        transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+    }
+
+    ul:has(#box4:checked) li {
+        transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+    }
+
+    ul:has(#box5:checked) li {
+        transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+    }
+
+    ul:has(#box6:checked) li {
+        transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+    }
+
+    ul:has(#box7:checked) li {
+        transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+    }
+
+    ul:has(#box8:checked) li {
+        transform: translateZ(calc(var(--index-archief) * 5px)) translateX(calc(var(--index-archief) * -100px)) translateY(calc(var(--index-archief) * 100px));
+    }
+  </style>
 </head>
+
 <body>
+  <section class="closet">
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li> <label for="box1"><input type="checkbox" id="box1" hidden></label></li>
-       
+      <li></li><li></li><li></li><li></li><li></li>
+      <li><label for="box1"><input type="checkbox" id="box1" hidden /></label></li>
     </ul>
-   
+    <ul>
+      <li></li><li></li><li></li><li></li><li></li>
+      <li><label for="box2"><input type="checkbox" id="box2" hidden /></label></li>
+    </ul>
+    <ul>
+      <li></li><li></li><li></li><li></li><li></li>
+      <li><label for="box3"><input type="checkbox" id="box3" hidden /></label></li>
+    </ul>
+    <ul>
+      <li></li><li></li><li></li><li></li><li></li>
+      <li><label for="box4"><input type="checkbox" id="box4" hidden /></label></li>
+    </ul>
+    <ul>
+      <li></li><li></li><li></li><li></li><li></li>
+      <li><label for="box5"><input type="checkbox" id="box5" hidden /></label></li>
+    </ul>
+    <ul>
+      <li></li><li></li><li></li><li></li><li></li>
+      <li><label for="box6"><input type="checkbox" id="box6" hidden /></label></li>
+    </ul>
+    <ul>
+      <li></li><li></li><li></li><li></li><li></li>
+      <li><label for="box7"><input type="checkbox" id="box7" hidden /></label></li>
+    </ul>
+    <ul>
+      <li></li><li></li><li></li><li></li><li></li>
+      <li><label for="box8"><input type="checkbox" id="box8" hidden /></label></li>
+    </ul>
+  </section>
 </body>
+
 </html>
