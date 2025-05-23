@@ -5,5 +5,10 @@
 @import '../server/layouts/base.css';
 
 /* Component styling */
+@import '../server/views/index.css';
 
 
+img {
+    width: 100%;
+    height: 100%;
+}
