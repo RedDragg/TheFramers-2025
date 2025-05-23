@@ -4,20 +4,11 @@ import bodyParser from 'body-parser'; // Import json middleware from body-parser
 import { logger } from '@tinyhttp/logger';
 import { Liquid } from 'liquidjs';
 import sirv from 'sirv';
-// import { fileURLToPath } from 'url';
-// import { dirname, join } from 'path';
-
-// Verkrijg het pad van de huidige map
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
-
-// // Gebruik het pad om het bestand te maken
-// const file = join(__dirname, 'db.json');
-// const adapter = new JSONFile(file);
-
-const collectionAPI = `https://archive.framerframed.nl/api/collections`;
+import events from './events.json' assert { type: 'json' };
+import artists from './artists.json' assert { type: 'json' };
 
 const wordPressAPI = `https://framerframed.nl/en/wp-json/wp/v2/pages`;
+
 
 const engine = new Liquid({
   extname: '.liquid',
@@ -32,14 +23,75 @@ app
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
 
   app.get('/', async (req, res) => {
-    const dataCollection = await fetch(collectionAPI);
-    const allCollections = await dataCollection.json();
-    // console.log(allCollections)
+  const allEvents = events.events;
+  const allArtists = artists.artists;
 
-    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allCollections: allCollections }));
+  const searchQuery = req.query.search?.toLowerCase().trim() || '';
+  const filterType = req.query.type || 'all';
+
+  let filteredEvents = [];
+  let filteredArtists = [];
+
+  // Show all if no search, but based on type
+  if (!searchQuery) {
+    if (filterType === 'all' || filterType === 'events') {
+      filteredEvents = allEvents;
+    }
+
+    if (filterType === 'all' || filterType === 'artists') {
+      filteredArtists = allArtists;
+    }
+  } else {
+    // Filter by search query
+    if (filterType === 'all' || filterType === 'events') {
+      filteredEvents = allEvents.filter(event =>
+        event.node.title_NL.toLowerCase().includes(searchQuery)
+      );
+    }
+
+    if (filterType === 'all' || filterType === 'artists') {
+      filteredArtists = allArtists.filter(artist =>
+        artist.name.toLowerCase().includes(searchQuery)
+      );
+    }
+  }
+
+    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allEvents: filteredEvents, allArtists: filteredArtists, query: searchQuery, type: filterType  }));
   });
 
+  app.post('/show-artists', (req, res) => {
+    const { event_id } = req.body;
+    console.log(event_id)
+  
+    const event = events.events.find(ev => ev.node.ff_id == event_id);
+    const allArtists = artists.artists;
+  
+    if (!event) {
+      console.log('Event not found');
+      return res.redirect('/');
+    }
+  
+    console.log(`--- Artists related to event: ${event.node.title_NL} ---`);
+    event.rels.forEach(rel => {
+      const relatedArtist = allArtists.find(artist => artist.ff_id === rel.ff_id);
+      if (relatedArtist) {
+        console.log(`✔️ ${relatedArtist.name} (ff_id: ${relatedArtist.ff_id})`);
+      } else {
+        console.log(`❌ No artist found for relation uuid: ${rel.uuid}`);
+      }
+    });
+  
+    return res.redirect('/');
+  });
 
+app.post('/filter', (req, res) => {
+  const searchQuery = req.body.search;
+  const searchType = req.body.type;
+  console.log(searchQuery);
+  console.log(searchType);
+
+  return res.redirect(`/?search=${searchQuery}&type=${searchType}`);
+})
 
 
 
