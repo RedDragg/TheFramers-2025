@@ -23,9 +23,11 @@ app
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
 
   app.get('/', async (req, res) => {
+  // Data van events en artists ophalen
   const allEvents = events.events;
   const allArtists = artists.artists;
 
+  // Search query and filter opvragen uit URL
   const searchQuery = req.query.search?.toLowerCase().trim() || '';
   const filterType = req.query.type || 'all';
 
@@ -92,6 +94,12 @@ app.post('/filter', (req, res) => {
 
   return res.redirect(`/?search=${searchQuery}&type=${searchType}`);
 })
+
+
+
+
+
+
 
 
 
