@@ -3,40 +3,72 @@
 {% block content %}
 <main>
 
-    <h1>Titel</h1>
-  <!-- Radio buttons for selecting event type -->
-<form method="GET" action="/">
-{% assign unique_types = "" | split: "," %}
+  <h1>Titel</h1>
+  <div class="archive-container">
+    <section class="left-archive-wrapper">
+    <!-- Radio buttons for selecting event type -->
+  <form method="GET" action="/">
+    {% assign unique_types = "" | split: "," %}
 
-{% for type in allEventTypes %}
-  {% if type.nl and type.nl != "" and type.nl != blank %}
+    {% for type in allEventTypes %}
+    {% if type.nl and type.nl != "" and type.nl != blank %}
     {% unless unique_types contains type.nl %}
-      {% assign unique_types = unique_types | push: type.nl %}
+    {% assign unique_types = unique_types | push: type.nl %}
 
-      <li>
-        <label>
-          <input type="radio" value="{{ type.nl }}" name="eventType" {% if type.nl == selectedType %}checked{% endif %}>
-          {{ type.nl }}
-        </label>
-      </li>
+    <li>
+      <label>
+        <input type="radio" value="{{ type.nl }}" name="eventType" {% if type.nl==selectedType %}checked{% endif %}>
+        {{ type.nl }}
+      </label>
+    </li>
 
     {% endunless %}
-  {% endif %}
-{% endfor %}
-<button type="submit">Filter</button>
-</form>
-
-<!-- Filtered events -->
-<ul>
-  {% for item in allEvents %}
-    {% if item.event.type_nl == selectedType or selectedType == nil %}
-      <li>
-    <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }}  - {{ item.event.date_start  }} - {% if item.event.date_end == nil or item.event.date_end == blank %} NaN {% else %} {{ item.event.date_end  }} {% endif %} - relation <img src="/images/bloem.jpg" alt="">
-      </li>
     {% endif %}
-  {% endfor %}
+    {% endfor %}
+    <button type="submit">Filter</button>
+  </form>
 
-</ul>
+  <!-- Filtered events -->
+    </section>
+    <section class="right-archive-wrapper">
+
+  <table>
+    <tr>
+      <th>
+        <p>Title</p>
+      </th>
+      <th>
+        <p>Type</p>
+      </th>
+      <th>
+        <p>Date start</p>
+      </th>
+      <th>
+        <p>Date end</p>
+      </th>
+      <th>
+        <p>Participants</p>
+      </th>
+    </tr>
+    {% for item in allEvents %}
+    {% if item.event.type_nl == selectedType or selectedType == nil %}
+    <tr>
+      <td>{{ item.event.title_nl }}</td>
+      <td>{{ item.event.type_nl }}</td>
+      <td>{{ item.event.date_start }}</td>
+      <td>{% if
+        item.event.date_end == nil or item.event.date_end == blank %} NaN {% else %} {{ item.event.date_end }} {% endif
+        %}</td>
+      <td>relation</td>
+      <td><img src="/images/bloem.jpg" alt=""></td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+
+  </table>
+
+    </section>
+  </div>
 
 
 
@@ -44,5 +76,3 @@
 </main>
 
 {% endblock %}
-
-

@@ -6,6 +6,7 @@
 
 /* Component styling */
 @import '../server/views/index.css';
+@import '../server/views/archive.css';
 
 
 img {
