@@ -18,7 +18,16 @@
             {% if item.event.type_nl == type.nl %}
               <li>
                 <a href="/archive/:id">
-            <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }} - {% for rel in item.relationships %} {% for artist in allArtists %} {% if rel.node == "Person" and rel.uuid == artist.uuid %} {{ artist.name }} {% endif %} {% endfor %} {% endfor %}
+            <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }} - 
+            {% for rel in item.relationships %}
+              {% if rel.node == "Person" %}
+                {% for artist in allArtists %}
+                  {% if rel.uuid == artist.person.uuid %}
+                    {{ artist.person.name }}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
                 </a>
               </li>
             {% endif %}

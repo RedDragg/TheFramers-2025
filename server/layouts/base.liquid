@@ -7,10 +7,9 @@
     <title>{{ title }}</title>
   {% endblock %}
   {% if NODE_ENV == "development" %}
-    <script type="module" src="http://localhost:5173/@vite/client" defer></script>
+   <script type="module" src="http://localhost:5173/@vite/client" defer></script>
     <script type="module" src="http://localhost:5173/client/index.js" defer></script>
   {% else %}
-  {% comment %} <link rel="stylesheet" href="/server/views/archive.css"> {% endcomment %}
     <link rel="stylesheet" href="/index.css">
     <script src="/index.js" defer></script>
   {% endif %}
