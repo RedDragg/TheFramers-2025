@@ -90,14 +90,14 @@
           "year": 2022,
           "date_start": "2 januari 2022",
           "date_end": "8 februari 2022",
-          "type": "Event"
+          "type": "Exhibition Program"
         },
         {
           "ff_id": 2468,
           "uuid": "01234abcd-hij567",
           "year": 2018,
-          "title": "Manual of Editing",
-          "type": "Publication",
+          "title": "Debating titel",
+          "type": "Debate",
           "image": {
             "src": "String",
             "alt": "String",
@@ -107,7 +107,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Exhibition"
     },
     {
       "cover": {
@@ -153,7 +153,7 @@
           "year": 2022,
           "date_start": "1 maart 2022",
           "date_end": "10 maart 2022",
-          "type": "Event"
+          "type": "Eductional Program"
         },
         {
           "ff_id": 70001,
@@ -170,7 +170,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Exhibition Program"
     },
     {
       "cover": {
@@ -224,7 +224,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Eductional Program"
     },
     {
       "cover": {
@@ -278,7 +278,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Launch"
     },
     {
       "cover": {
@@ -332,7 +332,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Performance"
     },
     {
       "cover": {
@@ -386,7 +386,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Symposium"
     },
     {
       "cover": {
@@ -440,7 +440,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Debate"
     },
     {
       "cover": {
@@ -494,7 +494,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Public Program"
     },
     {
       "cover": {
@@ -548,7 +548,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Film Screening"
     },
     {
       "cover": {
@@ -602,7 +602,7 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
+      "type": "Debate"
     },
     {
       "cover": {
@@ -656,7 +656,155 @@
           }
         }
       ],
-      "type": "Tentoonstelling"
-    }
+      "type": "Exhibition Program"
+    },
+    {
+      "cover": {
+        "upload": "expo11_cover.jpg",
+        "alt": "Cover van Techno Visions",
+        "caption": "Een futuristische kijk op technologie en kunst",
+        "width": 80,
+        "height": 80
+      },
+      "node": {
+        "title_NL": "Techno Visies",
+        "content_NL": "Een tentoonstelling die de toekomst van technologie en kunst onderzoekt.",
+        "title_EN": "Techno Visions",
+        "content_EN": "An exhibition exploring the future of technology and art.",
+        "ff_id": 30011,
+        "uuid": "expo-011",
+        "year": 2025,
+        "date_start": "15 januari 2025",
+        "date_end": "28 februari 2025"
+      },
+      "rels": [
+        {
+          "bio_NL": "Jeroen combineert kunst en AI in zijn werk.",
+          "bio_EN": "Jeroen combines art and AI in his work.",
+          "ff_id": 50011,
+          "uuid": "rel-011",
+          "year": 1985,
+          "name": "Jeroen Bakker",
+          "type": "Person"
+        },
+        {
+          "ff_id": 60011,
+          "uuid": "evt-011",
+          "year": 2025,
+          "date_start": "20 januari 2025",
+          "date_end": "22 januari 2025",
+          "type": "Workshop"
+        },
+        {
+          "ff_id": 70011,
+          "uuid": "pub-011",
+          "year": 2024,
+          "title": "Future Interfaces",
+          "type": "Publication",
+          "image": {
+            "src": "future_interfaces.jpg",
+            "alt": "Boek over toekomstige interfaces",
+            "caption": "Publicatie over technologische innovaties",
+            "width": 90,
+            "height": 90
+          }
+        }
+      ],
+      "type": "Exhibition"
+    },
+    {
+      "cover": {
+        "upload": "expo12_cover.jpg",
+        "alt": "Cover van Sound Waves",
+        "caption": "Geluid en ruimte in een interactieve installatie",
+        "width": 80,
+        "height": 80
+      },
+      "node": {
+        "title_NL": "Geluidsgolven",
+        "content_NL": "Een interactieve installatie die de relatie tussen geluid en ruimte onderzoekt.",
+        "title_EN": "Sound Waves",
+        "content_EN": "An interactive installation exploring the relationship between sound and space.",
+        "ff_id": 30012,
+        "uuid": "expo-012",
+        "year": 2025,
+        "date_start": "10 maart 2025",
+        "date_end": "30 maart 2025"
+      },
+      "rels": [
+        {
+          "bio_NL": "Maya werkt met geluidskunst en ruimtelijke ontwerpen.",
+          "bio_EN": "Maya works with sound art and spatial design.",
+          "ff_id": 50012,
+          "uuid": "rel-012",
+          "year": 1990,
+          "name": "Maya de Vries",
+          "type": "Person"
+        },
+        {
+          "ff_id": 60012,
+          "uuid": "evt-012",
+          "year": 2025,
+          "date_start": "15 maart 2025",
+          "date_end": "16 maart 2025",
+          "type": "Live Performance"
+        }
+      ],
+      "type": "Symposium"
+    },
+    {
+      "cover": {
+        "upload": "expo13_cover.jpg",
+        "alt": "Cover van Digital Dreams",
+        "caption": "Een digitale verkenning van dromen en realiteit",
+        "width": 80,
+        "height": 80
+      },
+      "node": {
+        "title_NL": "Digitale Dromen",
+        "content_NL": "Deze tentoonstelling onderzoekt de overlap tussen dromen en digitale realiteit.",
+        "title_EN": "Digital Dreams",
+        "content_EN": "This exhibition explores the overlap between dreams and digital reality.",
+        "ff_id": 30013,
+        "uuid": "expo-013",
+        "year": 2025,
+        "date_start": "5 mei 2025",
+        "date_end": "25 mei 2025"
+      },
+      "rels": [
+        {
+          "bio_NL": "Emma maakt digitale kunst geïnspireerd door droombeelden.",
+          "bio_EN": "Emma creates digital art inspired by dream imagery.",
+          "ff_id": 50013,
+          "uuid": "rel-013",
+          "year": 1993,
+          "name": "Emma Jansen",
+          "type": "Person"
+        },
+        {
+          "ff_id": 60013,
+          "uuid": "evt-013",
+          "year": 2025,
+          "date_start": "10 mei 2025",
+          "date_end": "11 mei 2025",
+          "type": "Lecture"
+        },
+        {
+          "ff_id": 70013,
+          "uuid": "pub-013",
+          "year": 2023,
+          "title": "Dreamscapes",
+          "type": "Publication",
+          "image": {
+            "src": "dreamscapes.jpg",
+            "alt": "Boek over dromen en digitale kunst",
+            "caption": "Publicatie over digitale dromen",
+            "width": 90,
+            "height": 90
+          }
+        }
+      ],
+      "type": "Launch"
+    }    
   ]
 }

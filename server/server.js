@@ -4,11 +4,13 @@ import bodyParser from 'body-parser'; // Import json middleware from body-parser
 import { logger } from '@tinyhttp/logger';
 import { Liquid } from 'liquidjs';
 import sirv from 'sirv';
-import events from './events.json' assert { type: 'json' };
-import artists from './artists.json' assert { type: 'json' };
+// import events from './events.json' assert { type: 'json' };
+// import artists from './artists.json' assert { type: 'json' };
 
 const wordPressAPI = `https://framerframed.nl/en/wp-json/wp/v2/pages`;
-
+const eventsAPI = `https://archive.framerframed.nl/api/ff/events`;
+const personAPI = `https://archive.framerframed.nl/api/ff/persons`;
+const eventTypesAPI = `https://archive.framerframed.nl/api/ff/eventtypes`;
 
 const engine = new Liquid({
   extname: '.liquid',
@@ -23,45 +25,23 @@ app
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
 
   app.get('/', async (req, res) => {
-  // Data van events en artists ophalen
-  const allEvents = events.events;
-  const allArtists = artists.artists;
+    // Data van events en artists ophalen
+    const dataEvents = await fetch(eventsAPI)
+    const allEvents = await dataEvents.json();
+    console.log(allEvents);
 
-  // Search query and filter opvragen uit URL
-  const searchQuery = req.query.search?.toLowerCase().trim() || '';
-  const filterType = req.query.type || 'all';
+    const dataEventTypes = await fetch(eventTypesAPI);
+    const allEventTypes = await dataEventTypes.json();
 
-  let filteredEvents = [];
-  let filteredArtists = [];
+    const dataPeople = await fetch(personAPI);
+    const allArtists = await dataPeople.json();
 
-  // Show all if no search, but based on type
-  if (!searchQuery) {
-    if (filterType === 'all' || filterType === 'events') {
-      filteredEvents = allEvents;
-    }
 
-    if (filterType === 'all' || filterType === 'artists') {
-      filteredArtists = allArtists;
-    }
-  } else {
-    // Filter by search query
-    if (filterType === 'all' || filterType === 'events') {
-      filteredEvents = allEvents.filter(event =>
-        event.node.title_NL.toLowerCase().includes(searchQuery)
-      );
-    }
-
-    if (filterType === 'all' || filterType === 'artists') {
-      filteredArtists = allArtists.filter(artist =>
-        artist.name.toLowerCase().includes(searchQuery)
-      );
-    }
-  }
-
-    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allEvents: filteredEvents, allArtists: filteredArtists, query: searchQuery, type: filterType  }));
+    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allEvents: allEvents, allArtists: allArtists, allEventTypes: allEventTypes  }));
   });
 
-  app.post('/show-artists', (req, res) => {
+  app.post('/archives/:type/show-artists', (req, res) => {
+    const type = req.params.type.toLowerCase();
     const { event_id } = req.body;
     console.log(event_id)
   
@@ -83,23 +63,49 @@ app
       }
     });
   
-    return res.redirect('/');
+    return res.redirect('/archives/:type');
   });
 
-app.post('/filter', (req, res) => {
+app.post('/archives/filter', (req, res) => {
   const searchQuery = req.body.search;
   const searchType = req.body.type;
   console.log(searchQuery);
   console.log(searchType);
 
-  return res.redirect(`/?search=${searchQuery}&type=${searchType}`);
+  return res.redirect(`/archives/:type/?search=${searchQuery}&type=${searchType}`);
 })
 
+app.get('/archives/:type', (req, res) => {
+  const type = req.params.type.toLowerCase();
+  console.log(type)
 
+  const allEvents = events.events;
+  const allArtists = artists.artists;
 
+  let filteredEvents = [];
+  let filteredArtists = [];
 
+  if (type === 'all') {
+    filteredEvents = allEvents;
+    filteredArtists = allArtists;
+  } else if (type === 'events') {
+    filteredEvents = allEvents;
+  } else if (type === 'artists') {
+    filteredArtists = allArtists;
+  } else {
+    // Filter alleen events met die specifieke type
+    filteredEvents = allEvents.filter(event => event.type.toLowerCase() === type);
+  }
 
-
+  return res.send(renderTemplate('server/views/archives.liquid', {
+    title: 'Archives',
+    allEvents: filteredEvents,
+    allArtists: filteredArtists,
+    type: type,
+    query: '',
+    type: type
+  }));
+});
 
 
 
