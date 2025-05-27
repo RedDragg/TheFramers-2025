@@ -30,7 +30,7 @@ app
     // Data van events en artists ophalen
     const dataEvents = await fetch(eventsAPI)
     const allEvents = await dataEvents.json();
-    console.log(allEvents);
+    // console.log(allEvents);
 
     const dataEventTypes = await fetch(eventTypesAPI);
     const allEventTypes = await dataEventTypes.json();
@@ -42,7 +42,22 @@ app
     return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allEvents, allArtists, allEventTypes, selectedType  }));
   });
 
-  app.get('/')
+  app.get('/archive', async (req, res) => {
+    const selectedType = req.query.eventType;
+
+    // Data van events en artists ophalen
+    const dataEvents = await fetch(eventsAPI)
+    const allEvents = await dataEvents.json();
+    console.log(allEvents);
+
+    const dataEventTypes = await fetch(eventTypesAPI);
+    const allEventTypes = await dataEventTypes.json();
+
+    const dataPeople = await fetch(personAPI);
+    const allArtists = await dataPeople.json();
+
+    return res.send(renderTemplate('server/views/archive.liquid', { title: 'Archive', allEvents, allArtists, allEventTypes, selectedType }));
+  });
 
 
 
