@@ -31,13 +31,13 @@
   {% for item in allEvents %}
     {% if item.event.type_nl == selectedType or selectedType == nil %}
       <li>
-    <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }}  - {{ item.event.date_start  }} - {{ item.event.date_end  }} - {% for rel in relationships %} {% if rel.name == "person" %} {{ rel.name }} {% endif %} {% endfor %}
-        <strong>{{ item.event. }}</strong>
+    <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }}  - {{ item.event.date_start  }} - {% if item.event.date_end == nil or item.event.date_end == blank %} NaN {% else %} {{ item.event.date_end  }} {% endif %} - relation <img src="/images/bloem.jpg" alt="">
       </li>
     {% endif %}
   {% endfor %}
 
 </ul>
+
 
 
 

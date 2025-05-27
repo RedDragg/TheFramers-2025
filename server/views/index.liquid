@@ -1,7 +1,7 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
-<main> 
+<main>
 
     <h1>Titel</h1>
   <!-- Radio buttons for selecting event type -->
@@ -12,14 +12,14 @@
   {% if type.nl and type.nl != "" and type.nl != blank %}
     {% unless unique_types contains type.nl %}
       {% assign unique_types = unique_types | push: type.nl %}
-      
+
       <li>
         <label>
           <input type="radio" value="{{ type.nl }}" name="eventType" {% if type.nl == selectedType %}checked{% endif %}>
           {{ type.nl }}
         </label>
       </li>
-      
+
     {% endunless %}
   {% endif %}
 {% endfor %}
@@ -31,15 +31,16 @@
   {% for item in allEvents %}
     {% if item.event.type_nl == selectedType or selectedType == nil %}
       <li>
-        <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }} 
+    <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }}  - {{ item.event.date_start  }} - {% if item.event.date_end == nil or item.event.date_end == blank %} NaN {% else %} {{ item.event.date_end  }} {% endif %} - relation <img src="/images/bloem.jpg" alt="">
       </li>
     {% endif %}
   {% endfor %}
-  
+
 </ul>
-    
-   
-       
+
+
+
+
 </main>
 
 {% endblock %}
