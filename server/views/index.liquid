@@ -4,16 +4,39 @@
 <main> 
 
     <h1>Titel</h1>
-   <ul>
-      {% for type in allEventTypes %}
-        <li>
-          <label>
-            <input type="radio" value="{{ type }}" name="eventType" {% if type == selectedType %}checked{% endif %}>
-            {{ type.nl }}
-          </label>
-        </li>
-        {% endfor %}
-   </ul>
+  <!-- Radio buttons for selecting event type -->
+<form method="GET" action="/">
+{% assign unique_types = "" | split: "," %}
+
+{% for type in allEventTypes %}
+  {% if type.nl and type.nl != "" and type.nl != blank %}
+    {% unless unique_types contains type.nl %}
+      {% assign unique_types = unique_types | push: type.nl %}
+      
+      <li>
+        <label>
+          <input type="radio" value="{{ type.nl }}" name="eventType" {% if type.nl == selectedType %}checked{% endif %}>
+          {{ type.nl }}
+        </label>
+      </li>
+      
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+<button type="submit">Filter</button>
+</form>
+
+<!-- Filtered events -->
+<ul>
+  {% for item in allEvents %}
+    {% if item.event.type_nl == selectedType or selectedType == nil %}
+      <li>
+        <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }} 
+      </li>
+    {% endif %}
+  {% endfor %}
+  
+</ul>
     
    
        

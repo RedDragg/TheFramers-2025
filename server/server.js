@@ -25,6 +25,8 @@ app
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
 
   app.get('/', async (req, res) => {
+    const selectedType = req.query.eventType;
+
     // Data van events en artists ophalen
     const dataEvents = await fetch(eventsAPI)
     const allEvents = await dataEvents.json();
@@ -37,75 +39,10 @@ app
     const allArtists = await dataPeople.json();
 
 
-    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allEvents: allEvents, allArtists: allArtists, allEventTypes: allEventTypes  }));
+    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allEvents, allArtists, allEventTypes, selectedType  }));
   });
 
-  app.post('/archives/:type/show-artists', (req, res) => {
-    const type = req.params.type.toLowerCase();
-    const { event_id } = req.body;
-    console.log(event_id)
-  
-    const event = events.events.find(ev => ev.node.ff_id == event_id);
-    const allArtists = artists.artists;
-  
-    if (!event) {
-      console.log('Event not found');
-      return res.redirect('/');
-    }
-  
-    console.log(`--- Artists related to event: ${event.node.title_NL} ---`);
-    event.rels.forEach(rel => {
-      const relatedArtist = allArtists.find(artist => artist.ff_id === rel.ff_id);
-      if (relatedArtist) {
-        console.log(`✔️ ${relatedArtist.name} (ff_id: ${relatedArtist.ff_id})`);
-      } else {
-        console.log(`❌ No artist found for relation uuid: ${rel.uuid}`);
-      }
-    });
-  
-    return res.redirect('/archives/:type');
-  });
-
-app.post('/archives/filter', (req, res) => {
-  const searchQuery = req.body.search;
-  const searchType = req.body.type;
-  console.log(searchQuery);
-  console.log(searchType);
-
-  return res.redirect(`/archives/:type/?search=${searchQuery}&type=${searchType}`);
-})
-
-app.get('/archives/:type', (req, res) => {
-  const type = req.params.type.toLowerCase();
-  console.log(type)
-
-  const allEvents = events.events;
-  const allArtists = artists.artists;
-
-  let filteredEvents = [];
-  let filteredArtists = [];
-
-  if (type === 'all') {
-    filteredEvents = allEvents;
-    filteredArtists = allArtists;
-  } else if (type === 'events') {
-    filteredEvents = allEvents;
-  } else if (type === 'artists') {
-    filteredArtists = allArtists;
-  } else {
-    // Filter alleen events met die specifieke type
-    filteredEvents = allEvents.filter(event => event.type.toLowerCase() === type);
-  }
-
-  return res.send(renderTemplate('server/views/archives.liquid', {
-    title: 'Archives',
-    allEvents: filteredEvents,
-    allArtists: filteredArtists,
-    type: type,
-    query: '',
-    type: type
-  }));
-});
+  app.get('/')
 
 
 
