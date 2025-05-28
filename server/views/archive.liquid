@@ -8,32 +8,39 @@
     <section class="left-archive-wrapper">
       <!-- Radio buttons for selecting event type -->
       <form method="GET" action="/archive">
-        <ul>
-          {% assign unique_types = "" | split: "," %}
-
-          {% for type in allEventTypes %}
+      <ul>
+        <!-- "Alle" optie -->
+        <li>
+          <label>
+            <input type="radio" name="eventType" value="all" hidden {% if selectedType == null or selectedType == "all" %}checked{% endif %}>
+            <p>Alle</p>
+          </label>
+        </li>
+    
+        {% assign unique_types = "" | split: "," %}
+        {% for type in allEventTypes %}
           {% if type.nl and type.nl != "" and type.nl != blank %}
-          {% unless unique_types contains type.nl %}
-          {% assign unique_types = unique_types | push: type.nl %}
-          <li>
-            <label>
-              <input type="radio" value="{{ type.nl }}" name="eventType" hidden {% if type.nl==selectedType %}checked{%
-                endif %}>
-              <p>{{ type.nl }}</p>
-            </label>
-          </li>
-          {% endunless %}
+            {% unless unique_types contains type.nl %}
+              {% assign unique_types = unique_types | push: type.nl %}
+              <li>
+                <label>
+                  <input type="radio" value="{{ type.nl }}" name="eventType" hidden {% if type.nl == selectedType %}checked{% endif %}>
+                  <p>{{ type.nl }}</p>
+                </label>
+              </li>
+            {% endunless %}
           {% endif %}
-          {% endfor %}
-        </ul>
-        <button type="submit">Filter</button>
-      </form>
+        {% endfor %}
+      </ul>
+      <button type="submit">Filter</button>
+    </form>
+    
 
       <!-- Filtered events -->
     </section>
     <section class="right-archive-wrapper">
       <div class="top-wrapper">
-        <h1>Exhibition Programs</h1>
+        <h1>{{ selectedType }}</h1>
         <ul class="category-right-grid">
           <li><img src="" alt=""></li>
           <li></li>
@@ -60,7 +67,7 @@
           </th>
         </tr>
         {% for item in allEvents %}
-        {% if item.event.type_nl == selectedType or selectedType == nil %}
+          {% if selectedType == "all" or not selectedType or item.event.type_nl == selectedType %}
 
         <tr class="archive-item" data-href="/event/{{ item.event.id }}" tabindex="0">
           <td>{{ item.event.title_nl }}</td>
@@ -81,7 +88,7 @@
               {% endif %}
             {% endfor %}
           </td>
-          <td><img src="/images/bloem.jpg" alt="" class="category-image"></td>
+          <td><img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image"></td>
         </tr>
 
 

@@ -4,6 +4,13 @@
 <main>
 
     <h1>Titel</h1>
+    <search>
+      <form method="post" action="/search">
+              {% comment %} Name zorgt voor key form + action is voor andere route {% endcomment %}
+          <input type="search" id="searchAgent" name="search" value="{{ query }}" />
+          <button type="submit">Zoek</button>         
+        </form>
+      </search>
     <ul>
     {% assign unique_types = "" | split: "," %}
 
@@ -18,8 +25,8 @@
             {% if item.event.type_nl == type.nl %}
               <li>
                 <a href="/archive/{{ item.event.uuid }}">
-            <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }}  
- 
+                  <strong>{{ item.event.title_nl }}</strong> 
+                  <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image">
                 </a>
               </li>
             {% endif %}
