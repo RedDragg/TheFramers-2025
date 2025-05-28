@@ -17,7 +17,7 @@
           {% for item in allEvents %}
             {% if item.event.type_nl == type.nl %}
               <li>
-                <a href="/archive/:id">
+                <a href="/archive/{{ item.event.uuid }}">
             <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }} - 
             {% for rel in item.relationships %}
               {% if rel.node == "Person" %}
