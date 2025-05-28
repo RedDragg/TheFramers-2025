@@ -70,7 +70,17 @@
             item.event.date_end == nil or item.event.date_end == blank %} NaN {% else %} {{ item.event.date_end }} {%
             endif
             %}</td>
-          <td>relation</td>
+          <td>
+            {% for rel in item.relationships %}
+              {% if rel.node == "Person" %}
+                {% for artist in allArtists %}
+                  {% if rel.uuid == artist.person.uuid %}
+                    {{ artist.person.name }},
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </td>
           <td><img src="/images/bloem.jpg" alt="" class="category-image"></td>
         </tr>
 
