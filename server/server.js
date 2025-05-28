@@ -59,6 +59,33 @@ app
     return res.send(renderTemplate('server/views/archive.liquid', { title: 'Archive', allEvents, allArtists, allEventTypes, selectedType }));
   });
 
+  app.get('/archive/:uuid', async (req, res) => {
+    const eventUuid = req.params.uuid;
+  
+    // Fetch all events (or ideally cache them)
+    const response = await fetch(eventsAPI);
+    const allEvents = await response.json();
+  
+    // Find the event with the matching UUID
+    const event = allEvents.find(e => e.event.uuid === eventUuid);
+  
+    if (!event) {
+      return res.status(404).send('Event not found');
+    }
+  
+    // You can also load additional data here if needed
+    // const dataPeople = await fetch(personAPI);
+    // const allArtists = await dataPeople.json();
+  
+    return res.send(
+      renderTemplate('server/views/detail.liquid', {
+        title: event.event.title_nl,
+        event,
+        // allArtists,
+      })
+    );
+  });
+
 
 
 const renderTemplate = (template, data) => {
