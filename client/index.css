@@ -8,12 +8,3 @@
 @import '../server/views/index.css';
 @import '../server/views/archive.css';
 
-
-img {
-    width: 100%;
-    height: 100%;
-}
-
-body {
-    background-color: blue;
-}
