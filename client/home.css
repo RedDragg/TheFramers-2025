@@ -21,8 +21,9 @@
     inset: 0;
     display: grid;
     place-items: center;
-    overflow: auto;
+    overflow: clip;
     transition: opacity var(--updown-time) var(--rotate-delay) ease-out;
+  
 
     .item {
         width: 40rem;
@@ -33,11 +34,20 @@
         gap: .5rem;
         /* border: solid 1px black; */
         transform: rotate(calc(var(--slides-angle) * 1));
-
+        scroll-snap-align: center;
 
         div {
             display: flex;
             flex-direction: row;
+        }
+
+        &:hover{
+            z-index: 3;
+
+        }
+
+        &:focus{
+            z-index: 3;
         }
     }
 }
@@ -55,7 +65,10 @@
     padding: 90vh;
 
     transform: rotate(calc(var(--slides-angle) * -1));
-    overflow: auto;
+
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+
     scroll-behavior: smooth;
 
 
