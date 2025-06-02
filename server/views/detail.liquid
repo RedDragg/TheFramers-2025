@@ -5,6 +5,21 @@
 <main>
     <h2>{{ event.event.title_nl }}</h2>
     <p>{{ event.event.content_nl }}</p>
+    <ul>
+        {% for rel in event.relationships %}
+            {% if rel.node == "Person" %}
+              {% for artist in allArtists %}
+                {% if rel.uuid == artist.person.uuid %}
+                    <li>
+                        <h2>{{ artist.person.name }}</h2>
+                        <img src="{{ artist.imageUrl }}" alt="">
+                    </li>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+    </ul>
+   
 </main>
 
 {% endblock %}
