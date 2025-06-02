@@ -69,7 +69,7 @@
         {% for item in allEvents %}
           {% if selectedType == "all" or not selectedType or item.event.type_nl == selectedType %}
 
-        <tr class="archive-item" data-href="/event/{{ item.event.id }}" tabindex="0">
+        <tr class="archive-item" data-href="/archive/{{ item.event.uuid }}" tabindex="0">
           <td>{{ item.event.title_nl }}</td>
           <td>{{ item.event.type_nl }}</td>
           <td>{{ item.event.date_start }}</td>

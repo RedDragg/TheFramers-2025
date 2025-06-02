@@ -1,9 +1,7 @@
 /* ///////////////////// */
 /* 🎲🎲🎲 FONTFACES 🎲🎲🎲 */
 /* ///////////////////// */
-body {
-    background-color: hotpink;
-}
+
 /* Primary */
 /* @font-face {
     font-family: ;
@@ -27,10 +25,6 @@ body {
     padding: 0;
     box-sizing: border-box;
     list-style: none;
-}
-
-ul{
-  list-style: none;
 }
 
 /* :root { */
@@ -65,3 +59,11 @@ ul{
 /* /////////////////////////// */
 /* 🪐🪐🪐 TEXT FORMATTING 🪐🪐🪐 */
 /* /////////////////////////// */
+
+/* //////////////// */
+/* 📦📦📦 BODY 📦📦📦 */
+/* //////////////// */
+
+body {
+    background-color: hotpink;
+}
