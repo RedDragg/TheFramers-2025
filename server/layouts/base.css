@@ -1,19 +1,21 @@
 /* ///////////////////// */
 /* 🎲🎲🎲 FONTFACES 🎲🎲🎲 */
 /* ///////////////////// */
-
+body {
+    background-color: teal;
+}
 /* Primary */
-@font-face {
+/* @font-face {
     font-family: ;
     src: url();
-}
+} */
 /* 🔗 SOURCE:  */
 
 /* Secondary */
-@font-face {
+/* @font-face {
     font-family: ;
     src: url();
-}
+} */
 /* 🔗 SOURCE:  */
 
 /* ////////////////////// */
@@ -36,18 +38,18 @@ ul{
     /* Arial, Helvetica, sans-serif */
 
     /* Font sizes mobile/small */
-    --h1-small:;
+    /* --h1-small:;
     --h2-small:;
     --h3-small:;
     --h4-small:;
-    --p-small:;
+    --p-small:; */
 
     /* Font sizes regular/desktop */
-    --h1:;
+    /* --h1:;
     --h2:;
     --h3:;
     --h4:;
-    --p:;
+    --p:; */
 
     /* Colors */
 
