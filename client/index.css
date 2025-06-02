@@ -2,9 +2,13 @@
 @import "typography.css";
 
 /* Layout and view styling */
-@import '../server/layouts/base.css';
+@import "base.css";
 
 /* Component styling */
-@import '../server/views/index.css';
-@import '../server/views/archive.css';
+@import "home.css";
+@import "archive.css";
 
+body {
+    background: yellow;
+    
+}
