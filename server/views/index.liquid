@@ -3,85 +3,37 @@
 {% block content %}
 <main>
 
-    {% comment %} <h1>Titel</h1> {% endcomment %}
-    {% comment %} <search>
-      <form method="post" action="/search">
-              {% comment %} Name zorgt voor key form + action is voor andere route {% endcomment %}
-          {% comment %} <input type="search" id="searchAgent" name="search" value="{{ query }}" />
-          <button type="submit">Zoek</button>         
-        </form>
-      </search>
-    <ul>
-    {% assign unique_types = "" | split: "," %} {% endcomment %}
-{% comment %} 
-{% for type in allEventTypes %}
-  {% if type.nl and type.nl != "" and type.nl != blank %}
-    {% unless unique_types contains type.nl %}
-      {% assign unique_types = unique_types | push: type.nl %} {% endcomment %}
 
 <section class="data-scroll">
-    <ul class="home-data">
+  <ul class="home-data">
 
-
+    {% assign unique_types = [] %}
     {% for type in allEventTypes %}
       {% if type.nl and type.nl != "" and type.nl != blank %}
         {% unless unique_types contains type.nl %}
           {% assign unique_types = unique_types | push: type.nl %}
-          
-      {% for item in allEvents %}
-        {% if item.event.type_nl == type.nl %}
-          <li class="item" tabindex="0">
-            <a href="/archive/{{ item.event.uuid }}">
 
-            <div>
-              <strong>{{ item.event.title_nl }}</strong> 
-              <h2>{{ type.nl }}</h2>
-            </div>
-            
-              <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy">
-            </a>
-          </li>
-
-        {% endif %}
-      {% endfor %}
-
-        {% endunless %}
-    {% endif %}
-  {% endfor %}
-</ul>
-
-</section>
-{% comment %} 
-<li class="item">
-  <div tabindex="0">
-    <p class="title" tabindex="0">titel</p>
-    <p class="type" tabindex="0">type</p>
-  </div>
-  <img tabindex="0" src="https://www.edupet.nl/static/uploads-cms2/kat-kopen-1900x800.webp" alt="kat">
-</li>
-
-
-
-      <li class="item">
-        <h2>{{ type.nl }}</h2>
-        <ul>
           {% for item in allEvents %}
             {% if item.event.type_nl == type.nl %}
-              <li>
+              {% assign type_class = type.nl | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
+              <li class="item" tabindex="0">
                 <a href="/archive/{{ item.event.uuid }}">
-                  <strong>{{ item.event.title_nl }}</strong> 
+                  <div>
+                    <strong>{{ item.event.title_nl }}</strong> 
+                    <h2 class="type-label {{ type_class }}">{{ type.nl }}</h2>
+                  </div>
                   <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy">
                 </a>
               </li>
             {% endif %}
           {% endfor %}
-        </ul>
-      </li>
 
-    {% endunless %}
-  {% endif %}
-{% endfor %}
-</ul> {% endcomment %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+
+  </ul>
+</section>
 
 </main>
 

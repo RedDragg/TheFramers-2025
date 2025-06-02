@@ -31,6 +31,19 @@ ul{
   list-style: none;
 }
 
+
+:root {
+    /* custom properties voor home page */
+    --slides-angle: -40deg;
+    --slides-spacing: -15em;
+    --slides-margin: 2em;
+    --slide-height: 30em;
+
+    --updown-time: .5s;
+    --rotate-time: 2s;
+}
+
+
 /* :root { */
     /* Fonts */
     /* Arial, Helvetica, sans-serif */
@@ -235,6 +248,11 @@ header{
   position: sticky;
   top: 0;
   z-index: 9999;
+}
+
+a{
+    text-decoration: none;
+    color: black
 }
 
 /* /////////////////////////// */
