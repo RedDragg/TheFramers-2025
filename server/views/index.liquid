@@ -1,21 +1,44 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
-<main> 
+<main>
+
     <h1>Titel</h1>
-    <h2>Collections</h2>
+    <search>
+      <form method="post" action="/search">
+              {% comment %} Name zorgt voor key form + action is voor andere route {% endcomment %}
+          <input type="search" id="searchAgent" name="search" value="{{ query }}" />
+          <button type="submit">Zoek</button>         
+        </form>
+      </search>
+    <ul>
+    {% assign unique_types = "" | split: "," %}
+
+{% for type in allEventTypes %}
+  {% if type.nl and type.nl != "" and type.nl != blank %}
+    {% unless unique_types contains type.nl %}
+      {% assign unique_types = unique_types | push: type.nl %}
+      <li>
+        <h2>{{ type.nl }}</h2>
         <ul>
-            {% for collection in allCollections %}
+          {% for item in allEvents %}
+            {% if item.event.type_nl == type.nl %}
               <li>
-                <strong>{{ collection.name }}</strong><br>
-                UUID: {{ collection.uuid }}<br>
-                Code: {{ collection.code }}
+                <a href="/archive/{{ item.event.uuid }}">
+                  <strong>{{ item.event.title_nl }}</strong> 
+                  <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy">
+                </a>
               </li>
-            {% endfor %}
-          </ul>   
-    <h2></h2>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </li>
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+</ul>
+
 </main>
 
-
-
 {% endblock %}
+

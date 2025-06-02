@@ -1,0 +1,108 @@
+{% layout "server/layouts/base.liquid" %}
+
+{% block content %}
+<main>
+
+  <h1>Titel</h1>
+  <div class="archive-container">
+    <section class="left-archive-wrapper">
+      <!-- Radio buttons for selecting event type -->
+      <form method="GET" action="/archive">
+      <ul>
+        <!-- "Alle" optie -->
+        <li>
+          <label>
+            <input type="radio" name="eventType" value="all" hidden {% if selectedType == null or selectedType == "all" %}checked{% endif %}>
+            <p>Alle</p>
+          </label>
+        </li>
+    
+        {% assign unique_types = "" | split: "," %}
+        {% for type in allEventTypes %}
+          {% if type.nl and type.nl != "" and type.nl != blank %}
+            {% unless unique_types contains type.nl %}
+              {% assign unique_types = unique_types | push: type.nl %}
+              <li>
+                <label>
+                  <input type="radio" value="{{ type.nl }}" name="eventType" hidden {% if type.nl == selectedType %}checked{% endif %}>
+                  <p>{{ type.nl }}</p>
+                </label>
+              </li>
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <button type="submit">Filter</button>
+    </form>
+    
+
+      <!-- Filtered events -->
+    </section>
+    <section class="right-archive-wrapper">
+      <div class="top-wrapper">
+        <h1>{{ selectedType }}</h1>
+        <ul class="category-right-grid">
+          <li><img src="" alt=""></li>
+          <li></li>
+          <li><img src="" alt=""></li>
+          <li><label for="grid-category-wrapper">grid<input type="checkbox" id="grid-category-wrapper"></label></li>
+        </ul>
+      </div>
+      <table>
+        <tr>
+          <th>
+            <p>Title</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Date start</p>
+          </th>
+          <th>
+            <p>Date end</p>
+          </th>
+          <th>
+            <p>Participants</p>
+          </th>
+        </tr>
+        {% for item in allEvents %}
+          {% if selectedType == "all" or not selectedType or item.event.type_nl == selectedType %}
+
+        <tr class="archive-item" data-href="/event/{{ item.event.id }}" tabindex="0">
+          <td>{{ item.event.title_nl }}</td>
+          <td>{{ item.event.type_nl }}</td>
+          <td>{{ item.event.date_start }}</td>
+          <td>{% if
+            item.event.date_end == nil or item.event.date_end == blank %} NaN {% else %} {{ item.event.date_end }} {%
+            endif
+            %}</td>
+          <td>
+            {% for rel in item.relationships %}
+              {% if rel.node == "Person" %}
+                {% for artist in allArtists %}
+                  {% if rel.uuid == artist.person.uuid %}
+                    {{ artist.person.name }},
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </td>
+          <td><img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy"></td>
+        </tr>
+
+
+        {% endif %}
+        {% endfor %}
+
+      </table>
+
+    </section>
+  </div>
+
+
+
+
+</main>
+
+{% endblock %}

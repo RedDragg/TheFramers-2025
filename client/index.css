@@ -5,5 +5,6 @@
 @import '../server/layouts/base.css';
 
 /* Component styling */
-
+@import '../server/views/index.css';
+@import '../server/views/archive.css';
 
