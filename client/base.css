@@ -1,9 +1,7 @@
 /* ///////////////////// */
 /* 🎲🎲🎲 FONTFACES 🎲🎲🎲 */
 /* ///////////////////// */
-body {
-    background-color: hotpink;
-}
+
 /* Primary */
 /* @font-face {
     font-family: ;
@@ -69,7 +67,8 @@ ul{
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
+    /* gap: 1rem; */
+    gap: .2rem;
     width: fit-content;
     padding: .5rem 1rem;
     border-radius: 0 0 1.3rem 1.3rem;
@@ -230,6 +229,12 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+header{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
 }
 
 /* /////////////////////////// */
