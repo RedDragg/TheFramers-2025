@@ -3,22 +3,57 @@
 {% block content %}
 
 <main>
-    <h2>{{ event.event.title_nl }}</h2>
-    <p>{{ event.event.content_nl }}</p>
-    <ul>
-        {% for rel in event.relationships %}
-            {% if rel.node == "Person" %}
-              {% for artist in allArtists %}
-                {% if rel.uuid == artist.person.uuid %}
-                    <li>
-                        <h2>{{ artist.person.name }}</h2>
-                        <img src="{{ artist.imageUrl }}" alt="">
-                    </li>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
-    </ul>
+  {% comment %} Div or section with two headers? {% endcomment %}
+   {% comment %} What is the name for? {% endcomment %}
+    <div class="details-position">
+      <div class="details-wrapper">
+
+        {% comment %} Open possibbly required? {% endcomment %}
+        <details class="about" open name="about&relations-switch">
+          <summary>About</summary>
+
+          <h2>{{ event.event.title_nl }}</h2>
+
+          <ul>
+            <li>
+              <h3>Type</h3>
+              <div></div>
+            </li>
+            <li>
+              <h3>Artist</h3>
+              <p>{{ artist.person.name }}Name</p>
+            </li>
+            <li>
+              <h3>Date</h3>
+              <p></p>
+            </li>
+          </ul>
+          <p>{{ event.event.content_nl }}</p>
+        </details>
+
+        <details class="relations" name="about&relations-switch">
+          <summary>Relations</summary>
+
+          <h2>{{ event.event.title_nl }}</h2>
+
+          <ul>
+            {% for rel in event.relationships %}
+              {% if rel.node == "Person" %}
+                {% for artist in allArtists %}
+                  {% if rel.uuid == artist.person.uuid %}
+                      <li>
+                          <h2>{{ artist.person.name }}</h2>
+                          <img src="{{ artist.imageUrl }}" alt="">
+                      </li>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </details>
+      </div>
+    </div>
+
    
 </main>
 
