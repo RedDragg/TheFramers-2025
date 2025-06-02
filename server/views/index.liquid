@@ -26,15 +26,13 @@
               <li>
                 <a href="/archive/{{ item.event.uuid }}">
                   <strong>{{ item.event.title_nl }}</strong> 
-                  <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image">
+                  <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy">
                 </a>
               </li>
             {% endif %}
           {% endfor %}
         </ul>
       </li>
-
-
     {% endunless %}
   {% endif %}
 {% endfor %}
