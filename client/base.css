@@ -80,8 +80,7 @@ ul{
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* gap: 1rem; */
-    gap: .2rem;
+    gap: 1rem;
     width: fit-content;
     padding: .5rem 1rem;
     border-radius: 0 0 1.3rem 1.3rem;
