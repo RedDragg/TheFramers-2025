@@ -7,8 +7,3 @@
 /* Component styling */
 @import "home.css";
 @import "archive.css";
-
-body {
-    background: yellow;
-    
-}
