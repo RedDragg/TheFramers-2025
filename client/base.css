@@ -2,7 +2,7 @@
 /* 🎲🎲🎲 FONTFACES 🎲🎲🎲 */
 /* ///////////////////// */
 body {
-    background-color: teal;
+    background-color: hotpink;
 }
 /* Primary */
 /* @font-face {
@@ -33,7 +33,7 @@ ul{
   list-style: none;
 }
 
-:root {
+/* :root { */
     /* Fonts */
     /* Arial, Helvetica, sans-serif */
 
@@ -56,7 +56,7 @@ ul{
     /* Buttons */
     /* Primary button */
     /* Secondary button */
-}
+/* } */
 
 /* //////////////// */
 /* 🎱🎱🎱 HTML 🎱🎱🎱 */
