@@ -140,37 +140,50 @@ app.get('/archive', async (req, res) => {
 
 
 
-// Route: Event detail page
 app.get('/archive/:uuid', async (req, res) => {
-  const eventUuid = req.params.uuid; // Get the event UUID from the route parameter
+  const uuid = req.params.uuid;
 
   // Fetch all events
-  const response = await fetch(eventsAPI);
-  const allEvents = await response.json();
+  const eventsResponse = await fetch(eventsAPI);
+  const allProjects = await eventsResponse.json();
 
-  // Find the event with the matching UUID
-  const event = allEvents.find(e => e.event.uuid === eventUuid);
+  // Fetch all people
+  const peopleResponse = await fetch(personAPI);
+  const allPeople = await peopleResponse.json();
 
-  if (!event) {
-    return res.status(404).send('Event not found'); // Return 404 if event is not found
+  // Add image URLs to people and events
+  const allArtists = personImageUrls(allPeople);
+  const allEvents = eventImageUrls(allProjects);
+
+  // Try to find a matching event
+  const event = allEvents.find(e => e.event.uuid === uuid);
+
+  // Try to find a matching person
+  const person = allPeople.find(p => p.person.uuid === uuid);
+
+  // If neither is found, return 404
+  if (!event && !person) {
+    return res.status(404).send('Not found');
   }
 
-  // Fetch people data
-  const dataPeople = await fetch(personAPI);
-  const allArtists = await dataPeople.json();
+  if (event) {
+    console.log(event)
+  } else {
+    console.log(person)
+  }
 
-  // Add image URLs to artists
-  const artistsWithImages = personImageUrls(allArtists);
-
-  // Render the event detail page template with data
+  // Render template with both possibilities; the Liquid logic handles the rest
   return res.send(
-    renderTemplate('server/views/detail.liquid', {
-      title: event.event.title_nl,
+    renderTemplate('server/views/details.liquid', {
+      title: event?.event?.title_nl || person?.person?.name || 'Detail',
       event,
-      allArtists: artistsWithImages,
+      person,
+      allArtists,
+      allEvents // Needed to resolve relationships for people
     })
   );
 });
+
 
 
 

@@ -19,6 +19,7 @@
     {% unless unique_types contains type.nl %}
       {% assign unique_types = unique_types | push: type.nl %}
       <li>
+        <a href="/archive/{{ type.nl }}">
         <h2>{{ type.nl }}</h2>
         <ul>
           {% for item in allEvents %}
@@ -27,6 +28,7 @@
                 <a href="/archive/{{ item.event.uuid }}">
                   <strong>{{ item.event.title_nl }}</strong> 
                   <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy">
+                </a>
                 </a>
               </li>
             {% endif %}
