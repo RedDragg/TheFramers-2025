@@ -27,6 +27,23 @@
     list-style: none;
 }
 
+ul{
+  list-style: none;
+}
+
+
+:root {
+    /* custom properties voor home page */
+    --slides-angle: -40deg;
+    --slides-spacing: -15em;
+    --slides-margin: 2em;
+    --slide-height: 30em;
+
+    --updown-time: .5s;
+    --rotate-time: 2s;
+}
+
+
 /* :root { */
     /* Fonts */
     /* Arial, Helvetica, sans-serif */
@@ -55,6 +72,187 @@
 /* //////////////// */
 /* 🎱🎱🎱 HTML 🎱🎱🎱 */
 /* //////////////// */
+
+/* nav menu styling */
+.home-menu {
+    position: sticky;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+    padding: .5rem 1rem;
+    border-radius: 0 0 1.3rem 1.3rem;
+    color: white;
+
+    label {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+
+
+    &:has(#all-content:checked) li:nth-child(2) {
+        color: black;
+        background-color: white;
+        padding: .2rem .5rem;
+        border-radius: .4rem;
+
+        svg {
+            fill: black;
+            stroke: white;
+        }
+    }
+
+    &:has(#theme:checked) li:nth-child(3) {
+        color: black;
+        background-color: white;
+        padding: .2rem .5rem;
+        border-radius: .4rem;
+
+        svg {
+            fill: black;
+        }
+    }
+
+    &:has(#view-position) li:nth-child(5) svg:nth-child(3) {
+        display: none;
+
+    }
+
+    &:has(#view-position:checked) li:nth-child(5) {
+        svg:nth-child(2) {
+            display: none;
+        }
+
+        svg:nth-child(3) {
+            display: block;
+        }
+    }
+
+
+
+    /* SEARCH  */
+
+
+    li:nth-child(4) {
+        /* variabelen voor de animatie  */
+        --easing: cubic-bezier(0.4, 0, 0.2, 1);
+        --font-size: 1rem;
+        --transition-time-icon: 0.5s;
+        --transition-time-input: 0.5s 0.25s;
+
+        border: 1px solid transparent;
+        background: white;
+        border-radius: .8rem;
+        padding: .2rem .5rem;
+        display: flex;
+        transition: border-color var(--transition-time-icon) linear,
+            padding var(--transition-time-input) var(--easing);
+    }
+
+    li:nth-child(4):not(:focus-within) {
+        --transition-time-input: .7s 0s;
+        background: transparent;
+    }
+
+
+    .search__input {
+        background: transparent;
+        border: none;
+        color: black;
+        font-size: var(--font-size);
+        opacity: 0;
+        outline: none;
+        padding: 0;
+        transition: width var(--transition-time-input) var(--easing),
+            padding var(--transition-time-input) var(--easing),
+            opacity var(--transition-time-input) linear;
+        width: 0;
+
+        /* the usual webkit cancel button stylen */
+        &::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+            height: 1em;
+            width: 1em;
+            border-radius: 50em;
+            background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+            background-size: contain;
+        }
+    }
+
+    .search__input::placeholder {
+        color: var(--color);
+        opacity: 0.75;
+    }
+
+    .search__label {
+        transition: transform var(--transition-time-icon) var(--easing), color 0.1s;
+    }
+
+
+    li:nth-child(4):focus-within .search__input {
+        opacity: 1;
+        padding: 0 .5rem 0 .5rem;
+        width: fit-content;
+    }
+
+    li:nth-child(4):focus-within .search__label {
+        transform: scale(0.5);
+    }
+
+    @keyframes unhide {
+        from {
+            height: 0;
+            opacity: 0;
+        }
+
+        to {
+            height: auto;
+            opacity: 1;
+        }
+    }
+
+
+
+    /* .search{
+        display: flex;
+        flex-direction: row;
+
+
+        input:nth-child(1){
+            width: fit-content;
+            padding: .3rem .5rem;
+            border-radius: .4rem;
+            border: none;
+        }
+    }
+
+    &:has(#searchInput-button:checked) li:nth-child(4) input:nth-child(1){
+            display: none;
+        } */
+
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+a{
+    text-decoration: none;
+    color: black
+}
 
 /* /////////////////////////// */
 /* 🪐🪐🪐 TEXT FORMATTING 🪐🪐🪐 */

@@ -1,5 +1,172 @@
-/* DEZE MOET NOG GEKOPPELD WORDEN */
-img {
-    width: 100%;
-    height: 100%;
+/* ⭐️ Home - overview page ⭐️ */
+
+/* colors type category */
+
+.type-label{
+    padding: .2rem .5rem;
+    border-radius: 2rem;
+    height: 2rem;
+}
+
+.type-label.expositie {
+    background-color: #FFD700;
+  }
+  
+  .type-label.lancering {
+    background-color: #FF6347;
+  }
+  
+  .type-label.debat {
+    background-color: #9ACD32;
+  }
+
+  .type-label.symposium {
+    background-color: #be32cd;
+  }
+
+  .type-label.performance {
+    background-color: #324ecd;
+  }
+
+  .type-label.expositie-programma {
+    background-color: #32b3cd;
+  }
+
+  .type-label.publiek-programma {
+    background-color: #cd328a;
+  }
+
+  .type-label.filmvertoning {
+    background-color: #cd8a32;
+  }
+
+  .type-label.lezing {
+    background-color: #f39be8;
+  }
+
+  .type-label.educatief-programma {
+    background-color: #05ec33;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* section */
+.data-scroll {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+
+    /* zorgt ervoor dat de section niet kan scrollen */
+    overflow: clip;
+    transition: opacity var(--updown-time) var(--rotate-delay) ease-out;
+  
+    /* li */
+    .item {
+        width: 40rem;
+        height: 100%;
+  
+
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        /* border: solid 1px black; */
+        transform: rotate(calc(var(--slides-angle) * 1));
+        scroll-snap-align: center;
+
+        &:hover{
+            z-index: 3;
+
+        }
+
+        &:focus{
+            z-index: 3;
+        }
+    }
+}
+
+/* ul */
+.home-data {
+    position: absolute;
+    inset: -50vmax;
+    list-style-type: "";
+    display: grid;
+    padding-block: var(--slides-margin);
+
+    /* grid-auto-rows: calc(var(--slide-height) + var(--slides-spacing)); */
+    place-items: center;
+    padding-inline: 50vmax;
+    padding: 90vh;
+
+    transform: rotate(calc(var(--slides-angle) * -1));
+
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+
+    scroll-behavior: smooth;
+
+
+    img {
+        width: 100%;
+        border-radius: 8px;
+        border: .5px solid black;
+    }
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        padding: .5rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+
+    .type {
+        padding: .3rem 1rem;
+        background: grey;
+        border-radius: 5px;
+        text-transform: capitalize;
+    }
+
+}
+
+/* responsive */
+@media (max-width: 480px) {
+    .data-scroll .item {
+        width: 60vw;
+    }
+
+    .home-data {
+        padding-inline: .5vw;
+    }
+
+    .title {
+        font-size: 1.2rem;
+    }
+
+    .type {
+        font-size: 0.9rem;
+        padding: 0.2rem 0.6rem;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 }

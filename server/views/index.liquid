@@ -3,42 +3,73 @@
 {% block content %}
 <main>
 
-    <h1>Titel</h1>
-    <search>
-      <form method="post" action="/search">
-              {% comment %} Name zorgt voor key form + action is voor andere route {% endcomment %}
-          <input type="search" id="searchAgent" name="search" value="{{ query }}" />
-          <button type="submit">Zoek</button>         
-        </form>
-      </search>
-    <ul>
-    {% assign unique_types = "" | split: "," %}
 
-{% for type in allEventTypes %}
-  {% if type.nl and type.nl != "" and type.nl != blank %}
-    {% unless unique_types contains type.nl %}
-      {% assign unique_types = unique_types | push: type.nl %}
-      <li>
-        <a href="/archive/{{ type.nl }}">
-        <h2>{{ type.nl }}</h2>
-        <ul>
+ <section class="data-scroll">
+  <ul class="home-data">
+
+    {% assign unique_types = [] %}
+    {% for type in allEventTypes %}
+      {% if type.nl and type.nl != "" and type.nl != blank %}
+        {% unless unique_types contains type.nl %}
+          {% assign unique_types = unique_types | push: type.nl %}
+
           {% for item in allEvents %}
             {% if item.event.type_nl == type.nl %}
-              <li>
+              {% assign type_class = type.nl | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
+              <li class="item" tabindex="0">
                 <a href="/archive/{{ item.event.uuid }}">
-                  <strong>{{ item.event.title_nl }}</strong> 
+                  <div>
+                    <strong>{{ item.event.title_nl }}</strong> 
+                    <h2 class="type-label {{ type_class }}">{{ type.nl }}</h2>
+                  </div>
                   <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy">
                 </a>
                 </a>
               </li>
             {% endif %}
           {% endfor %}
-        </ul>
-      </li>
-    {% endunless %}
-  {% endif %}
-{% endfor %}
-</ul>
+
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+
+  </ul>
+</section> 
+
+{% comment %} 
+<section class="data-scroll">
+  <ul class="home-data">
+
+    {% assign unique_types = [] %}
+    {% for type in allEventTypes %}
+      {% if type.nl and type.nl != "" and type.nl != blank %}
+        {% unless unique_types contains type.nl %}
+          {% assign unique_types = unique_types | push: type.nl %}
+
+          {% assign matching_items = allEvents | where: "event.type_nl", type.nl %}
+          {% assign items_with_image = matching_items | where_exp: "item", "item.imageUrl and item.imageUrl != ''" %}
+          {% assign project_count = matching_items | size %}
+          {% assign random_item = items_with_image | sample %}
+          {% assign type_class = type.nl | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
+
+          {% if random_item %}
+            <li class="item" tabindex="0">
+              <a href="/archive/{{ random_item.event.uuid }}">
+                <div>
+                  <strong>{{ project_count }} projects</strong>
+                  <h2 class="type-label {{ type_class }}">{{ type.nl }}</h2>
+                </div>
+                <img src="{{ random_item.imageUrl }}" alt="{{ random_item.event.title_nl }}" class="category-image" loading="lazy">
+              </a>
+            </li>
+          {% endif %}
+
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+
+  </ul>
+</section> {% endcomment %}
 
 </main>
 
