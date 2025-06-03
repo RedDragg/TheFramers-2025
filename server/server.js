@@ -96,8 +96,9 @@ app.post('/search', async (req, res) => {
 
 
 // Route: Archive page
-app.get('/archive', async (req, res) => {
-  const selectedType = req.query.eventType; // Get the selected event type from query parameters
+app.get('/archive/type/:eventType', async (req, res) => {
+  const selectedEvent = req.query.event
+  console.log(selectedEvent)
 
   // Fetch events data
   const dataEvents = await fetch(eventsAPI);
@@ -115,9 +116,9 @@ app.get('/archive', async (req, res) => {
   );
 
   // Filter events by selected type if provided
-  if (selectedType && selectedType !== 'all') {
+  if (selectedEvent && selectedEvent !== 'all') {
     filteredEvents = filteredEvents.filter(
-      (e) => e.event.type_nl === selectedType
+      (e) => e.event.type_nl === selectedEvent
     );
   }
 
@@ -134,7 +135,7 @@ app.get('/archive', async (req, res) => {
     allEvents: eventsWithImages, 
     allArtists, 
     allEventTypes, 
-    selectedType 
+    selectedEvent 
   }));
 });
 
