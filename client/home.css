@@ -8,6 +8,19 @@
     height: 2rem;
 }
 
+h2::before {
+  content: '';
+  display: block;
+  background-color: white;
+  width: 70rem;
+  height: 10rem;
+  position: absolute;
+  top: -30px;
+  right: -50px;
+  filter: blur(35px);
+  z-index: -1;
+}
+
 .type-label.expositie {
     background-color: #FFD700;
   }
@@ -94,6 +107,18 @@
         &:focus{
             z-index: 3;
         }
+
+      /* div images grid */
+    .image-grid{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: .5rem;
+            /* 🔗: https://getcssscan.com/css-box-shadow-examples */
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
     }
 }
 
@@ -108,7 +133,8 @@
     /* grid-auto-rows: calc(var(--slide-height) + var(--slides-spacing)); */
     place-items: center;
     padding-inline: 50vmax;
-    padding: 90vh;
+    padding-top: 60rem;
+    padding-bottom: 30rem;
 
     transform: rotate(calc(var(--slides-angle) * -1));
 
@@ -119,12 +145,23 @@
 
 
     img {
-        width: 100%;
+        width: 5rem;
+        height: 5rem;
         border-radius: 8px;
-        border: .5px solid black;
     }
 
-    div {
+    .category-image-grid{
+      /* 🔗: https://getcssscan.com/css-box-shadow-examples */
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      }
+  
+      .category-image{
+             /* 🔗: https://getcssscan.com/css-box-shadow-examples */
+        box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;    }
+
+
+    /* .type-header { */
+    div{
         display: flex;
         justify-content: space-between;
         flex-direction: row;
