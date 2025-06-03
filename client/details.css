@@ -2,6 +2,13 @@
 /* 📁📁📁 DETAILS 📁📁📁 */
 /* /////////////////// */
 
+/* MAIN */
+main {
+    width: 100%;
+    height: 100%;
+    margin: 2rem 0 0 0;
+}
+
 .details-position {
     display: grid;
     justify-content: center;
@@ -20,29 +27,32 @@
     details {
         /* Eerst nodig om content niet te laten verschuiven */
         /* min-height: 90vh; */
-        /* display: block; */
+
+        &[open] {
+            /* outline: var(--border-radius-button) solid var(--deep-black) 1.5px; */
+            border: var(--deep-black) 1.5px solid;
+            border-radius: var(--border-radius-button);
+        }
 
         & > summary {
             width: fit-content;
             height: fit-content;
-            padding: 0.3rem 1rem;
             text-align: center;
         }
 
-        &[open] summary {
-            border: var(--deep-black) 1.5px solid;
-            border-radius: var(--border-radius-button);
-        }
+        /* &[open] summary {
+            
+        } */
 
         &::details-content {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            margin-top: 2.5rem;
         }
 
         &[open]::details-content {
             left: 0;
+            top: 4rem;
             position: absolute;
         } 
     }
@@ -52,8 +62,22 @@
 /* 📄📄📄 ABOUT 📄📄📄 */
 /* ///////////////// */
 
-.about summary::marker {
-    content: "/images";
+.about summary {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .2rem .6rem;
+
+    &::marker {
+        content: "";
+    }
+
+    &::before {
+        content: url("/public/images/about-icon.svg");
+        height: 1.5rem;
+        width: 1.5rem;
+        display: inline-block;
+    }
 }
 
 .about ul {
@@ -70,4 +94,62 @@
         flex-direction: column;
         gap: 0.5rem;
     }
+}
+
+details iframe {
+    width: 100%;
+    border-radius: var(--border-radius-button);
+    object-fit: cover;
+}
+
+details img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-button);
+    object-fit: cover;
+}
+
+/* ///////////////////// */
+/* 🕯️🕯️🕯️ RELATIONS 🕯️🕯️🕯️ */
+/* //////////////////// */
+
+.relations summary {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .2rem .6rem;
+
+    &::marker {
+        content: "";
+    }
+
+    &::before {
+        content: url("/public/images/relations-icon.svg");
+        height: 1.5rem;
+        width: 1.5rem;
+        display: inline-block;
+    }
+}
+
+.relations ul {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.relations li {
+    width: 11rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.relation-img {
+    width: inherit;
+    height: auto;
+    border-radius: var(--border-radius-button);
+    object-fit: cover;
 }

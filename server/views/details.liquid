@@ -17,17 +17,29 @@
           <ul>
             <li>
               <h3>Type</h3>
-              <div></div>
+              {% comment %} Better element for this? {% endcomment %}
+                <ul>
+                  <li>{{ event.event.type_nl }}</li>
+                </ul>
             </li>
             <li>
               <h3>Artist</h3>
-              <p>{{ artist.person.name }}Name</p>
+              {% for rel in event.relationships %}
+              {% if rel.node == "Person" %}
+                {% for artist in allArtists %}
+                  {% if rel.uuid == artist.person.uuid %}
+                      <p>{{ artist.person.name }}</p>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
             </li>
             <li>
               <h3>Date</h3>
-              <p></p>
+              <p>{{ event.event.year }}</p>
             </li>
           </ul>
+
           <p>{{ event.event.content_nl }}</p>
         </details>
 
@@ -42,8 +54,8 @@
                 {% for artist in allArtists %}
                   {% if rel.uuid == artist.person.uuid %}
                       <li>
-                          <h2>{{ artist.person.name }}</h2>
-                          <img src="{{ artist.imageUrl }}" alt="">
+                          <h3>{{ artist.person.name }}</h3>
+                          <img src="{{ artist.imageUrl }}" class="relation-img" alt="">
                       </li>
                   {% endif %}
                 {% endfor %}

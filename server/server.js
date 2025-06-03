@@ -150,6 +150,7 @@ app.get('/archive/:uuid', async (req, res) => {
 
   // Find the event with the matching UUID
   const event = allEvents.find(e => e.event.uuid === eventUuid);
+  console.log(event);
 
   if (!event) {
     return res.status(404).send('Event not found'); // Return 404 if event is not found
