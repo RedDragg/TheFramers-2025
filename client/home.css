@@ -5,7 +5,9 @@
 .type-label{
     padding: .2rem .5rem;
     border-radius: 2rem;
+    height: 2rem;
 }
+
 .type-label.expositie {
     background-color: #FFD700;
   }
