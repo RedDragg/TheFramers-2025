@@ -48,6 +48,9 @@
                         border-radius: 5px;
                         border: solid 1px red;
                     }
+
+
+
                 }
 
                 .category-header {
@@ -271,3 +274,45 @@
             }
 
         }
+
+.type .Expositie {
+  background-color: #e6194b; /* felrood */
+}
+
+.type .Lancering {
+  background-color: #f58231; /* helder oranje */
+}
+
+.type .Debat {
+  background-color: #ffe119; /* fel geel */
+}
+
+.type .Symposium {
+  background-color: #3cb44b; /* sterk groen */
+}
+
+.type .Expositie {
+  background-color: #42d4f4; /* helder cyaan */
+}
+
+.type .Publiek {
+  background-color: #4363d8; /* intens blauw */
+}
+
+.type .Performance {
+  background-color: #911eb4; /* paars */
+}
+
+.type .Filmvertoning {
+  background-color: #f032e6; /* opvallend roze */
+}
+
+.type .Lezing {
+  background-color: #bfef45; /* limoengroen */
+}
+
+.type .Educatief {
+  background-color: #fabebe; /* lichtroze */
+}
+
+

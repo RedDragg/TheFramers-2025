@@ -96,7 +96,7 @@
             {% endif %}
             {% endfor %}
           </td>
-          <td><img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy"></td>
+          <td><img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image {{ item.event.type_nl }}" loading="lazy"></td>
         </tr>
 
 
