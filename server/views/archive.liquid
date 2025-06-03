@@ -1,8 +1,8 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
-<main class="category-wrapper">
-  <div class="category">
+<main class="category">
+  <div class="category-wrapper">
     <div class="breadcrumbs">
       <a href="/">Home</a> &gt;
            <form method="GET" action="/archive">
@@ -73,16 +73,16 @@
 
         <tr class="archive-item" data-href="/event/{{ item.event.id }}" tabindex="0">
           <td><a href="#" class="link-detail"></a></td>
-          <td>{{ item.event.title_nl }}</td>
+          <td><h2>{{ item.event.title_nl }}</h2></td>
           <td class="type">
-            <div class="types {{ item.event.type_nl }}"></div>{{ item.event.type_nl }}
+            <div class="types {{ item.event.type_nl }}"></div><p>{{ item.event.type_nl }}</p>
           </td>
           <td>{% if
-            item.event.date_start == "null" or item.event.date_start == blank %} - {% else %} {{ item.event.date_start }} {%
+            item.event.date_start == "null" or item.event.date_start == blank %} - {% else %} <p>{{ item.event.date_start }}</p> {%
             endif
             %}</td>
           <td>{% if
-            item.event.date_end == nil or item.event.date_end == blank %} - {% else %} {{ item.event.date_end }} {%
+            item.event.date_end == nil or item.event.date_end == blank %} - {% else %} <p>{{ item.event.date_end }}</p> {%
             endif
             %}</td>
           <td class="participants">

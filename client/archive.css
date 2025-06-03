@@ -1,14 +1,12 @@
 
-                    .Debat {
-                background: red;
-            }
-        .category-wrapper {
+
+        .category {
             display: flex;
             width: 100dvw;
             justify-content: center;
             padding-top: 5rem;
 
-            .category {
+            .category-wrapper {
                 display: flex;
                 flex-direction: column;
                 gap: 1rem;
@@ -45,7 +43,7 @@
 
                     .category-image {
                         width: 100%;
-                        height: auto;
+                        height: 100%;
                         object-fit: cover;
                         border-radius: 5px;
                         border: solid 1px red;
@@ -101,8 +99,6 @@
                     td:has(.link-detail){
                         position: absolute;
                         inset: 0;
-                        display: none;
-                        text-align: right;
 
                         a{
                             position: absolute;
@@ -131,13 +127,14 @@
                         border-radius: 0 0 5px 5px;
                     }
 
+
+
                     h2{
                         font-size: 1.1rem;
                     }
 
                     td:has(img) {
-                      display: none;
-                      text-align: right;
+                        text-align: right;
                     }
 
                     td:has(.participants) {
@@ -151,6 +148,7 @@
 
                 .category-image {
                     width: 2.5rem;
+                    height: 2.5rem;
                     object-fit: cover;
                     border-radius: 5px;
                 }
@@ -208,7 +206,7 @@
             }
         }
 
-        @media (max-width: 571px) {
+        @media (max-width: 900px) {
 
             .category{
                 .table-header {
@@ -238,7 +236,7 @@
                 }
 
                 tr{
-                    grid-template-columns: 1.2fr .5fr!important;
+                    grid-template-columns: .8fr 1.2fr!important;
                     grid-template-rows: repeat(6, auto);
                     grid-template-areas: "left-title left-title"
                                         "left-type right-item"
@@ -248,7 +246,6 @@
 
                     td:nth-child(2) {
                         grid-area: left-title;
-                        width: max-content;
                     }
                     td:nth-child(3) {
                         grid-area: left-type;
