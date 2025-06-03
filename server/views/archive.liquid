@@ -159,6 +159,13 @@
           <li><label for="grid-category-wrapper">grid<input type="checkbox" id="grid-category-wrapper"></label></li>
         </ul>
       </div>
+      {% assign event_count = 0 %}
+{% for item in allEvents %}
+  {% if selectedType == "all" or not selectedType or item.event.type_nl == selectedType %}
+    {% assign event_count = event_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+    <p>Results: {{ event_count }} event{% if event_count != 1 %}s{% endif %}</p>
       <table>
         <tr>
           <th>
@@ -180,7 +187,7 @@
         {% for item in allEvents %}
         {% if selectedType == "all" or not selectedType or item.event.type_nl == selectedType %}
 
-        <tr class="archive-item" data-href="/event/{{ item.event.id }}" tabindex="0">
+        <tr class="archive-item" data-href="/archive/{{ item.event.uuid }}" tabindex="0">
           <td>{{ item.event.title_nl }}</td>
           <td>{{ item.event.type_nl }}</td>
           <td>{{ item.event.date_start }}</td>

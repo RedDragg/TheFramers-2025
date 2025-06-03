@@ -1,0 +1,57 @@
+{% layout "server/layouts/base.liquid" %}
+
+{% block content %}
+<main>
+
+  {% if event %}
+    <!-- Event detail view -->
+    <h2>{{ event.event.title_nl }}</h2>
+    <p>{{ event.event.content_nl }}</p>
+
+    <h3>People involved</h3>
+    <ul>
+      {% for rel in event.relationships %}
+        {% if rel.node == "Person" %}
+          {% for artist in allArtists %}
+            {% if rel.uuid == artist.person.uuid %}
+              <li>
+                <a href="/archive/{{ artist.person.uuid }}">
+                  <h4>{{ artist.person.name }}</h4>
+                  <img src="{{ artist.imageUrl }}" alt="{{ artist.person.name }}">
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+  {% elsif person %}
+    <!-- Person detail view -->
+    <h2>{{ person.person.name }}</h2>
+    <p>{{ person.person.bio_nl }}</p>
+
+    <h3>Events involved</h3>
+    <ul>
+      {% for rel in person.relationships %}
+        {% if rel.node == "Event" %}
+          {% for event in allEvents %}
+            {% if rel.uuid == event.event.uuid %}
+              <li>
+                <a href="/archive/{{ event.event.uuid }}">
+                  <h4>{{ event.event.title_nl }}</h4>
+                  <img src="{{ event.imageUrl }}" alt="{{ event.event.title_nl }}">
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+  {% else %}
+    <p>Oops! This item could not be found.</p>
+  {% endif %}
+
+</main>
+{% endblock %}
