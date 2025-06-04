@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100dvh;
+        }
+
+
+        ul{
+            list-style: none;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            display: flex;
+            gap: 2rem;
+            
+            overflow: auto;
+
+            li:nth-of-type(1){ --index-archief:1; background-color: red;}
+            li:nth-of-type(2){ --index-archief:2; background-color: blue;}
+            li:nth-of-type(3){ --index-archief:3; background-color: green;}
+            li:nth-of-type(4){ --index-archief:4; background-color: yellow;}
+            li:nth-of-type(5){ --index-archief:5; background-color: orange;}
+            li:nth-of-type(6){ --index-archief:6; background-color: purple;}
+            li:nth-of-type(7){ --index-archief:7; background-color: pink;}
+            li:nth-of-type(8){ --index-archief:8;  background-color: brown;}
+        }
+
+        li{
+            transform: translateZ(calc(var(--index-archief) * -80px)) translateX(calc(var(--index-archief) * 300px)) translateY(calc(var(--index-archief) * -30px));
+            padding: 5rem;
+            background: pink;
+            width: 50dvw;
+            height: 45dvh;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><p>Exhibition & Program</p></li>
+        <li><p>Educational program</p></li>
+        <li><p>Launch</p></li>
+        <li><p>Symposium</p></li>
+        <li><p>Debate</p></li>
+        <li><p>Public program</p></li>
+        <li><p>Film searching</p></li>
+    </ul>
+</body>
+</html>
