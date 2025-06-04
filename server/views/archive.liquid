@@ -5,18 +5,18 @@
   <div class="category-wrapper">
     <div class="breadcrumbs">
       <a href="/">Home</a> &gt;
-           <form method="GET" action="/archive">
+           <form method="GET" action="/archive/type/{{ selectedEvent }}">
   <label for="eventTypeSelect"></label>
   <select name="eventType" id="eventTypeSelect" onchange="this.form.submit()">
     <!-- "Alle" optie -->
-    <option value="all" {% if selectedType == null or selectedType == "all" %}selected{% endif %}>Alle</option>
+    <option value="all" {% if selectedEvent == null or selectedEvent == "all" %}selected{% endif %}>Alle</option>
 
     {% assign unique_types = "" | split: "," %}
     {% for type in allEventTypes %}
       {% if type.nl and type.nl != "" and type.nl != blank %}
         {% unless unique_types contains type.nl %}
           {% assign unique_types = unique_types | push: type.nl %}
-          <option value="{{ type.nl }}" {% if type.nl == selectedType %}selected{% endif %}>{{ type.nl }}</option>
+          <option value="{{ type.nl }}" {% if type.nl == selectedEvent %}selected{% endif %}>{{ type.nl }}</option>
         {% endunless %}
       {% endif %}
     {% endfor %}
@@ -26,7 +26,7 @@
     <section class="category-list">
       <!-- <a href="/">Back</a> -->
       <div class="category-header">
-        <h1>{{ selectedType }}</h1>
+        <h1>{{ selectedEvent }}</h1>
         <ul>
           <li><label for="images-only"><input type="radio" id="images-only" name="view-category" hidden>Images</label>
           </li>
@@ -71,8 +71,8 @@
         {% for item in allEvents %}
         {% if selectedEvent == "all" or not selectedEvent or item.event.type_nl == selectedEvent %}
 
-        <tr class="archive-item" data-href="/event/{{ item.event.id }}" tabindex="0">
-          <td><a href="#" class="link-detail"></a></td>
+        <tr class="archive-item" tabindex="0">
+          <td><a href="/archive/{{ item.event.uuid }}" class="link-detail"></a></td>
           <td><h2>{{ item.event.title_nl }}</h2></td>
           <td class="type">
             <div class="types {{ item.event.type_nl }}"></div><p>{{ item.event.type_nl }}</p>
@@ -88,14 +88,20 @@
             endif
             %}</td>
           <td class="participants">
+            {% assign relevant_artists = '' | split: ',' %}
+
             {% for rel in item.relationships %}
-            {% if rel.node == "Person" %}
-            {% for artist in allArtists %}
-            {% if rel.uuid == artist.person.uuid %}
-            <p>{{ artist.person.name }},</p>
-            {% endif %}
+              {% if rel.node == "Person" %}
+                {% for artist in allArtists %}
+                  {% if rel.uuid == artist.person.uuid %}
+                    {% assign relevant_artists = relevant_artists | push: artist.person.name %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
             {% endfor %}
-            {% endif %}
+          
+            {% for name in relevant_artists %}
+              {{ name }}{% unless forloop.last %}, {% endunless %}
             {% endfor %}
           </td>
           <td><img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy"></td>

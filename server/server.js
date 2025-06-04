@@ -22,23 +22,28 @@ const app = new App();
 // Utility function to add image URLs to events
 function eventImageUrls(events) {
   return events.map(event => {
-    const assetRel = event.relationships?.find(rel => rel.node === 'Asset'); // Find the asset relationship
-    const imageUrl = assetRel ? `https://archive.framerframed.nl/assets/${assetRel.uuid}/hd.webp` : null; // Construct image URL
+    const assetRel = event.relationships?.find(rel => rel.node === 'Asset');
+    const imageUrl = assetRel 
+      ? `https://archive.framerframed.nl/assets/${assetRel.uuid}/hd.webp`
+      : '/images/placeholder.webp'; // fallback image in public/images
     return {
       ...event,
-      imageUrl // Add image URL to the event object
+      imageUrl
     };
   });
 }
 
+
 // Utility function to add image URLs to people
 function personImageUrls(people) {
   return people.map(person => {
-    const assetRel = person.relationships?.find(rel => rel.node === 'Asset'); // Find the asset relationship
-    const imageUrl = assetRel ? `https://archive.framerframed.nl/assets/${assetRel.uuid}/hd.webp` : null; // Construct image URL
+    const assetRel = person.relationships?.find(rel => rel.node === 'Asset');
+    const imageUrl = assetRel 
+      ? `https://archive.framerframed.nl/assets/${assetRel.uuid}/hd.webp`
+      : '/images/placeholder.webp'; // fallback image in public/images
     return {
       ...person,
-      imageUrl // Add image URL to the person object
+      imageUrl
     };
   });
 }
@@ -97,14 +102,12 @@ app.post('/search', async (req, res) => {
 
 // Route: Archive page
 app.get('/archive/type/:eventType', async (req, res) => {
-  const selectedEvent = req.query.event
+  const selectedEvent = req.params.eventType
   console.log(selectedEvent)
 
   // Fetch events data
   const dataEvents = await fetch(eventsAPI);
   const allEvents = await dataEvents.json();
-
-  console.log(allEvents);
 
   // Fetch event types data
   const dataEventTypes = await fetch(eventTypesAPI);
