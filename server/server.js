@@ -102,7 +102,8 @@ app.post('/search', async (req, res) => {
 
 // Route: Archive page
 app.get('/archive/type/:eventType', async (req, res) => {
-  const selectedEvent = req.params.eventType
+  const selectedEvent = req.query.eventType || req.params.eventType || 'all';
+
   console.log(selectedEvent)
 
   // Fetch events data
