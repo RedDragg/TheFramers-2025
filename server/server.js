@@ -80,13 +80,22 @@ app
   .listen(3000, () => console.log('Server available on http://localhost:3000')); // Start the server on port 3000
 
 
-  app.use((req, res, next) => {
-    const lang = req.params.lang?.toUpperCase();
-    if (lang && !['EN', 'NL'].includes(lang)) {
-      return res.redirect('/EN'); // of '/NL'
-    }
-    next();
-  });
+// Redirect to default lang if missing
+app.use((req, res, next) => {
+  if (!/^\/(EN|NL)(\/|$)/i.test(req.path)) {
+    return res.redirect(`/EN${req.path}`);
+  }
+  next();
+});
+
+// Validate lang param if present
+app.use((req, res, next) => {
+  const lang = req.params.lang?.toUpperCase();
+  if (lang && !['EN', 'NL'].includes(lang)) {
+    return res.redirect('/EN');
+  }
+  next();
+});
 
 // Route: Home page
 app.get('/:lang', async (req, res) => {
