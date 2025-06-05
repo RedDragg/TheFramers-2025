@@ -1,16 +1,20 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
+{% comment %} <p>{{ event.event.title_nl }}</p>
+<p>{{ lang }}</p> {% endcomment %}
+
+
 
 <main>
-  {% render '../components/detail-page/details.liquid', title:
-      (upperLang === 'EN'
-        ? event?.event?.title_en
-        : event?.event?.title_nl) || person?.person?.name || 'Detail',
-    event,
-    person,
-    allArtists: filteredArtists,
-    allEvents: filteredEvents %}
+{% render '../components/detail-page/details.liquid', 
+  title: title, 
+  event: event, 
+  person: person, 
+  allArtists: allArtists, 
+  allEvents: allEvents, 
+  lang: lang, 
+  currentPath: currentPath, %}
 </main>
 
 {% endblock %}
