@@ -1,15 +1,14 @@
 {% comment %} Div or section with two headers? {% endcomment %}
-{% comment %} What is the name for? {% endcomment %}
 
 {% if lang == 'EN' %}
-    {% assign type = event.event.type_en %}
-    {% assign title = event.event.title_en %}
-    {% assign content = event.event.content_en %}
-  {% else %}
-    {% assign type = event.event.type_nl %}
-    {% assign title = event.event.title_nl %}
-    {% assign content = event.event.content_nl %}
-  {% endif %}
+{% assign type = event.event.type_en %}
+{% assign title = event.event.title_en %}
+{% assign content = event.event.content_en %}
+{% else %}
+{% assign type = event.event.type_nl %}
+{% assign title = event.event.title_nl %}
+{% assign content = event.event.content_nl %}
+{% endif %}
 
 <div class="details-position">
   <div class="details-wrapper">
@@ -17,56 +16,60 @@
     <details class="about" open name="about&relations-switch">
       <summary>
         {% if lang == 'EN' %}
-          About
+        About
         {% else %}
-          Over
+        Over
         {% endif %}
       </summary>
 
       <h2>{{ title }}</h2>
 
       <ul>
-        <li>
+        <li class="type">
           <h3>
             {% if lang == 'EN' %}
-              Type
+            Type
             {% else %}
-              Type
+            Type
             {% endif %}
           </h3>
           <ul>
             <li>{{ type }}</li>
           </ul>
         </li>
-        <li>
+        <li class="artist">
+          {% comment %} Better element for this? {% endcomment %}
           <h3>
             {% if lang == 'EN' %}
-              Artist
+            Artist
             {% else %}
-              Artiest
+            Artiest
             {% endif %}
           </h3>
           {% for rel in event.relationships %}
-            {% if rel.node == "Person" %}
-              {% for artist in allArtists %}
-                {% if rel.uuid == artist.person.uuid %}
-                  <p>{{ artist.person.name }}</p>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
+          {% if rel.node == "Person" %}
+          {% for artist in allArtists %}
+          {% if rel.uuid == artist.person.uuid %}
+          <p>{{ artist.person.name }}</p>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
           {% endfor %}
         </li>
-        <li>
+        <li class="date">
           <h3>
             {% if lang == 'EN' %}
-              Date
+            Date
             {% else %}
-              Datum
+            Datum
             {% endif %}
           </h3>
           <p>{{ event.event.year }}</p>
         </li>
       </ul>
+      <hr>
+
+      <img src="{{ event.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
 
       <p>{{ content }}</p>
     </details>
@@ -74,30 +77,58 @@
     <details class="relations" name="about&relations-switch">
       <summary>
         {% if lang == 'EN' %}
-          Relations
+        Relations
         {% else %}
-          Relaties
+        Relaties
         {% endif %}
       </summary>
 
       <h2>{{ title }}</h2>
 
-      <ul>
-        {% for rel in event.relationships %}
+      <img src="{{ event.imageUrl }}" alt="{{ event_title }}" class="cover-img" loading="lazy">
+      
+      <section class="relation-carousel">
+        <input type="radio" id="radio-1" name="radio-card" checked>
+
+        <article class="relation-content" style="--angle:4deg">
+          {% for rel in event.relationships %}
           {% if rel.node == "Person" %}
-            {% for artist in allArtists %}
-              {% if rel.uuid == artist.person.uuid %}
-                <li>
-                  <h3>{{ artist.person.name }}</h3>
-                  <img src="{{ artist.imageUrl }}" class="relation-img" alt="{{ artist.person.name }}">
-                </li>
-              {% endif %}
-            {% endfor %}
+          {% for artist in allArtists %}
+          {% if rel.uuid == artist.person.uuid %}
+
+          <img class="relation-image-carousel" src="{{ artist.imageUrl }}">
+            <div class="relation-data">
+              <span class="card-num" aria-label="relation count">1/7</span>
+              
+                <h2>{{ artist.person.name }}</h2>
+              <div class="labels">
+                <label for="radio-7" aria-label="Previous">&#10094;</label>
+                <label for="radio-2" aria-label="Next">&#10095;</label>
+              </div>
+            </div>
           {% endif %}
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
+        </article>
+      </section>
+      
+
+      {% comment %} <ul>
+        {% for rel in event.relationships %}
+        {% if rel.node == "Person" %}
+        {% for artist in allArtists %}
+        {% if rel.uuid == artist.person.uuid %}
+        <li>
+          <h3>{{ artist.person.name }}</h3>
+          <img src="{{ artist.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
+        </li>
+        {% endif %}
         {% endfor %}
-      </ul>
+        {% endif %}
+        {% endfor %}
+      </ul> {% endcomment %}
     </details>
 
   </div>
 </div>
-
