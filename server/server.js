@@ -116,10 +116,10 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
   return res.send(renderTemplate('server/views/archive.liquid', { 
     title: 'Archive', 
     allEvents: filteredEvents, 
-    allArtist: filteredArtists, 
+    allArtists: filteredArtists, 
     allEventTypes, 
     selectedEvent,
-    lang,
+    lang: upperLang,
     currentPath: req.path,
   }));
 });
@@ -130,6 +130,7 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
 app.get('/:lang/archive/:uuid', async (req, res) => {
   const { uuid, lang } = req.params;
   const upperLang = lang.toUpperCase();
+  
 
   const [dataEvents, dataPeople] = await Promise.all([
     fetch(eventsAPI),
@@ -157,16 +158,20 @@ app.get('/:lang/archive/:uuid', async (req, res) => {
     return res.status(404).send('Not found');
   }
 
+  const title =
+  (upperLang === 'EN'
+    ? event?.event?.title_en
+    : event?.event?.title_nl) || person?.person?.name || 'Detail';
+
+    console.log(upperLang, event, person);
+
   return res.send(renderTemplate('server/views/detail-page.liquid', {
-    title:
-      (upperLang === 'EN'
-        ? event?.event?.title_en
-        : event?.event?.title_nl) || person?.person?.name || 'Detail',
+    title,
     event,
     person,
     allArtists: filteredArtists,
     allEvents: filteredEvents,
-    lang,
+    lang: upperLang,
     currentPath: req.path,
   }));
 });

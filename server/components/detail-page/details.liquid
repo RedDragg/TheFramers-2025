@@ -1,62 +1,103 @@
 {% comment %} Div or section with two headers? {% endcomment %}
 {% comment %} What is the name for? {% endcomment %}
+
+{% if lang == 'EN' %}
+    {% assign type = event.event.type_en %}
+    {% assign title = event.event.title_en %}
+    {% assign content = event.event.content_en %}
+  {% else %}
+    {% assign type = event.event.type_nl %}
+    {% assign title = event.event.title_nl %}
+    {% assign content = event.event.content_nl %}
+  {% endif %}
+
 <div class="details-position">
-    <div class="details-wrapper">
+  <div class="details-wrapper">
 
-    {% comment %} Open possibbly required? {% endcomment %}
     <details class="about" open name="about&relations-switch">
-        <summary>About</summary>
+      <summary>
+        {% if lang == 'EN' %}
+          About
+        {% else %}
+          Over
+        {% endif %}
+      </summary>
 
-        <h2>{{ event.event.title_nl }}</h2>
+      <h2>{{ title }}</h2>
 
-        <ul>
+      <ul>
         <li>
-            <h3>Type</h3>
-            {% comment %} Better element for this? {% endcomment %}
-            <ul>
-                <li>{{ event.event.type_nl }}</li>
-            </ul>
-        </li>
-        <li>
-            <h3>Artist</h3>
-            {% for rel in event.relationships %}
-            {% if rel.node == "Person" %}
-            {% for artist in allArtists %}
-                {% if rel.uuid == artist.person.uuid %}
-                    <p>{{ artist.person.name }}</p>
-                {% endif %}
-            {% endfor %}
+          <h3>
+            {% if lang == 'EN' %}
+              Type
+            {% else %}
+              Type
             {% endif %}
-        {% endfor %}
+          </h3>
+          <ul>
+            <li>{{ type }}</li>
+          </ul>
         </li>
         <li>
-            <h3>Date</h3>
-            <p>{{ event.event.year }}</p>
+          <h3>
+            {% if lang == 'EN' %}
+              Artist
+            {% else %}
+              Artiest
+            {% endif %}
+          </h3>
+          {% for rel in event.relationships %}
+            {% if rel.node == "Person" %}
+              {% for artist in allArtists %}
+                {% if rel.uuid == artist.person.uuid %}
+                  <p>{{ artist.person.name }}</p>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
         </li>
-        </ul>
+        <li>
+          <h3>
+            {% if lang == 'EN' %}
+              Date
+            {% else %}
+              Datum
+            {% endif %}
+          </h3>
+          <p>{{ event.event.year }}</p>
+        </li>
+      </ul>
 
-        <p>{{ event.event.content_nl }}</p>
+      <p>{{ content }}</p>
     </details>
 
-        <details class="relations" name="about&relations-switch">
-            <summary>Relations</summary>
+    <details class="relations" name="about&relations-switch">
+      <summary>
+        {% if lang == 'EN' %}
+          Relations
+        {% else %}
+          Relaties
+        {% endif %}
+      </summary>
 
-            <h2>{{ event.event.title_nl }}</h2>
+      <h2>{{ title }}</h2>
 
-            <ul>
-            {% for rel in event.relationships %}
-                {% if rel.node == "Person" %}
-                {% for artist in allArtists %}
-                    {% if rel.uuid == artist.person.uuid %}
-                        <li>
-                            <h3>{{ artist.person.name }}</h3>
-                            <img src="{{ artist.imageUrl }}" class="relation-img" alt="">
-                        </li>
-                    {% endif %}
-                {% endfor %}
-                {% endif %}
+      <ul>
+        {% for rel in event.relationships %}
+          {% if rel.node == "Person" %}
+            {% for artist in allArtists %}
+              {% if rel.uuid == artist.person.uuid %}
+                <li>
+                  <h3>{{ artist.person.name }}</h3>
+                  <img src="{{ artist.imageUrl }}" class="relation-img" alt="{{ artist.person.name }}">
+                </li>
+              {% endif %}
             {% endfor %}
-            </ul>
-        </details>
-    </div>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </details>
+
+  </div>
 </div>
+
