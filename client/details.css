@@ -98,6 +98,7 @@ main {
 
 details iframe {
     width: 100%;
+    height: auto;
     border-radius: var(--border-radius-button);
     object-fit: cover;
 }
