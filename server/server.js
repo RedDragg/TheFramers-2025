@@ -79,6 +79,15 @@ app
   .use('/', sirv('dist')) // Serve static files from the 'dist' directory
   .listen(3000, () => console.log('Server available on http://localhost:3000')); // Start the server on port 3000
 
+
+  app.use((req, res, next) => {
+    const lang = req.params.lang?.toUpperCase();
+    if (lang && !['EN', 'NL'].includes(lang)) {
+      return res.redirect('/EN'); // of '/NL'
+    }
+    next();
+  });
+
 // Route: Home page
 app.get('/:lang', async (req, res) => {
   const lang = req.params.lang.toUpperCase();
@@ -103,7 +112,9 @@ app.get('/:lang', async (req, res) => {
     title: 'Home', 
     allEvents: filteredEvents, 
     allArtists: filteredArtists, 
-    allEventTypes 
+    allEventTypes,
+    lang,
+    currentPath: req.path,
   }));
 });
 
@@ -150,7 +161,9 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
     allEvents: filteredEvents, 
     allArtist: filteredArtists, 
     allEventTypes, 
-    selectedEvent 
+    selectedEvent,
+    lang,
+    currentPath: req.path,
   }));
 });
 
@@ -196,6 +209,8 @@ app.get('/:lang/archive/:uuid', async (req, res) => {
     person,
     allArtists: filteredArtists,
     allEvents: filteredEvents,
+    lang,
+    currentPath: req.path,
   }));
 });
 
