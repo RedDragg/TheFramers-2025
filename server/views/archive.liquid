@@ -71,8 +71,8 @@
         {% for item in allEvents %}
         {% if selectedType == "all" or not selectedType or item.event.type_nl == selectedType %}
 
-        <tr class="archive-item" data-href="/event/{{ item.event.id }}" tabindex="0">
-          <td><a href="#" class="link-detail"></a></td>
+        <tr class="archive-item" tabindex="0">
+          <td><a href="/archive/{{ item.event.uuid }}" class="link-detail"></a></td>
           <td><h2>{{ item.event.title_nl }}</h2></td>
           <td class="type">
             <div class="types {{ item.event.type_nl }}"></div><p>{{ item.event.type_nl }}</p>
