@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'; // Middleware for parsing request bodies
 import { logger } from '@tinyhttp/logger'; // Middleware for logging HTTP requests
 import { Liquid } from 'liquidjs'; // Template engine for rendering views
 import sirv from 'sirv'; // Static file server middleware
+import { eventImageUrls, personImageUrls, filterEventsByLang, filterPersonsByLang } from './utils.js';
 
 // API endpoints for fetching data
 const wordPressAPI = `https://framerframed.nl/en/wp-json/wp/v2/pages`;
@@ -19,59 +20,6 @@ const engine = new Liquid({
 // Create a new Tinyhttp app instance
 const app = new App();
 
-// Utility function to add image URLs to events
-function eventImageUrls(events) {
-  return events.map(event => {
-    const assetRel = event.relationships?.find(rel => rel.node === 'Asset');
-    const imageUrl = assetRel 
-      ? `https://archive.framerframed.nl/assets/${assetRel.uuid}/hd.webp`
-      : '/images/placeholder.webp'; // fallback image in public/images
-    return {
-      ...event,
-      imageUrl
-    };
-  });
-}
-
-
-// Utility function to add image URLs to people
-function personImageUrls(people) {
-  return people.map(person => {
-    const assetRel = person.relationships?.find(rel => rel.node === 'Asset');
-    const imageUrl = assetRel 
-      ? `https://archive.framerframed.nl/assets/${assetRel.uuid}/hd.webp`
-      : '/images/placeholder.webp'; // fallback image in public/images
-    return {
-      ...person,
-      imageUrl
-    };
-  });
-}
-
-function filterEventsByLang(events, lang) {
-  return events.filter(e => {
-    if (!e.event) return false;
-    const title = lang === 'EN' ? e.event.title_en : e.event.title_nl;
-    return title && title.trim() !== '';
-  });
-}
-
-function filterPersonsByLang(persons, lang) {
-  return persons.filter(p => {
-    if (!p.person) return false;
-    const bio = lang === 'EN' ? p.person.bio_en : p.person.bio_nl;
-    return bio && bio.trim() !== '';
-  });
-}
-
-function filterEventsAndPersonsByLang(data, lang) {
-  return {
-    events: filterEventsByLang(data.events, lang),
-    persons: filterPersonsByLang(data.persons, lang)
-  };
-}
-
-
 // Middleware setup
 app
   .use(logger()) // Log HTTP requests
@@ -80,13 +28,22 @@ app
   .listen(3000, () => console.log('Server available on http://localhost:3000')); // Start the server on port 3000
 
 
-  app.use((req, res, next) => {
-    const lang = req.params.lang?.toUpperCase();
-    if (lang && !['EN', 'NL'].includes(lang)) {
-      return res.redirect('/EN'); // of '/NL'
-    }
-    next();
-  });
+// Redirect to default lang if missing
+app.use((req, res, next) => {
+  if (!/^\/(EN|NL)(\/|$)/i.test(req.path)) {
+    return res.redirect(`/EN${req.path}`);
+  }
+  next();
+});
+
+// Validate lang param if present
+app.use((req, res, next) => {
+  const lang = req.params.lang?.toUpperCase();
+  if (lang && !['EN', 'NL'].includes(lang)) {
+    return res.redirect('/EN');
+  }
+  next();
+});
 
 // Route: Home page
 app.get('/:lang', async (req, res) => {
@@ -121,7 +78,7 @@ app.get('/:lang', async (req, res) => {
 
 
 // Route: Search functionality
-app.post('/search', async (req, res) => {
+app.post('/:lang/search', async (req, res) => {
   const searchQuery = req.body.search; // Get the search query from the request body
   console.log(searchQuery);
 
