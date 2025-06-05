@@ -1,0 +1,62 @@
+{% comment %} Div or section with two headers? {% endcomment %}
+{% comment %} What is the name for? {% endcomment %}
+<div class="details-position">
+    <div class="details-wrapper">
+
+    {% comment %} Open possibbly required? {% endcomment %}
+    <details class="about" open name="about&relations-switch">
+        <summary>About</summary>
+
+        <h2>{{ event.event.title_nl }}</h2>
+
+        <ul>
+        <li>
+            <h3>Type</h3>
+            {% comment %} Better element for this? {% endcomment %}
+            <ul>
+                <li>{{ event.event.type_nl }}</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Artist</h3>
+            {% for rel in event.relationships %}
+            {% if rel.node == "Person" %}
+            {% for artist in allArtists %}
+                {% if rel.uuid == artist.person.uuid %}
+                    <p>{{ artist.person.name }}</p>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+        {% endfor %}
+        </li>
+        <li>
+            <h3>Date</h3>
+            <p>{{ event.event.year }}</p>
+        </li>
+        </ul>
+
+        <p>{{ event.event.content_nl }}</p>
+    </details>
+
+        <details class="relations" name="about&relations-switch">
+            <summary>Relations</summary>
+
+            <h2>{{ event.event.title_nl }}</h2>
+
+            <ul>
+            {% for rel in event.relationships %}
+                {% if rel.node == "Person" %}
+                {% for artist in allArtists %}
+                    {% if rel.uuid == artist.person.uuid %}
+                        <li>
+                            <h3>{{ artist.person.name }}</h3>
+                            <img src="{{ artist.imageUrl }}" class="relation-img" alt="">
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </details>
+    </div>
+</div>

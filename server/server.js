@@ -165,7 +165,7 @@ app.get('/archive/:uuid', async (req, res) => {
 
   // Render the event detail page template with data
   return res.send(
-    renderTemplate('server/views/details.liquid', {
+    renderTemplate('server/views/detail-page.liquid', {
       title: event.event.title_nl,
       event,
       allArtists: artistsWithImages,
