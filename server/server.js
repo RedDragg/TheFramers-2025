@@ -200,7 +200,7 @@ app.get('/:lang/archive/:uuid', async (req, res) => {
     return res.status(404).send('Not found');
   }
 
-  return res.send(renderTemplate('server/views/details.liquid', {
+  return res.send(renderTemplate('server/views/detail-page.liquid', {
     title:
       (upperLang === 'EN'
         ? event?.event?.title_en
