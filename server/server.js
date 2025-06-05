@@ -48,6 +48,28 @@ function personImageUrls(people) {
   });
 }
 
+function filterEventsByLang(events, lang) {
+  return events.filter(e => {
+    if (!e.event) return false;
+    const title = lang === 'EN' ? e.event.title_en : e.event.title_nl;
+    return title && title.trim() !== '';
+  });
+}
+
+function filterPersonsByLang(persons, lang) {
+  return persons.filter(p => {
+    if (!p.person) return false;
+    const bio = lang === 'EN' ? p.person.bio_en : p.person.bio_nl;
+    return bio && bio.trim() !== '';
+  });
+}
+
+function filterEventsAndPersonsByLang(data, lang) {
+  return {
+    events: filterEventsByLang(data.events, lang),
+    persons: filterPersonsByLang(data.persons, lang)
+  };
+}
 
 
 // Middleware setup
@@ -58,35 +80,33 @@ app
   .listen(3000, () => console.log('Server available on http://localhost:3000')); // Start the server on port 3000
 
 // Route: Home page
-app.get('/', async (req, res) => {
-  // Fetch events data
-  const dataEvents = await fetch(eventsAPI);
-  const allEvents = await dataEvents.json();
+app.get('/:lang', async (req, res) => {
+  const lang = req.params.lang.toUpperCase();
 
-  // Fetch event types data
-  const dataEventTypes = await fetch(eventTypesAPI);
-  const allEventTypes = await dataEventTypes.json();
+  const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
+    fetch(eventsAPI),
+    fetch(eventTypesAPI),
+    fetch(personAPI)
+  ]);
+  const [allEventsRaw, allEventTypes, allPeople] = await Promise.all([
+    dataEvents.json(),
+    dataEventTypes.json(),
+    dataPeople.json()
+  ]);
 
-  // Filter events with valid titles
-  const filteredEvents = allEvents.filter(
-    (e) => e.event && e.event.title_nl && e.event.title_nl.trim() !== ''
-  );
+  const allEvents = eventImageUrls(allEventsRaw);
+  const filteredEvents = filterEventsByLang(allEvents, lang);
+  const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, lang));
 
-  // Add image URLs to events
-  const eventsWithImages = eventImageUrls(filteredEvents);
 
-  // Fetch people data
-  const dataPeople = await fetch(personAPI);
-  const allArtists = await dataPeople.json();
-
-  // Render the home page template with data
   return res.send(renderTemplate('server/views/index.liquid', { 
     title: 'Home', 
-    allEvents: eventsWithImages, 
-    allArtists, 
+    allEvents: filteredEvents, 
+    allArtists: filteredArtists, 
     allEventTypes 
   }));
 });
+
 
 
 // Route: Search functionality
@@ -101,43 +121,34 @@ app.post('/search', async (req, res) => {
 
 
 // Route: Archive page
-app.get('/archive/type/:eventType', async (req, res) => {
-  const selectedEvent = req.query.eventType || req.params.eventType || 'all';
+app.get('/:lang/archive/type/:eventType', async (req, res) => {
+  const { eventType, lang } = req.params;
+  const selectedEvent = eventType || 'all';
+  const upperLang = lang.toUpperCase();
 
-  console.log(selectedEvent)
+  // Fetch data
+  const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
+    fetch(eventsAPI),
+    fetch(eventTypesAPI),
+    fetch(personAPI)
+  ]);
+  const [allEventsRaw, allEventTypes, allPeople] = await Promise.all([
+    dataEvents.json(),
+    dataEventTypes.json(),
+    dataPeople.json()
+  ]);
 
-  // Fetch events data
-  const dataEvents = await fetch(eventsAPI);
-  const allEvents = await dataEvents.json();
+  const allEvents = eventImageUrls(allEventsRaw);
+  const filteredEvents = filterEventsByLang(allEvents, upperLang)
+    .filter(e => selectedEvent === 'all' || getEventTypeName(e, upperLang) === selectedEvent);
 
-  // Fetch event types data
-  const dataEventTypes = await fetch(eventTypesAPI);
-  const allEventTypes = await dataEventTypes.json();
+  const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, upperLang));
 
-  // Filter events with valid titles
-  let filteredEvents = allEvents.filter(
-    (e) => e.event && e.event.title_nl && e.event.title_nl.trim() !== ''
-  );
 
-  // Filter events by selected type if provided
-  if (selectedEvent && selectedEvent !== 'all') {
-    filteredEvents = filteredEvents.filter(
-      (e) => e.event.type_nl === selectedEvent
-    );
-  }
-
-  // Add image URLs to events
-  const eventsWithImages = eventImageUrls(filteredEvents);
-
-  // Fetch people data
-  const dataPeople = await fetch(personAPI);
-  const allArtists = await dataPeople.json();
-
-  // Render the archive page template with data
   return res.send(renderTemplate('server/views/archive.liquid', { 
     title: 'Archive', 
-    allEvents: eventsWithImages, 
-    allArtists, 
+    allEvents: filteredEvents, 
+    allArtist: filteredArtists, 
     allEventTypes, 
     selectedEvent 
   }));
@@ -145,49 +156,49 @@ app.get('/archive/type/:eventType', async (req, res) => {
 
 
 
-app.get('/archive/:uuid', async (req, res) => {
-  const uuid = req.params.uuid;
 
-  // Fetch all events
-  const eventsResponse = await fetch(eventsAPI);
-  const allProjects = await eventsResponse.json();
+app.get('/:lang/archive/:uuid', async (req, res) => {
+  const { uuid, lang } = req.params;
+  const upperLang = lang.toUpperCase();
 
-  // Fetch all people
-  const peopleResponse = await fetch(personAPI);
-  const allPeople = await peopleResponse.json();
+  const [dataEvents, dataPeople] = await Promise.all([
+    fetch(eventsAPI),
+    fetch(personAPI)
+  ]);
 
-  // Add image URLs to people and events
-  const allArtists = personImageUrls(allPeople);
-  const allEvents = eventImageUrls(allProjects);
+  const [allEventsRaw, allPeopleRaw] = await Promise.all([
+    dataEvents.json(),
+    dataPeople.json()
+  ]);
 
-  // Try to find a matching event
-  const event = allEvents.find(e => e.event.uuid === uuid);
+  // Voeg afbeelding URL's toe
+  const allEventsWithImages = eventImageUrls(allEventsRaw);
+  const allPeopleWithImages = personImageUrls(allPeopleRaw);
 
-  // Try to find a matching person
-  const person = allPeople.find(p => p.person.uuid === uuid);
+  // Filter op taal
+  const filteredEvents = filterEventsByLang(allEventsWithImages, upperLang);
+  const filteredArtists = filterPersonsByLang(allPeopleWithImages, upperLang);
 
-  // If neither is found, return 404
+  // Zoek het specifieke event of person via uuid (in de ongefilterde lijst, zodat ook verborgen content kan worden benaderd)
+  const event = allEventsWithImages.find(e => e.event.uuid === uuid);
+  const person = allPeopleWithImages.find(p => p.person.uuid === uuid);
+
   if (!event && !person) {
     return res.status(404).send('Not found');
   }
 
-  if (event) {
-    console.log(event)
-  } else {
-    console.log(person)
-  }
-
-  // Render template with both possibilities; the Liquid logic handles the rest
-  return res.send(
-    renderTemplate('server/views/details.liquid', {
-      title: event?.event?.title_nl || person?.person?.name || 'Detail',
-      event,
-      person,
-      allArtists,
-      allEvents // Needed to resolve relationships for people
-    })
-  );
+  return res.send(renderTemplate('server/views/details.liquid', {
+    title:
+      (upperLang === 'EN'
+        ? event?.event?.title_en
+        : event?.event?.title_nl) || person?.person?.name || 'Detail',
+    event,
+    person,
+    allArtists: filteredArtists,
+    allEvents: filteredEvents,
+  }));
 });
+
 
 
 
