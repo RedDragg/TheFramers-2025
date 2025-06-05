@@ -89,6 +89,13 @@
           </label>
 
         </li>
+        <li>
+          {% if lang == 'EN' %}
+            <a href="/NL{{ request.url | remove_first: '/EN' }}">Nederlands</a>
+          {% else %}
+            <a href="/EN{{ request.url | remove_first: '/NL' }}">English</a>
+          {% endif %}
+        </li>
       </ul>
     </nav>
   </header>

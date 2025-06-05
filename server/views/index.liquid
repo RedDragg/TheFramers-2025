@@ -4,26 +4,39 @@
 <main>
 
 
- <section class="data-scroll">
+<section class="data-scroll">
   <ul class="home-data">
 
     {% assign unique_types = [] %}
     {% for type in allEventTypes %}
-      {% if type.nl and type.nl != "" and type.nl != blank %}
-        {% unless unique_types contains type.nl %}
-          {% assign unique_types = unique_types | push: type.nl %}
+      {% if lang == 'EN' %}
+        {% assign type_name = type.en %}
+      {% else %}
+        {% assign type_name = type.nl %}
+      {% endif %}
+
+      {% if type_name and type_name != "" and type_name != blank %}
+        {% unless unique_types contains type_name %}
+          {% assign unique_types = unique_types | push: type_name %}
 
           {% for item in allEvents %}
-            {% if item.event.type_nl == type.nl %}
-              {% assign type_class = type.nl | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
+            {% if lang == 'EN' %}
+              {% assign event_type_name = item.event.type_en %}
+              {% assign event_title = item.event.title_en %}
+            {% else %}
+              {% assign event_type_name = item.event.type_nl %}
+              {% assign event_title = item.event.title_nl %}
+            {% endif %}
+
+            {% if event_type_name == type_name %}
+              {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
               <li class="item" tabindex="0">
-                <a href="/archive/{{ item.event.uuid }}">
+                <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
                   <div>
-                    <strong>{{ item.event.title_nl }}</strong> 
-                    <h2 class="type-label {{ type_class }}">{{ type.nl }}</h2>
+                    <strong>{{ event_title }}</strong> 
+                    <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
                   </div>
-                  <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy">
-                </a>
+                  <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
                 </a>
               </li>
             {% endif %}
@@ -32,6 +45,11 @@
         {% endunless %}
       {% endif %}
     {% endfor %}
+
+  </ul>
+</section>
+
+
 
   </ul>
 </section> 
