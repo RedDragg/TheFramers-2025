@@ -1,10 +1,7 @@
-/* Global styles */
-@import "typography.css";
-
 /* Layout and view styling */
 @import "base.css";
 
 /* Component styling */
 @import "home.css";
 @import "archive.css";
-
+@import "details.css";

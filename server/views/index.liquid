@@ -3,26 +3,39 @@
 {% block content %}
 <main>
 
-{% comment %} 
 <section class="data-scroll">
   <ul class="home-data">
 
     {% assign unique_types = [] %}
     {% for type in allEventTypes %}
-      {% if type.nl and type.nl != "" and type.nl != blank %}
-        {% unless unique_types contains type.nl %}
-          {% assign unique_types = unique_types | push: type.nl %}
+      {% if lang == 'EN' %}
+        {% assign type_name = type.en %}
+      {% else %}
+        {% assign type_name = type.nl %}
+      {% endif %}
+
+      {% if type_name and type_name != "" and type_name != blank %}
+        {% unless unique_types contains type_name %}
+          {% assign unique_types = unique_types | push: type_name %}
 
           {% for item in allEvents %}
-            {% if item.event.type_nl == type.nl and item.imageUrl and item.imageUrl != "" and item.imageUrl != blank %}
-              {% assign type_class = type.nl | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
+            {% if lang == 'EN' %}
+              {% assign event_type_name = item.event.type_en %}
+              {% assign event_title = item.event.title_en %}
+            {% else %}
+              {% assign event_type_name = item.event.type_nl %}
+              {% assign event_title = item.event.title_nl %}
+            {% endif %}
+
+            {% if event_type_name == type_name %}
+              {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
               <li class="item" tabindex="0">
-                <a href="/archive/{{ item.event.uuid }}">
-                  <div class="type-header">
-                    <strong>{{ item.event.title_nl }}</strong> 
-                    <h2 class="type-label {{ type_class }}">{{ type.nl }}</h2>
+                <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
+                  <div>
+                    <strong>{{ event_title }}</strong> 
+                    <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
                   </div>
-                  <img src="{{ item.imageUrl }}" alt="{{ item.event.title_nl }}" class="category-image" loading="lazy">
+                  <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
                 </a>
               </li>
             {% endif %}
@@ -33,48 +46,12 @@
     {% endfor %}
 
   </ul>
-</section> {% endcomment %}
-
-
-<section class="data-scroll">
-  <ul class="home-data">
-
-    {% assign unique_types = [] %}
-    {% for type in allEventTypes %}
-      {% if type.nl and type.nl != "" and type.nl != blank %}
-        {% unless unique_types contains type.nl %}
-          {% assign unique_types = unique_types | push: type.nl %}
-
-          {% assign matching_items = allEvents | where: "event.type_nl", type.nl %}
-          {% assign items_with_image = matching_items | where_exp: "item", "item.imageUrl and item.imageUrl != ''" %}
-          {% assign project_count = matching_items | size %}
-          {% assign sample_images = items_with_image | slice: 0, 24 %}
-          {% assign type_class = type.nl | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
-
-          {% if sample_images.size > 0 %}
-            <li class="item" tabindex="0">
-              <div class="type-header">
-                <strong>{{ project_count }} projects</strong>
-                <h2 class="type-label {{ type_class }}">{{ type.nl }}</h2>
-              </div>
-              <div class="image-grid">
-                {% for img in sample_images %}
-                  <a href="/archive/{{ img.event.uuid }}">
-                    <img src="{{ img.imageUrl }}" alt="{{ img.event.title_nl | escape }}" class="category-image-grid" loading="lazy">
-                  </a>
-                {% endfor %}
-              </div>
-            </li>
-          {% endif %}
-
-        {% endunless %}
-      {% endif %}
-    {% endfor %}
-
-  </ul>
 </section>
 
 
+
+  </ul>
+</section> 
 
 {% comment %} 
 <section class="data-scroll">
