@@ -3,9 +3,12 @@
 {% block content %}
 <main>
 
+{% comment %} Scroll driven scroll view{% endcomment %}
 <section class="data-scroll">
+  {% comment %} unordered list met li's {% endcomment %}
   <ul class="home-data">
 
+  {% comment %} 🪄 Checking for the language {% endcomment %}
     {% assign unique_types = [] %}
     {% for type in allEventTypes %}
       {% if lang == 'EN' %}
@@ -29,6 +32,8 @@
 
             {% if event_type_name == type_name %}
               {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
+
+              {% comment %} 🗄️ List items {% endcomment %}
               <li class="item" tabindex="0">
                 <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
                   <div>
@@ -38,6 +43,8 @@
                   <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
                 </a>
               </li>
+
+
             {% endif %}
           {% endfor %}
 
@@ -52,41 +59,6 @@
 
   </ul>
 </section> 
-
-{% comment %} 
-<section class="data-scroll">
-  <ul class="home-data">
-
-    {% assign unique_types = [] %}
-    {% for type in allEventTypes %}
-      {% if type.nl and type.nl != "" and type.nl != blank %}
-        {% unless unique_types contains type.nl %}
-          {% assign unique_types = unique_types | push: type.nl %}
-
-          {% assign matching_items = allEvents | where: "event.type_nl", type.nl %}
-          {% assign items_with_image = matching_items | where_exp: "item", "item.imageUrl and item.imageUrl != ''" %}
-          {% assign project_count = matching_items | size %}
-          {% assign random_item = items_with_image | sample %}
-          {% assign type_class = type.nl | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
-
-          {% if random_item %}
-            <li class="item" tabindex="0">
-              <a href="/archive/{{ random_item.event.uuid }}">
-                <div>
-                  <strong>{{ project_count }} projects</strong>
-                  <h2 class="type-label {{ type_class }}">{{ type.nl }}</h2>
-                </div>
-                <img src="{{ random_item.imageUrl }}" alt="{{ random_item.event.title_nl }}" class="category-image" loading="lazy">
-              </a>
-            </li>
-          {% endif %}
-
-        {% endunless %}
-      {% endif %}
-    {% endfor %}
-
-  </ul>
-</section> {% endcomment %}
 
 </main>
 

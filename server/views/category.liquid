@@ -1,0 +1,60 @@
+{% layout "server/layouts/base.liquid" %}
+
+{% block content %}
+<main>
+
+<section class="data-scroll">
+  <ul class="home-data">
+
+    {% assign unique_types = [] %}
+    {% for type in allEventTypes %}
+      {% if lang == 'EN' %}
+        {% assign type_name = type.en %}
+      {% else %}
+        {% assign type_name = type.nl %}
+      {% endif %}
+
+      {% if type_name and type_name != "" and type_name != blank %}
+        {% unless unique_types contains type_name %}
+          {% assign unique_types = unique_types | push: type_name %}
+
+          {% if lang == 'EN' %}
+            {% assign matching_items = allEvents | where: "event.type_en", type_name %}
+          {% else %}
+            {% assign matching_items = allEvents | where: "event.type_nl", type_name %}
+          {% endif %}
+
+          {% assign items_with_image = matching_items | where_exp: "item", "item.imageUrl and item.imageUrl != ''" %}
+          {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
+
+          {% if items_with_image.size > 0 %}
+            <li class="item" tabindex="0">
+              <div>
+                <strong>{{ items_with_image.size }} projects</strong>
+                <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
+              </div>
+              <div class="image-gallery">
+                {% for item in items_with_image limit: 3 %}
+                  {% if lang == 'EN' %}
+                    {% assign event_title = item.event.title_en %}
+                  {% else %}
+                    {% assign event_title = item.event.title_nl %}
+                  {% endif %}
+                  <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
+                    <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
+                  </a>
+                {% endfor %}
+              </div>
+            </li>
+          {% endif %}
+
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+
+  </ul>
+</section>
+
+</main>
+{% endblock %}
+

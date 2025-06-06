@@ -3,207 +3,165 @@
 /* colors type category */
 
 .type-label{
-    padding: .2rem .5rem;
-    border-radius: 2rem;
-    height: 2rem;
-}
-
-h2::before {
-  content: '';
-  display: block;
-  background-color: white;
-  width: 70rem;
-  height: 10rem;
-  position: absolute;
-  top: -30px;
-  right: -50px;
-  filter: blur(35px);
-  z-index: -1;
+  padding: .2rem .5rem;
+  border-radius: 2rem;
+  height: 2rem;
 }
 
 .type-label.expositie {
-    background-color: #FFD700;
-  }
-  
-  .type-label.lancering {
-    background-color: #FF6347;
-  }
-  
-  .type-label.debat {
-    background-color: #9ACD32;
-  }
+  background-color: #FFD700;
+}
 
-  .type-label.symposium {
-    background-color: #be32cd;
-  }
+.type-label.lancering {
+  background-color: #FF6347;
+}
 
-  .type-label.performance {
-    background-color: #324ecd;
-  }
+.type-label.debat {
+  background-color: #9ACD32;
+}
 
-  .type-label.expositie-programma {
-    background-color: #32b3cd;
-  }
+.type-label.symposium {
+  background-color: #be32cd;
+}
 
-  .type-label.publiek-programma {
-    background-color: #cd328a;
-  }
+.type-label.performance {
+  background-color: #324ecd;
+}
 
-  .type-label.filmvertoning {
-    background-color: #cd8a32;
-  }
+.type-label.expositie-programma {
+  background-color: #32b3cd;
+}
 
-  .type-label.lezing {
-    background-color: #f39be8;
-  }
+.type-label.publiek-programma {
+  background-color: #cd328a;
+}
 
-  .type-label.educatief-programma {
-    background-color: #05ec33;
-  }
-  
+.type-label.filmvertoning {
+  background-color: #cd8a32;
+}
 
+.type-label.lezing {
+  background-color: #f39be8;
+}
 
-
-
-
-
-
-
-
-
-
-
+.type-label.educatief-programma {
+  background-color: #05ec33;
+}
 
 
 /* section */
 .data-scroll {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    place-items: center;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    /* zorgt ervoor dat de section niet kan scrollen */
-    overflow: clip;
-    transition: opacity var(--updown-time) var(--rotate-delay) ease-out;
-  
-    /* li */
-    .item {
-        width: 40rem;
-        height: 100%;
-  
+  place-items: center;
+  background-color: #05ec33;
 
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-        /* border: solid 1px black; */
-        transform: rotate(calc(var(--slides-angle) * 1));
-        scroll-snap-align: center;
+  /* zorgt ervoor dat de section niet kan scrollen */
+  overflow: clip;
+  transition: opacity var(--updown-time) var(--rotate-delay) ease-out;
 
-        &:hover{
-            z-index: 3;
-
-        }
-
-        &:focus{
-            z-index: 3;
-        }
-
-      /* div images grid */
-    .image-grid{
+  /* li */
+  .item {
+    background-color: #FF6347;
+      height: 100%;
+      /* 🔗 https://clamp-generator.netlify.app/ */
+      width: calc(clamp(20rem, 19.643vw + 16.071rem, 40.625rem));
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      background-color: white;
-      padding: 1.5rem;
-      border-radius: .5rem;
-            /* 🔗: https://getcssscan.com/css-box-shadow-examples */
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    }
-    }
+      flex-direction: column;
+      gap: .5rem;
+      /* border: solid 1px black; */
+      transform: rotate(calc(var(--slides-angle) * 1));
+      scroll-snap-align: center;
+
+      &:last-child{
+        margin-bottom: 50rem;
+      }
+
+      &:hover{
+          z-index: 3;
+
+      }
+
+      &:focus{
+          z-index: 3;
+      }
+  }
 }
 
 /* ul */
 .home-data {
-    position: absolute;
-    inset: -50vmax;
-    list-style-type: "";
-    display: grid;
-    padding-block: var(--slides-margin);
+  background-color: #cd328a;
+  display: flex;
+  flex-direction: column;
+  transform: rotate(39.5deg);
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  height: 200%;
+  width: 100%;
+  padding-inline: 30rem;
+  padding-top: 50rem;
+  padding-left: -1rem;
+  padding-bottom: 10rem;
 
-    /* grid-auto-rows: calc(var(--slide-height) + var(--slides-spacing)); */
-    place-items: center;
-    padding-inline: 50vmax;
-    padding-top: 60rem;
-    padding-bottom: 30rem;
 
-    transform: rotate(calc(var(--slides-angle) * -1));
-
+  list-style-type: "";
+    /* scroll behaviour  */
     overflow-y: auto;
     scroll-snap-type: y mandatory;
-
     scroll-behavior: smooth;
 
+  img {
+      width: 100%;
+      border-radius: 8px;
+      border: .5px solid black;
+  }
 
-    img {
-        width: 5rem;
-        height: 5rem;
-        border-radius: 8px;
-    }
+  div {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      padding: .5rem;
+  }
 
-    .category-image-grid{
-      /* 🔗: https://getcssscan.com/css-box-shadow-examples */
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-      }
-  
-      .category-image{
-             /* 🔗: https://getcssscan.com/css-box-shadow-examples */
-        box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;    }
+  .title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-transform: capitalize;
+  }
+
+  .type {
+      padding: .3rem 1rem;
+      background: grey;
+      border-radius: 5px;
+      text-transform: capitalize;
+  }
 
 
-    /* .type-header { */
-    div{
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-        padding: .5rem;
-    }
+  .data-scroll .item {
+      width: 60vw;
+  }
 
-    .title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        text-transform: capitalize;
-    }
+  .home-data {
+      padding-inline: .5vw;
+  }
 
-    .type {
-        padding: .3rem 1rem;
-        background: grey;
-        border-radius: 5px;
-        text-transform: capitalize;
-    }
+  .title {
+      font-size: 1.2rem;
+  }
 
-}
+  .type {
+      font-size: 0.9rem;
+      padding: 0.2rem 0.6rem;
+  }
 
-/* responsive */
-@media (max-width: 480px) {
-    .data-scroll .item {
-        width: 60vw;
-    }
-
-    .home-data {
-        padding-inline: .5vw;
-    }
-
-    .title {
-        font-size: 1.2rem;
-    }
-
-    .type {
-        font-size: 0.9rem;
-        padding: 0.2rem 0.6rem;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-    }
+  img {
+      max-width: 100%;
+      height: auto;
+  }
 }
