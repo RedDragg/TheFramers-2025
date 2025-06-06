@@ -90,8 +90,12 @@ app.post('/:lang/search', async (req, res) => {
 
 // Route: Archive page
 app.get('/:lang/archive/type/:eventType', async (req, res) => {
-  const { eventType, lang } = req.params;
-  const selectedEvent = eventType || 'all';
+  const { lang, eventType } = req.params;
+  const queryEventType = req.query.eventType;
+
+  // Kies eventType uit query of params, query gaat voor
+  const selectedEventRaw = queryEventType || eventType || 'all';
+  const selectedEvent = selectedEventRaw.toLowerCase() === 'all' ? 'all' : selectedEventRaw;
   const upperLang = lang.toUpperCase();
 
   // Fetch data
@@ -108,10 +112,14 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
 
   const allEvents = eventImageUrls(allEventsRaw);
   const filteredEvents = filterEventsByLang(allEvents, upperLang)
-    .filter(e => selectedEvent === 'all' || getEventTypeName(e, upperLang) === selectedEvent);
+    .filter(e => {
+      const type = upperLang === 'EN' ? e.event.type_en : e.event.type_nl;
+      return selectedEvent === 'all' || type === selectedEvent;
+    });
 
   const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, upperLang));
 
+  console.log('Selected Event:', selectedEvent);
 
   return res.send(renderTemplate('server/views/archive.liquid', { 
     title: 'Archive', 
@@ -123,7 +131,6 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
     currentPath: req.path,
   }));
 });
-
 
 
 
