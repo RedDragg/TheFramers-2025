@@ -10,6 +10,7 @@
 {% assign content = event.event.content_nl %}
 {% endif %}
 
+{% if  %}
 <div class="details-position">
   <div class="details-wrapper">
 
@@ -50,7 +51,7 @@
           {% if rel.node == "Person" %}
           {% for artist in allArtists %}
           {% if rel.uuid == artist.person.uuid %}
-          <p>{{ artist.person.name }}</p>
+            <p>{{ artist.person.name }}</p>
           {% endif %}
           {% endfor %}
           {% endif %}
@@ -85,9 +86,26 @@
 
       <h2>{{ title }}</h2>
 
-      <img src="{{ event.imageUrl }}" alt="{{ event_title }}" class="cover-img" loading="lazy">
-      
-      <section class="relation-carousel">
+      {% comment %} <img src="{{ event.imageUrl }}" alt="Cover picture of the{{ type  }} {{ event_title }}" class="cover-img" loading="lazy"> {% endcomment %}
+
+      <ul class="relations-list">
+        {% for rel in event.relationships %}
+        {% if rel.node == "Person" %}
+        {% for artist in allArtists %}
+        {% if rel.uuid == artist.person.uuid %}
+        <li>
+          <a href="">
+            <img src="{{ artist.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
+            <h3>{{ artist.person.name }}</h3>
+          </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+
+      {% comment %} <section class="relation-carousel">
         <input type="radio" id="radio-1" name="radio-card" checked>
 
         <article class="relation-content" style="--angle:4deg">
@@ -98,7 +116,7 @@
 
           <img class="relation-image-carousel" src="{{ artist.imageUrl }}">
             <div class="relation-data">
-              <span class="card-num" aria-label="relation count">1/7</span>
+              <span class="card-num" aria-label="relation">1/7</span>
               
                 <h2>{{ artist.person.name }}</h2>
               <div class="labels">
@@ -111,23 +129,8 @@
           {% endif %}
           {% endfor %}
         </article>
-      </section>
-      
+      </section> {% endcomment %}
 
-      {% comment %} <ul>
-        {% for rel in event.relationships %}
-        {% if rel.node == "Person" %}
-        {% for artist in allArtists %}
-        {% if rel.uuid == artist.person.uuid %}
-        <li>
-          <h3>{{ artist.person.name }}</h3>
-          <img src="{{ artist.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
-        </li>
-        {% endif %}
-        {% endfor %}
-        {% endif %}
-        {% endfor %}
-      </ul> {% endcomment %}
     </details>
 
   </div>

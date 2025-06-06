@@ -156,75 +156,25 @@ details img {
     width: 80%;
 }
 
-.relations ul {
+.relations-list {
     width: 100%;
     height: auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    justify-content: space-between;
+    gap: 2rem;
 }
 
 .relations li {
-    width: 11rem;
+    width: 45%;
     height: auto;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .relation-img {
-    width: inherit;
-    height: auto;
+    width: 8rem;
+    height: 8rem;
     border-radius: var(--border-radius-button);
     object-fit: cover;
-}
-
-/* //////////////////////// */
-/* 🥐🥐🥐 REL CAROUSEL 🥐🥐🥐 */
-/* //////////////////////// */
-
-.relation-carousel {
-    --img-w: 200px;
-    --duration: 300ms;
-    --img-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
-
-    width: fit-content;
-    height: auto;
-    margin-inline: auto;
-    display: grid;
-
-    counter-reset: my-counter;
-}
-
-/* Hide radio buttons with screen reader accessible hiding */
-input[type="radio"] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-.relation-content {
-    --cards-grid-cols: auto;
-    --cards-grid-rows: var(--img-w) auto;
-    --cards-grid-gap: 2rem;
-    --cards-footer-justify: center;
-    
-    grid-area: 1/1;
-    display: grid;
-    place-items: center; 
-    grid-template-columns: var(--cards-grid-cols);
-    grid-template-rows: var(--cards-grid-rows);
-    gap: var(--cards-grid-gap);
-  
-}
-
-.relation-image-carousel {
-    width: 11rem;
-    height: auto;
 }
