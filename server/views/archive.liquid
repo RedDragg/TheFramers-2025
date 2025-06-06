@@ -12,7 +12,7 @@
         <option value="all" {% if selectedEvent == null or selectedEvent == "all" %}selected{% endif %}>
           {% if lang == "NL" %}Alle{% else %}All{% endif %}
         </option>
-    
+
         {% assign unique_types = "" | split: "," %}
         {% for type in allEventTypes %}
           {% if lang == "EN" %}
@@ -20,7 +20,7 @@
           {% else %}
             {% assign typeName = type.nl %}
           {% endif %}
-    
+
           {% if typeName and typeName != "" and typeName != blank %}
             {% unless unique_types contains typeName %}
               {% assign unique_types = unique_types | push: typeName %}
@@ -30,7 +30,7 @@
         {% endfor %}
       </select>
     </form>
-    
+
     </div>
     <section class="category-list">
       <!-- <a href="/">Back</a> -->
@@ -52,12 +52,19 @@
       <!-- Filtered events -->
     </section>
 
-        {% assign event_count = 0 %}
-      {% for item in allEvents %}
-        {% if selectedEvent == "all" or not selectedEvent or item.event.type_nl == selectedEvent %}
-          {% assign event_count = event_count | plus: 1 %}
-        {% endif %}
-      {% endfor %}
+{% assign event_count = 0 %}
+{% for item in allEvents %}
+  {% if lang == "EN" %}
+    {% assign eventTypeToCheck = item.event.type_en %}
+  {% else %}
+    {% assign eventTypeToCheck = item.event.type_nl %}
+  {% endif %}
+
+  {% if selectedEvent == "all" or not selectedEvent or eventTypeToCheck == selectedEvent %}
+    {% assign event_count = event_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
           <p>Results: {{ event_count }} event{% if event_count != 1 %}s{% endif %}</p>
       <table>
         <tr class="table-header">
@@ -85,7 +92,7 @@
             {% assign eventTypeToCheck = item.event.type_nl %}
             {% assign eventTitleToShow = item.event.title_nl %}
           {% endif %}
-        
+
           {% if selectedEvent == "all" or not selectedEvent or eventTypeToCheck == selectedEvent %}
             <tr class="archive-item" tabindex="0">
               <td><a href="/{{ lang }}/archive/{{ item.event.uuid }}" class="link-detail"></a></td>

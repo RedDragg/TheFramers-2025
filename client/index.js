@@ -13,28 +13,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// scroll op de windows scrollbar
-const navOpacity = document.querySelector(".home-menu li:nth-child(2)");
+ document.addEventListener("DOMContentLoaded", () => {
+    const navOpacity = document.querySelector(".home-menu");
+    const scrollContainer = document.querySelector(".home-data");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY === 0) {
-    // Helemaal bovenaan: opacity terug naar 1
-    navOpacity.style.opacity = "1";
-  } else {
-    // Gescrold: opacity verlagen
-    navOpacity.style.opacity = "0.2";
-  }
-});
+    window.addEventListener("scroll", () => {
+      if (window.scrollY === 0) {
+        navOpacity.style.opacity = "1";
+      } else {
+        navOpacity.style.opacity = "0.2";
+      }
+    });
 
-// scroll op de .home-data container
-const scrollContainer = document.querySelector(".home-data");
-
-scrollContainer.addEventListener("scroll", () => {
-  if (scrollContainer.scrollTop === 0) {
-    // Helemaal bovenaan
-    navOpacity.style.opacity = "1";
-  } else {
-    // Gescrold binnen .home-data
-    navOpacity.style.opacity = "0.5";
-  }
-});
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", () => {
+        if (scrollContainer.scrollTop === 0) {
+          navOpacity.style.opacity = "1";
+        } else {
+          navOpacity.style.opacity = "0.5";
+        }
+      });
+    }
+  });

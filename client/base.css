@@ -94,6 +94,7 @@ header{
             grid-template-areas: "nav-logo nav-lang" "nav-logo nav-mid";
             grid-template-rows: 1fr auto;
             padding: 0 1rem;
+             transition: opacity 0.3s ease;
 
             color: white;
 
@@ -163,7 +164,7 @@ header{
 
 
                 &:hover {
-                  opacity: 1!important;
+                  opacity: 1;
                   transition: opacity .5s ease;
                 }
             }
@@ -393,15 +394,15 @@ header{
 /* 🪐🪐🪐 TEXT FORMATTING 🪐🪐🪐 */
 /* /////////////////////////// */
 
-.Expositie {
+.Exhibition {
   background-color: #e6194b; /* felrood */
 }
 
-.Lancering {
+.Launch {
   background-color: #f58231; /* helder oranje */
 }
 
-.Debat {
+.Debate {
   background-color: #ffe119; /* fel geel */
 }
 
@@ -409,11 +410,7 @@ header{
   background-color: #3cb44b; /* sterk groen */
 }
 
-.Expositie {
-  background-color: #42d4f4; /* helder cyaan */
-}
-
-.Publiek {
+.Public {
   background-color: #4363d8; /* intens blauw */
 }
 
@@ -421,17 +418,19 @@ header{
   background-color: #911eb4; /* paars */
 }
 
-.Filmvertoning {
+.Film {
   background-color: #f032e6; /* opvallend roze */
 }
 
-.Lezing {
+.Talk {
   background-color: #bfef45; /* limoengroen */
 }
 
-.Educatief {
+.Educational {
   background-color: #fabebe; /* lichtroze */
 }
+
+
 
 @media (prefers-reduced-motion: reduce) {
 *{
