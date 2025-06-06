@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'; // Middleware for parsing request bodies
 import { logger } from '@tinyhttp/logger'; // Middleware for logging HTTP requests
 import { Liquid } from 'liquidjs'; // Template engine for rendering views
 import sirv from 'sirv'; // Static file server middleware
-import { eventImageUrls, personImageUrls, filterEventsByLang, filterPersonsByLang } from './utils.js';
+import { eventImageUrls, personImageUrls, filterEventsByLang, filterPersonsByLang, getEventTypeName } from './utils.js';
 
 // API endpoints for fetching data
 const wordPressAPI = `https://framerframed.nl/en/wp-json/wp/v2/pages`;

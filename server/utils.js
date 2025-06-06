@@ -43,5 +43,10 @@ export function eventImageUrls(events) {
       return bio && bio.trim() !== '';
     });
   }
+
+  export function getEventTypeName(event, lang) {
+    if (!event || !event.event) return '';
+    return lang === 'EN' ? event.event.type_en : event.event.type_nl;
+  }
   
   
