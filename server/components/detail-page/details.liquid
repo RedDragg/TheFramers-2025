@@ -94,7 +94,7 @@
         {% for artist in allArtists %}
         {% if rel.uuid == artist.person.uuid %}
         <li>
-          <a href="">
+          <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
             <img src="{{ artist.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
             <h3>{{ artist.person.name }}</h3>
           </a>
