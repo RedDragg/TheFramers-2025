@@ -2,11 +2,22 @@
 
 /* colors type category */
 
-.type-label{
-  padding: .2rem .5rem;
-  border-radius: 2rem;
-  height: 2rem;
+.type-label{ 
+
+  /* 🔗: https://getcssscan.com/css-buttons-examples */
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+
+  border: .05rem solid;
+  max-height: 2rem;
+  text-align: center;
+  padding: 0.25em 0.5em;
+  box-shadow: 2px 2px 0px 0px;
 }
+
 
 .type-label.expositie {
   background-color: #FFD700;
@@ -59,7 +70,6 @@
   align-items: center;
 
   place-items: center;
-  background-color: #05ec33;
 
   /* zorgt ervoor dat de section niet kan scrollen */
   overflow: clip;
@@ -67,7 +77,6 @@
 
   /* li */
   .item {
-    background-color: #FF6347;
       height: 100%;
       /* 🔗 https://clamp-generator.netlify.app/ */
       width: calc(clamp(20rem, 19.643vw + 16.071rem, 40.625rem));
@@ -95,7 +104,6 @@
 
 /* ul */
 .home-data {
-  background-color: #cd328a;
   display: flex;
   flex-direction: column;
   transform: rotate(39.5deg);
@@ -127,6 +135,7 @@
       justify-content: space-between;
       flex-direction: row;
       padding: .5rem;
+      letter-spacing: 1.5px;
   }
 
   .title {
