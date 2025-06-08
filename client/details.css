@@ -9,6 +9,17 @@ main {
     margin: 2rem 0 0 0;
 }
 
+.back-arrow {
+    width: fit-content;
+    height: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: 5rem;
+}
+
 .details-position {
     display: grid;
     justify-content: center;

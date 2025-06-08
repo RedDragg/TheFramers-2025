@@ -10,6 +10,20 @@
 {% assign content = event.event.content_nl %}
 {% endif %}
 
+<a href="" class="back-arrow">
+    <svg role="graphics-symbol" width="24" height="24" aria-labelledby="back-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 12L20 12" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
+      <path d="M11.0325 4.33939L4.45961 10.9122C4.31606 11.0546 4.20206 11.224 4.12432 11.4108C4.04646 11.5975 4.00641 11.7977 4.00641 12C4.00641 12.2023 4.04646 12.4025 4.12432 12.5892C4.20206 12.776 4.31606 12.9454 4.45961 13.0877L11.0325 19.6606" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <p id="back-arrow">
+      {% if lang == "EN" %}
+        Back
+      {% else %}
+        Terug
+      {% endif %}
+    </p>
+</a>
+
 <div class="details-position">
   <div class="details-wrapper">
   
@@ -122,7 +136,7 @@
       <img src="{{ event.imageUrl }}" alt="Cover image of {{ event_title }}" class="category-image" loading="lazy">
       
       {% if lang == 'EN' %}
-        <p>{{ content_en }}</p>
+        <p>{{ content }}</p>
       {% else %}
         {% if content_nl == nil or content_nl == blank %}
           <p>Excuses, deze content is alleen beschikbaar in het Engels.</p>
@@ -205,7 +219,7 @@
             <h3>{{ title }}</h3>
           </a>
           {% elsif event %}
-          <a href="/{{ lang }}/archive/{{ item.artist.uuid }}">
+          <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
             <img src="{{ artist.imageUrl }}" class="relation-img" alt="Cover picture of {{ title }}, which has a relation to {{ artist.person.name }}">
             <h3>{{ artist.person.name }}</h3>
           </a>
