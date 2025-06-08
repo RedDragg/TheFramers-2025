@@ -132,7 +132,7 @@
         {% endif %}
       {% endif %}
 
-      {% elsif person %}
+    {% elsif person %}
         <ul>
           <li class="exhibitions">
             <h3>
@@ -165,6 +165,7 @@
           {% else %}
             <p>{{ artist.person.bio_nl }}</p>
           {% endif %}
+        {% endif %}
       {% endif %}
       <hr>
     </details>
@@ -176,9 +177,9 @@
     <details class="relations" name="about&relations-switch">
       <summary>
         {% if lang == 'EN' %}
-        Relations
+        Related
         {% else %}
-        Relaties
+        Gerelateerd
         {% endif %}
       </summary>
 
@@ -200,13 +201,13 @@
         <li>
           {% if person %}
           <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
-            <img src="{{ artist.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
-            <h3>{{ artist.person.name }}</h3>
+            <img src="{{ event.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
+            <h3>{{ title }}</h3>
           </a>
           {% elsif event %}
-          <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
-            <img src="{{ event.imageUrl }}" class="relation-img" alt="Cover picture of {{ title }}, which has a relation to {{ artist.person.name }}">
-            <h3>{{ title }}</h3>
+          <a href="/{{ lang }}/archive/{{ item.artist.uuid }}">
+            <img src="{{ artist.imageUrl }}" class="relation-img" alt="Cover picture of {{ title }}, which has a relation to {{ artist.person.name }}">
+            <h3>{{ artist.person.name }}</h3>
           </a>
           {% else %}
             <svg role="img" xmlns="http://www.w3.org/2000/svg" width="92" height="80" id="empty-state-img" viewBox="0 0 92 80" fill="none">
