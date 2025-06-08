@@ -155,12 +155,12 @@
         <li>
           {% if person %}
           <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
-            <img src="{{ artist.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
+            <img src="{{ event.imageUrl }}" class="relation-img" alt="Cover picture of {{ title }}, which has a relation to {{ artist.person.name }}">
             <h3>{{ artist.person.name }}</h3>
           </a>
           {% elsif event %}
           <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
-            <img src="{{ event.imageUrl }}" class="relation-img" alt="Cover picture of {{ title }}, which has a relation to {{ artist.person.name }}">
+            <img src="{{ artist.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
             <h3>{{ title }}</h3>
           </a>
         {% else %}
