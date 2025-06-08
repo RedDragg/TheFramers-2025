@@ -29,7 +29,7 @@ main {
     --deep-black: #121212;
     --border-radius-button: 0.5rem;
     
-    width: 60vw;
+    width: clamp(18.5938rem, 3.1481rem + 77.2283vw, 63rem);
     display: flex;
     gap: 1rem;
     justify-content: center;

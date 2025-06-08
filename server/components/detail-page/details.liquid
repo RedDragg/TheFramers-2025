@@ -109,6 +109,8 @@
               Datum
             {% endif %}
           </h3>
+          {% comment %} {% if item.event.date_start == "null" or item.event.date_start == blank && item.event.date_end == nil or item.event.date_end == blank %} {% endcomment %}
+
           {% if item.event.date_start == "null" or item.event.date_start == blank %}
             {% if lang == 'EN' %}
               <p>One day event</p>
