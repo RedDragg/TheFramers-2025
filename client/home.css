@@ -62,7 +62,7 @@
 
 
 /* section */
-.data-scroll {
+.data-carousel {
   position: fixed;
   inset: 0;
   display: flex;
@@ -77,7 +77,7 @@
   transition: opacity var(--updown-time) var(--rotate-delay) ease-out;
 
   /* li */
-  .item {
+  .content-card {
       height: 100%;
       /* 🔗 https://clamp-generator.netlify.app/ */
       width: calc(clamp(20rem, 19.643vw + 16.071rem, 40.625rem));
@@ -104,7 +104,7 @@
 }
 
 /* ul */
-.home-data {
+.scroll-carousel{
   display: flex;
   flex-direction: column;
   transform: rotate(39.5deg);
@@ -112,7 +112,7 @@
   align-items: center;
   position: absolute;
   height: 200%;
-  width: 100%;
+  width: 200%;
   padding-inline: 30rem;
   padding-top: 50rem;
   padding-left: -1rem;
@@ -153,11 +153,11 @@
   }
 
 
-  .data-scroll .item {
+  .data-carousel .item {
       width: 60vw;
   }
 
-  .home-data {
+  .scroll-carousel{
       padding-inline: .5vw;
   }
 

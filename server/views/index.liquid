@@ -1,66 +1,18 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
-<main>
 
-{% comment %} Scroll driven scroll view{% endcomment %}
-<section class="data-scroll">
-  {% comment %} unordered list met li's {% endcomment %}
-  <ul class="home-data">
-
-  {% comment %} 🪄 Checking for the language {% endcomment %}
-    {% assign unique_types = [] %}
-    {% for type in allEventTypes %}
-      {% if lang == 'EN' %}
-        {% assign type_name = type.en %}
-      {% else %}
-        {% assign type_name = type.nl %}
-      {% endif %}
-
-      {% if type_name and type_name != "" and type_name != blank %}
-        {% unless unique_types contains type_name %}
-          {% assign unique_types = unique_types | push: type_name %}
-
-          {% for item in allEvents %}
-            {% if lang == 'EN' %}
-              {% assign event_type_name = item.event.type_en %}
-              {% assign event_title = item.event.title_en %}
-            {% else %}
-              {% assign event_type_name = item.event.type_nl %}
-              {% assign event_title = item.event.title_nl %}
-            {% endif %}
-
-            {% if event_type_name == type_name %}
-              {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
-
-              {% comment %} 🗄️ List items {% endcomment %}
-              <li class="item" tabindex="0">
-                <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
-                  <div>
-                    <strong>{{ event_title }}</strong> 
-                    <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
-                  </div>
-                  <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
-                </a>
-              </li>
-
-
-            {% endif %}
-          {% endfor %}
-
-        {% endunless %}
-      {% endif %}
-    {% endfor %}
-
-  </ul>
-</section>
-
-
-
-  </ul>
-</section> 
-
-</main>
+  {% if view == 'categories' %}
+    {% render 'components/home-page/all-category.liquid' 
+      allEvents: allEvents, 
+      allEventTypes: allEventTypes 
+    %}
+  {% else %}
+    {% render '../components/home-page/all-data.liquid' 
+      allEvents: allEvents, 
+      allArtists: allArtists 
+    %}
+  {% endif %}
 
 {% endblock %}
 
