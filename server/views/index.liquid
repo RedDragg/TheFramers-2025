@@ -3,14 +3,15 @@
 {% block content %}
 
   {% if view == 'categories' %}
-    {% render 'components/home-page/all-category.liquid' 
+    {% render '../components/home-page/all-category.liquid' 
       allEvents: allEvents, 
       allEventTypes: allEventTypes 
     %}
   {% else %}
     {% render '../components/home-page/all-data.liquid' 
       allEvents: allEvents, 
-      allArtists: allArtists 
+      allArtists: allArtists,
+      allEventTypes: allEventTypes 
     %}
   {% endif %}
 

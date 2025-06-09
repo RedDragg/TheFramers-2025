@@ -169,28 +169,6 @@ header{
                 }
             }
 
-            /* view switch layout css */
-
-            .categories-home {
-                display: none;
-            }
-
-            label:has(#all-content:checked) {
-                .categories-home {
-                    display: block;
-                }
-
-                .all-content {
-                    display: none;
-                }
-
-            }
-
-
-            label:has(#theme:checked) {
-                border-radius: .4rem;
-            }
-
 
             /* LOGO */
             li:nth-child(1) {
