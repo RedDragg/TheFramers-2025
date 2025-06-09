@@ -48,6 +48,7 @@ app.use((req, res, next) => {
 // Route: Home page - all data
 app.get('/:lang', async (req, res) => {
   const lang = req.params.lang.toUpperCase();
+  const view = req.query.view || 'categories'; // default naar 'all-data' als het ontbreekt
 
   const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
     fetch(eventsAPI),
@@ -72,6 +73,7 @@ app.get('/:lang', async (req, res) => {
     allEventTypes,
     lang,
     currentPath: req.path,
+    view 
   }));
 });
 

@@ -29,27 +29,31 @@
         </li>
 
         <li>
-          <label for="all-content">
-            <input type="checkbox" id="all-content" checked hidden>
-            <div class="all-content">
-            <svg class="all-content-logo" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 26" fill="none">
+          <a 
+  href="{{ currentPath }}?view={% if view == 'categories' %}all-data{% else %}categories{% endif %}"
+>
+  {% if view == 'categories' %}
+    <div class="all-content">
+      <svg class="all-content-logo" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 26" fill="none">
                 <path d="M2.87067 17.5395C2.85383 17.7037 2.87299 17.8695 2.9268 18.0255C2.98062 18.1814 3.06782 18.3238 3.1823 18.4426C3.29679 18.5614 3.43581 18.6538 3.58967 18.7133C3.74354 18.7729 3.90854 18.7982 4.07318 18.7875C5.31121 18.7722 6.54729 18.8901 7.76009 19.1391C9.46359 19.347 11.091 19.966 12.502 20.9429V7.21619C11.0932 6.23135 9.4656 5.60446 7.76009 5.38975C6.52416 5.14357 5.26502 5.03324 4.00511 5.06076C3.70425 5.06076 3.41569 5.18028 3.20294 5.39303C2.99019 5.60577 2.87067 5.89433 2.87067 6.1952V17.5395Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               <path d="M22.1332 17.5395C22.1432 17.7001 22.1189 17.8608 22.0621 18.0112C22.0051 18.1616 21.9168 18.2982 21.8032 18.4119C21.6895 18.5257 21.5529 18.6139 21.4025 18.6708C21.2521 18.7277 21.0912 18.752 20.9307 18.742C19.6927 18.7267 18.4566 18.8446 17.2438 19.0937C15.5363 19.3152 13.9086 19.95 12.502 20.9429V7.21619C13.9108 6.23135 15.5383 5.60446 17.2438 5.38975C18.4798 5.14357 19.7389 5.03324 20.9988 5.06076C21.1537 5.06048 21.307 5.09192 21.4492 5.15314C21.5915 5.21436 21.7198 5.30407 21.826 5.41672C21.9324 5.52938 22.0145 5.66262 22.0673 5.8082C22.1201 5.9538 22.1426 6.10866 22.1332 6.26326V17.5395Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               <path d="M5.85547 9.07666H7.15971"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               <path d="M5.85547 15.3389H7.76572"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               <path d="M6.02002 12.208H9.51117" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg> <p>All content</p>
-            </div>
-
-            <div class="categories-home">
-                <svg class="categorie-logo" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+            </svg> 
+      <p>All content</p>
+    </div>
+  {% else %}
+    <div class="categories-home">
+      <svg class="categorie-logo" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                 <path d="M20.3947 10.9213V7.71073C20.3947 7.15845 19.947 6.71073 19.3947 6.71073H12.3879C12.1227 6.71073 11.8683 6.60538 11.6808 6.41784L10.1613 4.89836C9.97378 4.71083 9.71942 4.60547 9.45421 4.60547H3.5C2.94772 4.60547 2.5 5.05318 2.5 5.60547V19.3949C2.5 19.9472 2.94772 20.3949 3.5 20.3949H4.76684C5.25896 20.3949 5.65789 19.996 5.65789 19.5039V19.5039C5.65789 19.397 5.67711 19.2911 5.71463 19.191L8.57246 11.5701C8.71882 11.1798 9.09194 10.9213 9.50879 10.9213H21.1126C21.7951 10.9213 22.2771 11.59 22.0613 12.2375L19.57 19.7112C19.4339 20.1195 19.0518 20.3949 18.6213 20.3949H4.60526" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-
-                <p>Categories</p>
-            </div>
-
-          </label>
+      <p>Categories</p>
+    </div>
+  {% endif %}
+</a>
+            
+        </li>
 
 
 
