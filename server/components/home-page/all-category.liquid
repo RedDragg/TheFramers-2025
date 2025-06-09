@@ -1,10 +1,6 @@
-{% layout "server/layouts/base.liquid" %}
 
-{% block content %}
-<main>
-
-<section class="data-scroll">
-  <ul class="home-data">
+<section class="data-carousel">
+  <ul class="scroll-carousel all-category">
 
     {% assign unique_types = [] %}
     {% for type in allEventTypes %}
@@ -28,7 +24,7 @@
           {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
 
           {% if items_with_image.size > 0 %}
-            <li class="item" tabindex="0">
+            <li class="content-card" tabindex="0">
               <div>
                 <strong>{{ items_with_image.size }} projects</strong>
                 <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
@@ -54,7 +50,4 @@
 
   </ul>
 </section>
-
-</main>
-{% endblock %}
 

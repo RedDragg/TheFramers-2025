@@ -75,36 +75,6 @@ app.get('/:lang', async (req, res) => {
   }));
 });
 
-// Route: Home page - category data
-app.get('/:lang/category', async (req, res) => {
-  const lang = req.params.lang.toUpperCase();
-
-  const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
-    fetch(eventsAPI),
-    fetch(eventTypesAPI),
-    fetch(personAPI)
-  ]);
-  const [allEventsRaw, allEventTypes, allPeople] = await Promise.all([
-    dataEvents.json(),
-    dataEventTypes.json(),
-    dataPeople.json()
-  ]);
-
-  const allEvents = eventImageUrls(allEventsRaw);
-  const filteredEvents = filterEventsByLang(allEvents, lang);
-  const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, lang));
-
-
-  return res.send(renderTemplate('server/views/category.liquid', { 
-    title: 'home/category', 
-    allEvents: filteredEvents, 
-    allArtists: filteredArtists, 
-    allEventTypes,
-    lang,
-    currentPath: req.path,
-  }));
-});
-
 
 // Route: Search functionality
 app.post('/:lang/search', async (req, res) => {
