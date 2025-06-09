@@ -4,14 +4,21 @@
 
   {% if view == 'categories' %}
     {% render '../components/home-page/all-category.liquid' 
-      allEvents: allEvents, 
-      allEventTypes: allEventTypes 
+    allEvents: allEvents, 
+    allArtists: allArtists,
+    allEventTypes: allEventTypes,
+    title: title,
+    lang: lang,
+    currentPath: currentPath
     %}
   {% else %}
     {% render '../components/home-page/all-data.liquid' 
       allEvents: allEvents, 
       allArtists: allArtists,
-      allEventTypes: allEventTypes 
+      allEventTypes: allEventTypes,
+      title: title,
+      lang: lang,
+      currentPath: currentPath
     %}
   {% endif %}
 

@@ -372,43 +372,6 @@ header{
 /* 🪐🪐🪐 TEXT FORMATTING 🪐🪐🪐 */
 /* /////////////////////////// */
 
-.Exhibition {
-  background-color: #e6194b; /* felrood */
-}
-
-.Launch {
-  background-color: #f58231; /* helder oranje */
-}
-
-.Debate {
-  background-color: #ffe119; /* fel geel */
-}
-
-.Symposium {
-  background-color: #3cb44b; /* sterk groen */
-}
-
-.Public {
-  background-color: #4363d8; /* intens blauw */
-}
-
-.Performance {
-  background-color: #911eb4; /* paars */
-}
-
-.Film {
-  background-color: #f032e6; /* opvallend roze */
-}
-
-.Talk {
-  background-color: #bfef45; /* limoengroen */
-}
-
-.Educational {
-  background-color: #fabebe; /* lichtroze */
-}
-
-
 
 @media (prefers-reduced-motion: reduce) {
 *{
