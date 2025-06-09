@@ -40,7 +40,7 @@
         <h2>{{ title }}</h2>
       {% elsif person %}
         <section class="person">
-          <h2>{{ artist.person.name }}</h2>
+          <h2>{{ person.person.name }}</h2>
           <a href="" target="_blank">
             <svg role="graphics-symbol" width="24" height="24" aria-labelledby="artist-website" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 21.5C17.2467 21.5 21.5 17.2467 21.5 12C21.5 6.75329 17.2467 2.5 12 2.5C6.75329 2.5 2.5 6.75329 2.5 12C2.5 17.2467 6.75329 21.5 12 21.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -153,7 +153,7 @@
           <li class="exhibitions">
             <h3>
               {% if lang == 'EN' %}
-              Ehibitions
+              Exhibitions
               {% else %}
               Exposities
               {% endif %}
@@ -170,16 +170,16 @@
           <p>{{ event.event.year }}</p>
           </li>
         </ul>
-        <img src="{{ artist.imageUrl }}" {% if lang == 'EN' %}alt="Portrait picture of {{ artist.person.name }}"{% else %}alt="Portrait picture of {{ artist.person.name }}"{% endif %}  class="category-image" loading="lazy">
+        <img src="{{ person.imageUrl }}" {% if lang == 'EN' %}alt="Portrait picture of {{ person.person.name }}"{% else %}alt="Portrait picture of {{ person.person.name }}"{% endif %}  class="category-image" loading="lazy">
           
         {% if lang == 'EN' %}
-          <p>{{ artist.person.bio_en }}</p>
+          <p>{{ person.person.bio_en }}</p>
         {% else %}
-          {% if artist.person.bio_nl == nil or artist.person.bio_nl == blank %}
+          {% if person.person.bio_nl == nil or person.person.bio_nl == blank %}
             <p>Excuses, deze content is alleen beschikbaar in het Engels.</p>
-            <p>{{ artist.person.bio_en }}</p>
+            <p>{{ personm.person.bio_en }}</p>
           {% else %}
-            <p>{{ artist.person.bio_nl }}</p>
+            <p>{{ person.person.bio_nl }}</p>
           {% endif %}
         {% endif %}
       {% endif %}
@@ -216,12 +216,12 @@
         {% if rel.uuid == artist.person.uuid %}
         <li>
           {% if person %}
-          <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
+          <a href="/{{ lang }}/archive/{{ event.uuid }}">
             <img src="{{ event.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
             <h3>{{ title }}</h3>
           </a>
           {% elsif event %}
-          <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
+          <a href="/{{ lang }}/archive/{{ rel.uuid }}">
             <img src="{{ artist.imageUrl }}" class="relation-img" alt="Cover picture of {{ title }}, which has a relation to {{ artist.person.name }}">
             <h3>{{ artist.person.name }}</h3>
           </a>
