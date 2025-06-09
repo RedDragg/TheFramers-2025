@@ -10,8 +10,8 @@ footer {
     height: auto;
     padding: 2rem;
     background-color: black;
-    z-index: -1;
     color: white;
+    z-index: 10000;
 
     a {
       text-decoration: none;
