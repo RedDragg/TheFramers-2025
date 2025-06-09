@@ -30,7 +30,7 @@
                 <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
               </div>
               <div class="image-gallery">
-                {% for item in items_with_image limit: 3 %}
+                {% for item in items_with_image limit: 6 %}
                   {% if lang == 'EN' %}
                     {% assign event_title = item.event.title_en %}
                   {% else %}
