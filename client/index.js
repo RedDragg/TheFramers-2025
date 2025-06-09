@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const lineHeightSlider = document.getElementById("lineHeightSlider");
     const weightSlider = document.getElementById("weightSlider");
     const letterSpacingSlider = document.getElementById("letterSpacingSlider");
-    const text = document.getElementById("text");
+    const text = document.querySelector(".text");
 
     const sizeValue = document.getElementById("sizeValue");
     const lineHeightValue = document.getElementById("lineHeightValue");
