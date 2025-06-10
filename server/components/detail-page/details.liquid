@@ -69,7 +69,7 @@
       {% if event %}
       <ul>
         <li class="cover-image">
-          <img src="{{ event.imageUrl }}" alt="Cover image of {{ title }}" class="category-image" loading="lazy">
+      <img src="{{ event.imageUrl }}" {% if lang == 'EN' %}alt="Cover image of {{ title }}" {% else %} alt="Omslag en hoofdfoto van {{ title }}"{% endif %} class="category-image" loading="lazy">
         </li>
         <li class="type">
           <h3>
@@ -179,7 +179,7 @@
           </li>
         </ul>
         <hr>
-        <img src="{{ person.imageUrl }}" {% if lang == 'EN' %}alt="Portrait picture of {{ person.person.name }}"{% else %}alt="Portrait picture of {{ person.person.name }}"{% endif %}  class="category-image" loading="lazy">
+        <img src="{{ person.imageUrl }}" {% if lang == 'EN' %}alt="Portrait picture of {{ person.person.name }}"{% else %}alt="Portret foto van {{ person.person.name }}"{% endif %}  class="category-image" loading="lazy">
           
         {% if lang == 'EN' %}
           <p>{{ person.person.bio_en }}</p>
@@ -225,7 +225,12 @@
                 {% if rel.uuid == event.event.uuid %}
                   <li>
                     <a href="/{{ lang }}/archive/{{ event.event.uuid }}">
-                      <img src="{{ event.imageUrl }}" class="relation-img" alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}">
+                      <img src="{{ event.imageUrl }}" class="relation-img" {% if lang == 'EN' %}alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}" {% else %}alt="Portret foto van {{ artist.person.name }}, die een rol heeft gespeeld bij dit project"{% endif %} loading="lazy">
+                      {% if lang == 'EN' %}
+                        <h3>{{ event.event.title_en }}</h3>
+                      {% else %}
+                        <h3>{{ event.event.title_nl }}</h3>
+                      {% endif %}
                       <h3>
                         {% if lang == 'EN' %}
                           {{ event.event.title_en }}
@@ -249,7 +254,7 @@
                     {% assign matchFound = true %}
                     <li>
                       <a href="/{{ lang }}/archive/{{ rel.uuid }}">
-                        <img src="{{ artist.imageUrl }}" class="relation-img" alt="Cover picture of {{ title }}, which has a relation to {{ artist.person.name }}">
+                        <img src="{{ artist.imageUrl }}" class="relation-img" {% if lang == 'EN' %}alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}" {% else %}alt="Portret foto van {{ artist.person.name }}, die een rol heeft gespeeld bij dit project"{% endif %}>
                         <h3>{{ artist.person.name }}</h3>
                       </a>
                     </li>
