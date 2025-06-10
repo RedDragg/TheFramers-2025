@@ -1,10 +1,13 @@
-/* ⭐️ Home - overview page ⭐️ */
+/* ////////////////////////////// */
+/* 🪩🪩🪩 HOME PAGE STYLING 🪩🪩🪩  */
+/* ////////////////////////////// */
+
 
 /* colors type category */
 .type-label{ 
 
   /* 🔗: https://getcssscan.com/css-buttons-examples */
-  font-size: 16px;
+  font-size: 1rem;
   letter-spacing: 1.5px;
   text-decoration: none;
   text-transform: uppercase;
@@ -16,6 +19,10 @@
   padding: 0.25em 0.5em;
   box-shadow: 2px 2px 0px 0px;
 }
+
+/* Colors per type */
+
+
 .type-label.expositie, 
 .type-label.exhibition {
   background-color: #E53935;
@@ -73,10 +80,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   place-items: center;
 
-  /* zorgt ervoor dat de section niet kan scrollen */
   overflow: clip;
   transition: opacity var(--updown-time) var(--rotate-delay) ease-out;
 
@@ -107,6 +112,7 @@
   }
 }
 
+/* Carousel for category */
 .all-category{
   /* 🔗 https://clamp-generator.netlify.app/ */
   gap: calc(clamp(10rem, 1.235vw + 9.769rem, 11.25rem));
@@ -127,7 +133,7 @@
   }
 }
 
-
+/* Carousel for all data  */
 .all-data{
 
   img{
@@ -159,7 +165,6 @@
     scroll-behavior: smooth;
 
   img {
-      /* width: 100%; */
       border-radius: 8px;
       border: .5px solid black;
   }
@@ -184,7 +189,6 @@
       border-radius: 5px;
       text-transform: capitalize;
   }
-
 
   .data-carousel .item {
       width: 60vw;

@@ -1,5 +1,11 @@
+
+/* /////////////////////////// */
+/* 🪩🪩🪩 FOOTER STYLING 🪩🪩🪩  */
+/* /////////////////////////// */
+
 footer {
   height: 20dvh;
+  
   .footer-container {
     position: fixed;
     bottom: 0;
@@ -20,6 +26,7 @@ footer {
   }
 }
 
+/* MEDIA QUERIES */
 @media (max-width: 571px) {
   footer {
     height: 30dvh;

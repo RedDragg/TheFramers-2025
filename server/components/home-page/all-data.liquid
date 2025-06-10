@@ -1,7 +1,14 @@
+{% comment %} 
+/* /////////////////////////////////////// */
+/* 🪩🪩🪩 DATA CAROUSEL ON HOME PAGE  🪩🪩🪩 */
+           /* ✨ FOR ALL DATA ✨ */
+/* /////////////////////////////////////// */ 
+{% endcomment %}
+
 <section class="data-carousel">
   <ul class="scroll-carousel all-data">
 
-    {% comment %} 🪄 Checking for the language {% endcomment %}
+    {% comment %} 🪄 ✨Checking for the language {% endcomment %}
     {% assign unique_types = [] %}
     {% for type in allEventTypes %}
       {% if lang == 'EN' %}

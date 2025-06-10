@@ -1,6 +1,14 @@
+{% comment %} ⭐️⭐️ BASE LIQUID LAYOUT ⭐️⭐️ {% endcomment %}
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
+
+
+{% comment %} 🎀 ARCHIVE PAGE 🎀 {% endcomment %}
+{% comment %} ✨ describtion ✨ {% endcomment %}
+
+
+
 <main class="category">
   <div class="category-wrapper">
     <div class="breadcrumbs">
@@ -8,6 +16,7 @@
       <form method="GET" action="/{{ lang }}/archive/type/all">
       <label for="eventTypeSelect"></label>
       <select name="eventType" id="eventTypeSelect" onchange="this.form.submit()">
+
         <!-- "Alle" optie -->
         <option value="all" {% if selectedEvent == null or selectedEvent == "all" %}selected{% endif %}>
           {% if lang == "NL" %}Alle{% else %}All{% endif %}
@@ -33,6 +42,7 @@
 
     </div>
     <section class="category-list">
+
       <!-- <a href="/">Back</a> -->
       <div class="category-header">
         <h1>{{ selectedEvent }}</h1>
@@ -43,14 +53,13 @@
                 checked>List</label></li>
         </ul>
       </div>
+
       <section class="left-archive-wrapper">
       <!-- Radio buttons for selecting event type -->
 
-
-
-
       <!-- Filtered events -->
     </section>
+
 
 {% assign event_count = 0 %}
 {% for item in allEvents %}
@@ -66,7 +75,10 @@
 {% endfor %}
 
           <p>Results: {{ event_count }} event{% if event_count != 1 %}s{% endif %}</p>
+
       <table>
+
+      
         <tr class="table-header">
           <th>
             <p>Title</p>
