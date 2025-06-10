@@ -7,16 +7,16 @@
     --back-arrow-margin-left: clamp(1rem, -0.1429rem + 5.7143vw, 5rem);
 }
 
-/* /////////////////// */
-/* 📁📁📁 DETAILS 📁📁📁 */
-/* /////////////////// */
-
 /* MAIN */
 main {
     width: 100%;
     height: 100%;
     margin: 2rem 0 0 0;
 }
+
+/* /////////////////// */
+/* 📁📁📁 DETAILS 📁📁📁 */
+/* /////////////////// */
 
 .back-arrow {
     width: fit-content;
@@ -29,12 +29,14 @@ main {
     margin-left: var(--back-arrow-margin-left);
 }
 
+/* Wrapper around all the detail information to position it center */
 .details-position {
     display: grid;
     justify-content: center;
     margin: 2rem 0 0 0;
 }
 
+/* Wrapper for the two detail elements */
 .details-wrapper {
     width: 100vw;
     height: 100%;
@@ -44,12 +46,11 @@ main {
     justify-content: center;
     position: relative;
 
+    /* The two detail elements inside the wrapper and the styling of their content */
     details {
-        /* Eerst nodig om content niet te laten verschuiven */
-        /* min-height: 90vh; */
 
+        /* Border styling when one of either detail elements is open */
         &[open] {
-            /* outline: var(--border-radius-button) solid var(--deep-black) 1.5px; */
             border: var(--deep-black) 1.5px solid;
             border-radius: var(--border-radius-button);
         }
@@ -60,10 +61,7 @@ main {
             text-align: center;
         }
 
-        /* &[open] summary {
-            
-        } */
-
+        /* Styling of the content inside the detail elements */
         &::details-content {
             display: flex;
             flex-direction: column;
@@ -79,11 +77,13 @@ main {
     }
 }
 
+/* Make the wrapper for the to detail elements 70vw when the website is shown on larger screens */
 @media screen and (min-width: 600px) {
     .details-wrapper {
         width: var(--detail-content-width-large-screens);
         padding: 0;
 
+        /* Make the gap/spacing between the diff elements bigger */
         details {
             
             &::details-content {
@@ -98,6 +98,7 @@ main {
 /* ///////////////// */
 
 /* 🪩 EVENT */
+/* Styling of the .about 'button' */
 .about summary {
     display: flex;
     align-items: center;
@@ -116,6 +117,7 @@ main {
     }
 }
 
+/* Styling of the .about info overview up-top  */
 .about ul {
     width: 100%;
     height: auto;
@@ -129,6 +131,10 @@ main {
     width: 40%;
 }
 
+/* The li with the participated artists and exhibitions, with classes 'artist' and 'exhibitions' */
+/* get a different lay-out, because they have way more content */
+/* The content is flexed into a row instead of column with the first child taking up the whole width of the li, to keep the heading on it's own rule */
+/* The content wraps and is placed after each other, also on the same rule, to make it as compact as possible */
 .artist,
 .exhibitions {
     display: flex;
@@ -141,7 +147,6 @@ main {
     }
 }
 
-/* date */
 .date {
     width: auto;
     display: flex;
@@ -150,20 +155,14 @@ main {
     gap: .5rem 0;
 }
 
-/* Artists */
-
-
 .line {
     width: 100%;
 }
 
+/* Styling of the content on larger screens */
+/* Order of the elements changes to the info up-top and the img last, because there is more space available */
 @media screen and (min-width: 600px) {
     .about ul {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         gap: 2rem 0;
     }
 
@@ -208,6 +207,7 @@ main {
         flex-wrap: wrap;
     }
 
+    /* The text content on the detail page is smaller in width on large screens and placed in the center */
     .content {
         width: 70%;
         align-self: center;
@@ -215,6 +215,7 @@ main {
 }
 
 /* 👱‍♀️ ARTIST/PERSON */
+/* The .about details for an artist have a different/extra link to their personal website */
 .about .person {
     width: 100%;
     height: auto;
@@ -223,6 +224,7 @@ main {
     flex-wrap: wrap;
     gap: 1rem;
 
+    /* Styling of the link to the personal website */
     & a {
         display: flex;
         width: fit-content;
@@ -238,24 +240,21 @@ main {
 @media screen and (min-width: 600px) {
     .exhibitions {
         height: 100%;
-
-        display: flex;
-        flex-direction: row;
-        gap: 0.5rem;
     }
 }
-    
 
 /* ////////////////////////// */
 /* 🔒🔒🔒 HARDCODED DATA 🔒🔒🔒 */
 /* ////////////////////////// */
 
+/* Styling of the FF line */
 hr {
     height: .5rem;
     background: var(--deep-black);
     border: none;
 }
 
+/* Hide the video's in the hardcoded data */
 details iframe {
     display: none;
     width: 100%;
@@ -264,6 +263,7 @@ details iframe {
     object-fit: cover;
 }
 
+/* Size and border of the images */
 details img {
     width: 100%;
     height: auto;
@@ -275,6 +275,7 @@ details img {
 /* 🕯️🕯️🕯️ RELATIONS 🕯️🕯️🕯️ */
 /* //////////////////// */
 
+/* Styling of the related 'button' */
 .relations summary {
     display: flex;
     align-items: center;
@@ -293,10 +294,8 @@ details img {
     }
 }
 
-.cover-img {
-    width: 80%;
-}
-
+/* Styling of all the related content */
+/* Due to flex and wrap, it changes from one column on mobile to two columns on larger screens */
 .relations-list {
     width: 100%;
     height: auto;
@@ -306,6 +305,8 @@ details img {
     gap: 2rem;
 }
 
+/* Styling of the individual related artists/persons or events */
+/* With the image and title vertically layed-out */
 .relations li {
     width: 100%;
     height: auto;
@@ -325,6 +326,7 @@ details img {
     object-fit: cover;
 }
 
+/* On larger screens, the individual content will take up 45% of the ul it's in, the relations-list */
 @media screen and (min-width: 600px) {
     .relations li { 
         width: 45%;
