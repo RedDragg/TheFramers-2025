@@ -92,52 +92,7 @@ main{
 /* /////////////////////////// */
 /* 🪐🪐🪐 TEXT FORMATTING 🪐🪐🪐 */
 /* /////////////////////////// */
-.types.expositie,
-.types.exhibition {
-  background-color: #E53935;
-}
 
-.types.lancering,
-.types.launch {
-  background-color: #FB8C00;
-}
-
-.types.debat,
-.types.debate {
-  background-color: #FDD835;
-}
-
-.types.symposium {
-  background-color: #43A047;
-}
-
-.types.exhibition-program,
-.types.expositie-programma {
-  background-color: #1E88E5;
-}
-
-.types.public-program,
-.types.publiek-programma {
-  background-color: #3949AB;
-}
-
-.types.performance {
-  background-color: #8E24AA;
-}
-
-.types.film-screening,
-.types.filmvertoning {
-  background-color: #6A1B9A;
-}
-
-.types.talk {
-  background-color: #b83e6b;
-}
-
-.types.educational-program,
-.types.educatief-programma {
-  background-color: #00ACC1;
-}
 
 
 @media (prefers-reduced-motion: reduce) {
