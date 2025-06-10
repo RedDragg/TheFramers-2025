@@ -90,6 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+    //scroll-nav
+
     document.addEventListener("DOMContentLoaded", function () {
     const footer = document.querySelector('.footer-container');
 
@@ -109,3 +111,82 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  //archive-pagination
+document.addEventListener("DOMContentLoaded", function () {
+  class Pagination {
+    constructor(itemSelector, itemsPerPage, paginationClass) {
+      this.items = Array.from(document.querySelectorAll(itemSelector));
+      this.itemsPerPage = itemsPerPage;
+      this.paginationContainers = document.querySelectorAll("." + paginationClass);
+      this.currentPage = 1;
+      this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
+      this.render();
+    }
+
+    showPage(page) {
+      this.currentPage = page;
+      this.items.forEach((item, index) => {
+        if (
+          index >= (page - 1) * this.itemsPerPage &&
+          index < page * this.itemsPerPage
+        ) {
+          item.style.display = "";
+        } else {
+          item.style.display = "none";
+        }
+      });
+      this.renderPagination();
+      this.renderStats();
+    }
+
+    renderPagination() {
+      this.paginationContainers.forEach(container => {
+        container.innerHTML = "";
+
+        // Previous button
+        const prev = document.createElement("button");
+        prev.innerText = "←";
+        prev.disabled = this.currentPage === 1;
+        prev.onclick = () => this.showPage(this.currentPage - 1);
+        container.appendChild(prev);
+
+        // Page numbers
+        for (let i = 1; i <= this.totalPages; i++) {
+          const btn = document.createElement("button");
+          btn.innerText = i;
+          if (i === this.currentPage) btn.disabled = true;
+          btn.onclick = () => this.showPage(i);
+          container.appendChild(btn);
+        }
+
+        // Next button
+        const next = document.createElement("button");
+        next.innerText = "→";
+        next.disabled = this.currentPage === this.totalPages;
+        next.onclick = () => this.showPage(this.currentPage + 1);
+        container.appendChild(next);
+      });
+    }
+
+    renderStats() {
+      const startItem = (this.currentPage - 1) * this.itemsPerPage + 1;
+      const endItem = Math.min(this.currentPage * this.itemsPerPage, this.items.length);
+      const totalItems = this.items.length;
+
+      this.paginationContainers.forEach(container => {
+        const statsDiv = document.createElement("div");
+        statsDiv.classList.add("pagination-stats");
+        statsDiv.innerHTML = `${startItem}-${endItem}`;
+        container.appendChild(statsDiv);
+      });
+    }
+
+    render() {
+      this.showPage(this.currentPage);
+    }
+  }
+
+  // Start pagination na DOM load, gebruik nu een class!
+  new Pagination(".archive-item", 12, "pagination");
+});
