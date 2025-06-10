@@ -1,5 +1,3 @@
-{% comment %} Div or section with two headers? {% endcomment %}
-
 {% if lang == 'EN' %}
 {% assign type = event.event.type_en %}
 {% assign title = event.event.title_en %}
@@ -28,6 +26,7 @@
     </p>
 </a>
 
+{% comment %} Can I use a section here?, it's supposed to have a heading {% endcomment %}
 <div class="details-position">
   <div class="details-wrapper">
   
@@ -69,7 +68,7 @@
       {% if event %}
       <ul>
         <li class="cover-image">
-      <img src="{{ event.imageUrl }}" {% if lang == 'EN' %}alt="Cover image of {{ title }}" {% else %} alt="Omslag en hoofdfoto van {{ title }}"{% endif %} class="category-image" loading="lazy">
+          <img src="{{ event.imageUrl }}" {% if lang == 'EN' %}alt="Cover image of {{ title }}" {% else %} alt="Omslag en hoofdfoto van {{ title }}"{% endif %} class="category-image" loading="lazy">
         </li>
         <li class="type">
           <h3>
@@ -231,13 +230,6 @@
                       {% else %}
                         <h3>{{ event.event.title_nl }}</h3>
                       {% endif %}
-                      <h3>
-                        {% if lang == 'EN' %}
-                          {{ event.event.title_en }}
-                        {% else %}
-                          {{ event.event.title_nl }}
-                        {% endif %}
-                      </h3>
                     </a>
                   </li>
                 {% endif %}
