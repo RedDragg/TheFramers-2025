@@ -206,6 +206,10 @@ main {
         flex-direction: row;
         flex-wrap: wrap;
     }
+
+    .content {
+        width: 70%;
+    }
 }
 
 /* 👱‍♀️ ARTIST/PERSON */
@@ -251,8 +255,9 @@ hr {
 }
 
 details iframe {
+    display: none;
     width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: var(--border-radius-button);
     object-fit: cover;
 }

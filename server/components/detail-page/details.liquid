@@ -128,13 +128,13 @@
         <p>Sorry, this content is only avaiable in Dutch</p>
         {% else %}
         {% endif %}  
-        <p>{{ content }}</p>
+        <p class="content">{{ content }}</p>
       {% else %}
         {% if content_nl == "nil" or content_nl == "blank" %}
           <p>Excuses, deze content is alleen beschikbaar in het Engels.</p>
         {% else %}
         {% endif %}
-        <p>{{ content }}</p>
+        <p class="content">{{ content }}</p>
       {% endif %}
 
     {% elsif person %}
