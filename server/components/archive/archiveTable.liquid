@@ -113,7 +113,7 @@
             </h2>
           </td>
           <td class="archive-type" td tabindex="0">
-            <div class="types {{ eventTypeToCheck | downcase }}"></div>
+            <div class="types {{ eventTypeToCheck | downcase | replace: ' ', '-' }}"></div>
             <p>{{ eventTypeToCheck }}</p>
           </td>
           <td td tabindex="0">
