@@ -1,4 +1,9 @@
-// utils.js
+
+/* /////////////////////////////////////// */
+         /* 🪩🪩🪩 Utils 🪩🪩🪩 */
+/* /////////////////////////////////////// */
+
+
 
 // Utility function to add image URLs to events
 export function eventImageUrls(events) {

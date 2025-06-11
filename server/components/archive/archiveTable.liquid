@@ -1,4 +1,8 @@
-
+{% comment %}
+/* //////////////////////// */
+/* 🪩🪩🪩 ARCHIVE PAGE 🪩🪩🪩 */
+/* //////////////////////// */
+{% endcomment %}
 
       <form method="GET" action="/{{ lang }}/archive/type/all">
         <label for="eventTypeSelect"></label>
@@ -98,7 +102,13 @@
         <tr class="archive-item" tabindex="0">
           <td><a href="/{{ lang }}/archive/{{ eventTypeToCheck }}/{{ item.event.uuid }}" class="link-detail"></a></td>
           <td>
-            <h2 class="text">{{ eventTitleToShow }}</h2>
+            <h2>
+              {% if lang == "EN" %}
+                {{ eventTitleToShow | downcase | replace: 'exhibition', '' | replace: 'launch', '' | replace: 'debate', '' | replace: 'symposium', '' | replace: 'public program', '' | replace: 'performance', '' | replace: 'film screening', '' | replace: 'talk', '' | replace: 'educational program', '' | replace: ':', '' | strip }}
+              {% else %}
+                {{ eventTitleToShow | downcase | replace: 'expositie programma', '' | replace: 'expositie', '' | replace: 'lancering', '' | replace: 'debat', '' | replace: 'symposium', '' | replace: 'publiek programma', '' | replace: 'film vertoning', '' | replace: 'filmvertoning', '' | replace: 'lezing', '' | replace: 'educatief programma', '' | replace: ':', '' | strip  }}
+              {% endif %}
+            </h2>
           </td>
           <td class="archive-type">
             <div class="types {{ eventTypeToCheck | downcase }}"></div>

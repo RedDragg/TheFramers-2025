@@ -181,6 +181,7 @@
 
       h2 {
         font-size: 1.1rem;
+        text-transform: capitalize;
       }
 
       td:has(img) {

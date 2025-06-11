@@ -45,7 +45,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    align-content: center;
+    
+    display: flex;
+    align-items: center;
+    gap: .75rem;
 }
 
 /* Update back-arrow to prevent conflicts */
@@ -157,6 +160,9 @@ main {
 /* ///////////////// */
 
 /* 🪩 EVENT */
+.about h2{
+        text-transform: capitalize
+}
 /* Styling of the .about 'button' */
 .about summary {
     display: flex;
