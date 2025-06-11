@@ -4,7 +4,66 @@
     --border-radius-button: 0.5rem;
 
     --detail-content-width-large-screens: clamp(26.25rem, 15.75rem + 52.5vw, 63rem);
-    --back-arrow-margin-left: clamp(1rem, -0.1429rem + 5.7143vw, 5rem);
+    --breadcrumbs-margin: clamp(1rem, -0.1429rem + 5.7143vw, 5rem);
+    --button-gap: .8rem;
+}
+
+/* /////////////////////// */
+/* 🍞🍞🍞 BREADCRUMBS 🍞🍞🍞 */
+/* /////////////////////// */
+
+.breadcrumbs {
+    width: 100%;
+    height: auto;
+    display: flex;
+    margin-left: var(--breadcrumbs-margin);
+    margin-right: var(--breadcrumbs-margin);
+    margin-bottom: 1rem;
+    gap: .8rem;
+    flex-wrap: wrap;
+}
+
+/* .breadcrumbs .crumb {
+    align-content: center;
+} */
+
+.breadcrumbs a {
+    color: var(--deep-black);
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: var(--button-gap);
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs .is-current {
+    font-weight: 800;
+    width: 30%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-content: center;
+}
+
+/* Update back-arrow to prevent conflicts */
+/* .back-arrow {
+    text-decoration: none;
+    color: var(--deep-black);
+    transition: opacity 0.2s ease;
+}
+
+.back-arrow:hover {
+    opacity: 0.7;
+} */
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    .breadcrumbs {
+        margin-bottom: 0.5rem;
+    }
 }
 
 /* MAIN */
@@ -55,7 +114,7 @@ main {
             border-radius: var(--border-radius-button);
         }
 
-        & > summary {
+        &>summary {
             width: fit-content;
             height: fit-content;
             text-align: center;
@@ -73,7 +132,7 @@ main {
             left: 0;
             top: 4rem;
             position: absolute;
-        } 
+        }
     }
 }
 
@@ -85,7 +144,7 @@ main {
 
         /* Make the gap/spacing between the diff elements bigger */
         details {
-            
+
             &::details-content {
                 gap: 2.5rem;
             }
@@ -131,6 +190,11 @@ main {
     width: 40%;
 }
 
+.cover-image {
+    view-transition-name: var(--vt);
+    view-transition-class: image;
+}
+
 /* The li with the participated artists and exhibitions, with classes 'artist' and 'exhibitions' */
 /* get a different lay-out, because they have way more content */
 /* The content is flexed into a row instead of column with the first child taking up the whole width of the li, to keep the heading on it's own rule */
@@ -142,7 +206,7 @@ main {
     flex-wrap: wrap;
     gap: .5rem 1rem;
 
-    & > :first-child {
+    &> :first-child {
         width: 100%;
     }
 }
@@ -179,7 +243,7 @@ main {
     }
 
     .line {
-        order: 4; 
+        order: 4;
     }
 
     .type,
@@ -254,6 +318,12 @@ hr {
     border: none;
 }
 
+hr.line-footer {
+    background-color: white;
+}
+
+
+
 /* Hide the video's in the hardcoded data */
 details iframe {
     display: none;
@@ -327,8 +397,13 @@ details img {
 }
 
 /* On larger screens, the individual content will take up 45% of the ul it's in, the relations-list */
-@media screen and (min-width: 600px) {
-    .relations li { 
+@media screen and (min-width: 570px) {
+    .relations li {
         width: 45%;
+    }
+
+    hr.line-footer {
+        width: .5rem;
+        height: auto;
     }
 }

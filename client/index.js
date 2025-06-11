@@ -216,6 +216,8 @@ document.addEventListener("DOMContentLoaded", function () {
       this.showPage(this.currentPage);
     }
   }
-
-  new Pagination("tr.archive-item", "pagination", "pagination-stats", "itemsPerPage");
+  const pagination = document.querySelector(".pagination");
+  if (pagination) {
+    new Pagination("tr.archive-item", "pagination", "pagination-stats", "itemsPerPage");
+  }
 });

@@ -24,48 +24,24 @@
           {% for item in allEvents %}
             {% if lang == 'EN' %}
               {% assign event_type_name = item.event.type_en %}
-              {% assign event_title = item.event.title_en | downcase 
-                | replace: 'exhibition', '' 
-                | replace: 'launch', '' 
-                | replace: 'debate', '' 
-                | replace: 'symposium', '' 
-                | replace: 'public program', '' 
-                | replace: 'performance', '' 
-                | replace: 'film screening', '' 
-                | replace: 'talk', '' 
-                | replace: 'educational program', '' 
-                | replace: ':', '' 
-                | strip 
-              %}
+              {% assign event_title = item.event.title_en | downcase | replace: 'exhibition', ''| replace: 'launch', ''| replace: 'debate', ''| replace: 'symposium', ''| replace: 'public program', ''| replace: 'performance', ''| replace: 'film screening', ''| replace: 'talk', ''| replace: 'educational program', ''| replace: ':', ''| strip %}
+
             {% else %}
               {% assign event_type_name = item.event.type_nl %}
-              {% assign event_title = item.event.title_nl | downcase 
-                | replace: 'expositie programma', '' 
-                | replace: 'expositie', '' 
-                | replace: 'lancering', '' 
-                | replace: 'debat', '' 
-                | replace: 'symposium', '' 
-                | replace: 'publiek programma', '' 
-                | replace: 'performance', '' 
-                | replace: 'film vertoning', '' 
-                | replace: 'lezing', '' 
-                | replace: 'educatief programma', '' 
-                | replace: ':', '' 
-                | strip 
-              %}
+              {% assign event_title = item.event.title_nl | downcase | replace: 'expositie programma', '' | replace: 'expositie', '' | replace: 'lancering', '' | replace: 'debat', ''| replace: 'symposium', ''| replace: 'publiek programma', ''| replace: 'performance', ''| replace: 'film vertoning', ''| replace: 'lezing', ''| replace: 'educatief programma', ''| replace: ':', '' | strip %} 
             {% endif %}
 
             {% if event_type_name == type_name %}
               {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
 
               <li class="content-card" tabindex="0">
-                <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
+                <a href="/{{ lang }}/archive/{{ type_name }}/{{ item.event.uuid }}">
                   <div>
-                    <strong>{{ event_title }}</strong> 
+                    <p>{{ event_title | capitalize }}</p>
                     <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
                   </div>
                   {% if item.imageUrl and item.imageUrl != "" %}
-                    <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
+                    <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy" style="--vt: image-{{ item.event.uuid }}">
                   {% else %}
                     <!-- Placeholder images for when no image is available -->
                     <img src="/images/placeholder-black.png" alt="{{ event_title }}" class="category-image" loading="lazy">

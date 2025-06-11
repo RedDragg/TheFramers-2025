@@ -4,7 +4,8 @@
 /* /////////////////////////// */
 
 footer {
-
+  view-transition-name: footer;
+  
 
   .footer-container {
     display: flex;
@@ -16,11 +17,13 @@ footer {
     background-color: black;
     color: white;
     z-index: 105;
+    font-weight: 200;
 
     a {
       text-decoration: none;
       color: white;
     }
+
   }
 }
 
