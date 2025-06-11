@@ -121,6 +121,7 @@ header {
     padding: .5rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
 
   label:not([for][for*="range"]):not(:is(.toggle, .save-button, :has(#theme))) {
