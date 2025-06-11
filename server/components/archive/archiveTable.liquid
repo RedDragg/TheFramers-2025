@@ -1,0 +1,153 @@
+<main class="category">
+  <div class="category-wrapper">
+    <div class="breadcrumbs">
+      <a href="/{{ lang }}">Home</a> &gt;
+      <form method="GET" action="/{{ lang }}/archive/type/all">
+        <label for="eventTypeSelect"></label>
+        <select name="eventType" id="eventTypeSelect" onchange="this.form.submit()">
+
+          <!-- "Alle" optie -->
+          <option value="all" {% if selectedEvent==null or selectedEvent=="all" %}selected{% endif %}>
+            {% if lang == "NL" %}Alle{% else %}All{% endif %}
+          </option>
+
+          {% assign unique_types = "" | split: "," %}
+          {% for type in allEventTypes %}
+          {% if lang == "EN" %}
+          {% assign typeName = type.en %}
+          {% else %}
+          {% assign typeName = type.nl %}
+          {% endif %}
+
+          {% if typeName and typeName != "" and typeName != blank %}
+          {% unless unique_types contains typeName %}
+          {% assign unique_types = unique_types | push: typeName %}
+          <option value="{{ typeName }}" {% if typeName==selectedEvent %}selected{% endif %}>
+            <div class="types {{ typeName | downcase }}"></div> {{ typeName }}
+          </option>
+          {% endunless %}
+          {% endif %}
+          {% endfor %}
+        </select>
+      </form>
+
+    </div>
+    <section class="category-list">
+
+      <!-- <a href="/">Back</a> -->
+      <div class="category-header">
+        <h1>{{ selectedEvent }}</h1>
+        <ul>
+          <li><label for="images-only"><input type="radio" id="images-only" name="view-category" hidden>Grid</label>
+          </li>
+          <li><label for="list-items"><input type="radio" id="list-items" name="view-category" hidden
+                checked>List</label></li>
+        </ul>
+      </div>
+      {% assign event_count = 0 %}
+      {% for item in allEvents %}
+      {% if lang == "EN" %}
+      {% assign eventTypeToCheck = item.event.type_en %}
+      {% else %}
+      {% assign eventTypeToCheck = item.event.type_nl %}
+      {% endif %}
+
+      {% if selectedEvent == "all" or not selectedEvent or eventTypeToCheck == selectedEvent %}
+      {% assign event_count = event_count | plus: 1 %}
+      {% endif %}
+      {% endfor %}
+
+      <div class="pagination-container">
+      <div class="pagination-stats"></div>
+      <label for="itemsPerPage"><select id="itemsPerPage">
+          <option value="8">8</option>
+          <option value="12" selected>12</option>
+          <option value="24">24</option>
+          <option value="48">48</option>
+        </select></label>
+      </div>
+
+
+
+      {% comment %} <p>Results: {{ event_count }} event{% if event_count != 1 %}s{% endif %}</p> {% endcomment %}
+      <table>
+        <tr class="table-header">
+          <th>
+            <p>Title</p>
+          </th>
+          <th>
+            <p>Type</p>
+          </th>
+          <th>
+            <p>Date start</p>
+          </th>
+          <th>
+            <p>Date end</p>
+          </th>
+          <th>
+            <p>Participants</p>
+          </th>
+        </tr>
+        {% for item in allEvents %}
+        {% if lang == "EN" %}
+        {% assign eventTypeToCheck = item.event.type_en %}
+        {% assign eventTitleToShow = item.event.title_en %}
+        {% else %}
+        {% assign eventTypeToCheck = item.event.type_nl %}
+        {% assign eventTitleToShow = item.event.title_nl %}
+        {% endif %}
+
+        {% if selectedEvent == "all" or not selectedEvent or eventTypeToCheck == selectedEvent %}
+        <tr class="archive-item" tabindex="0">
+          <td><a href="/{{ lang }}/archive/{{ item.event.uuid }}" class="link-detail"></a></td>
+          <td>
+            <h2>{{ eventTitleToShow }}</h2>
+          </td>
+          <td class="archive-type">
+            <div class="types {{ eventTypeToCheck | downcase }}"></div>
+            <p>{{ eventTypeToCheck }}</p>
+          </td>
+          <td>
+            {% if item.event.date_start == "null" or item.event.date_start == blank %}
+            -
+            {% else %}
+            <p class="text">{{ item.event.date_start | date: "%-d %B %Y" }}</p>
+            {% endif %}
+          </td>
+          <td>
+            {% if item.event.date_end == nil or item.event.date_end == blank %}
+            -
+            {% else %}
+            <p>{{ item.event.date_end | date: "%-d %B %Y" }}</p>
+            {% endif %}
+          </td>
+          <td class="participants">
+            {% assign relevant_artists = '' | split: ',' %}
+            {% for rel in item.relationships %}
+            {% if rel.node == "Person" %}
+            {% for artist in allArtists %}
+            {% if rel.uuid == artist.person.uuid %}
+            {% assign relevant_artists = relevant_artists | push: artist.person.name %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% for name in relevant_artists %}
+            {{ name }}{% unless forloop.last %}, {% endunless %}
+            {% endfor %}
+          </td>
+          <td><img src="{{ item.imageUrl }}" alt="{{ eventTitleToShow }}"
+              class="category-image {{ eventTypeToCheck | downcase }}" loading="lazy"></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+      </table>
+
+      <div class="pagination pagination-bottom"></div>
+      <div class="pagination-stats"></div>
+
+    </section>
+
+  </div>
+
+</main>
