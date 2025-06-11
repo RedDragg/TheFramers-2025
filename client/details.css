@@ -23,9 +23,18 @@
     flex-wrap: wrap;
 }
 
-/* .breadcrumbs .crumb {
-    align-content: center;
-} */
+.breadcrumbs .crumb {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.breadcrumbs .add-arrow::after {
+    content: url(/public/images/arrow-right.svg);
+    display: inline-block;
+    width: auto;
+    height: auto;
+}
 
 .breadcrumbs a {
     color: var(--deep-black);
