@@ -111,6 +111,13 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
   const selectedEvent = selectedEventRaw.toLowerCase() === 'all' ? 'all' : selectedEventRaw;
   const upperLang = lang.toUpperCase();
 
+  // Add the breadcrumbs 
+  const breadcrumbs = [
+    {name: 'Home', url: '/', icon: 'home'},
+    {name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive/type/${selectedEvent}`, icon: 'overview'},
+  ]
+  console.log(breadcrumbs);
+
   // Fetch data
   const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
     fetch(eventsAPI),
@@ -193,6 +200,7 @@ app.get('/:lang/archive/:uuid', async (req, res) => {
   console.log(upperLang, event, person);
 
   return res.send(renderTemplate('server/views/detail-page.liquid', {
+    breadcrumbs,
     title,
     event,
     person,
