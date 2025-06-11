@@ -67,7 +67,7 @@
 
 
       {% comment %} <p>Results: {{ event_count }} event{% if event_count != 1 %}s{% endif %}</p> {% endcomment %}
-      <table>
+      <table class="text">
         <tr class="table-header">
           <th>
             <p>Title</p>
@@ -98,7 +98,7 @@
         <tr class="archive-item" tabindex="0">
           <td><a href="/{{ lang }}/archive/{{ eventTypeToCheck }}/{{ item.event.uuid }}" class="link-detail"></a></td>
           <td>
-            <h2>{{ eventTitleToShow }}</h2>
+            <h2 class="text">{{ eventTitleToShow }}</h2>
           </td>
           <td class="archive-type">
             <div class="types {{ eventTypeToCheck | downcase }}"></div>

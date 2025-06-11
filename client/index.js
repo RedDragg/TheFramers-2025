@@ -21,74 +21,76 @@ document.addEventListener("DOMContentLoaded", () => {
         navOpacity.style.opacity = window.scrollY === 0 ? '1' : '0.5';
       });
     }
+  });
 
     // TYPOGRAFIE SLIDERS
-    const sizeSlider = document.getElementById("sizeSlider");
-    const lineHeightSlider = document.getElementById("lineHeightSlider");
-    const weightSlider = document.getElementById("weightSlider");
-    const letterSpacingSlider = document.getElementById("letterSpacingSlider");
-    const text = document.querySelector(".text");
+document.addEventListener("DOMContentLoaded", function () {
+  const sizeSlider = document.getElementById("sizeSlider");
+  const lineHeightSlider = document.getElementById("lineHeightSlider");
+  const letterSpacingSlider = document.getElementById("letterSpacingSlider");
 
-    const sizeValue = document.getElementById("sizeValue");
-    const lineHeightValue = document.getElementById("lineHeightValue");
-    const weightValue = document.getElementById("weightValue");
-    const letterSpacingValue = document.getElementById("letterSpacingValue");
+  const sizeValue = document.getElementById("sizeValue");
+  const lineHeightValue = document.getElementById("lineHeightValue");
+  const letterSpacingValue = document.getElementById("letterSpacingValue");
 
-    if (
-      sizeSlider && lineHeightSlider && weightSlider && letterSpacingSlider &&
-      text && sizeValue && lineHeightValue && weightValue && letterSpacingValue
-    ) {
-      function updateStyles() {
-        text.style.fontSize = sizeSlider.value + "px";
-        text.style.lineHeight = lineHeightSlider.value;
-        text.style.fontWeight = weightSlider.value;
-        text.style.letterSpacing = letterSpacingSlider.value + "px";
+  function updateStyles() {
+    const textElements = document.querySelectorAll(".text");
 
-        sizeValue.textContent = sizeSlider.value + "px";
-        lineHeightValue.textContent = lineHeightSlider.value;
-        weightValue.textContent = weightSlider.value;
-        letterSpacingValue.textContent = letterSpacingSlider.value + "px";
+    textElements.forEach(text => {
+      text.style.fontSize = sizeSlider.value + "px";
+      text.style.lineHeight = lineHeightSlider.value;
+      text.style.letterSpacing = letterSpacingSlider.value + "px";
+    });
 
-        saveSettings();
-      }
+    sizeValue.textContent = sizeSlider.value + "px";
+    lineHeightValue.textContent = lineHeightSlider.value;
+    letterSpacingValue.textContent = letterSpacingSlider.value + "px";
 
-      function saveSettings() {
-        localStorage.setItem("textSettings", JSON.stringify({
-          fontSize: sizeSlider.value,
-          lineHeight: lineHeightSlider.value,
-          fontWeight: weightSlider.value,
-          letterSpacing: letterSpacingSlider.value
-        }));
-      }
+    saveSettings();
 
-      function applySavedSettings() {
-        const saved = JSON.parse(localStorage.getItem("textSettings"));
-        if (saved) {
-          sizeSlider.value = saved.fontSize;
-          lineHeightSlider.value = saved.lineHeight;
-          weightSlider.value = saved.fontWeight;
-          letterSpacingSlider.value = saved.letterSpacing;
-        }
-        updateStyles();
-      }
+  }
 
-      function resetToDefault() {
-        sizeSlider.value = 16;
-        lineHeightSlider.value = 1.5;
-        weightSlider.value = 400;
-        letterSpacingSlider.value = 0;
-        updateStyles();
-        localStorage.removeItem("textSettings");
-      }
+  function saveSettings() {
+    localStorage.setItem("textSettings", JSON.stringify({
+      fontSize: sizeSlider.value,
+      lineHeight: lineHeightSlider.value,
+      letterSpacing: letterSpacingSlider.value
+    }));
+  }
 
-      sizeSlider.addEventListener("input", updateStyles);
-      lineHeightSlider.addEventListener("input", updateStyles);
-      weightSlider.addEventListener("input", updateStyles);
-      letterSpacingSlider.addEventListener("input", updateStyles);
-
-      applySavedSettings();
+  function applySavedSettings() {
+    const saved = JSON.parse(localStorage.getItem("textSettings"));
+    if (saved) {
+      sizeSlider.value = saved.fontSize;
+      lineHeightSlider.value = saved.lineHeight;
+      letterSpacingSlider.value = saved.letterSpacing;
     }
-  });
+    updateStyles();
+  }
+
+  function resetToDefault() {
+    sizeSlider.value = 16;
+    lineHeightSlider.value = 1.5;
+    letterSpacingSlider.value = 0;
+    updateStyles();
+    localStorage.removeItem("textSettings");
+  }
+
+  // Maak toegankelijk buiten deze functie:
+  window.resetToDefault = resetToDefault;
+
+  if (
+    sizeSlider && lineHeightSlider && letterSpacingSlider &&
+    sizeValue && lineHeightValue && letterSpacingValue
+  ) {
+    sizeSlider.addEventListener("input", updateStyles);
+    lineHeightSlider.addEventListener("input", updateStyles);
+    letterSpacingSlider.addEventListener("input", updateStyles);
+
+    applySavedSettings();
+  }
+});
+
 
     //scroll-nav
 
