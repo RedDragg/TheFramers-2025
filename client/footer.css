@@ -4,6 +4,7 @@
 /* /////////////////////////// */
 
 footer {
+  view-transition-name: footer;
   height: 20dvh;
 
   .footer-container {
