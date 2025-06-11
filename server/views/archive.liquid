@@ -7,7 +7,14 @@
 {% comment %} 🎀 ARCHIVE PAGE 🎀 {% endcomment %}
 {% comment %} ✨ describtion ✨ {% endcomment %}
 
+<main class="category">
+  <div class="category-wrapper">
 
+  {% render '../components/navigation/breadcrumbs.liquid', 
+  breadcrumbs: breadcrumbs,
+  currentName: title,
+  currentIcon: crumbType
+%}
 {% render '../components/archive/archiveTable.liquid'
     allEvents: allEvents,
     allArtists: allArtists,
@@ -16,6 +23,7 @@
     lang: lang,
     currentPath: currentPath
  %}
+  </div>
 
 </main>
 

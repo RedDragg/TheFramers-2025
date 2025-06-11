@@ -114,7 +114,6 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
   // Add the breadcrumbs 
   const breadcrumbs = [
     {name: 'Home', url: '/', icon: 'home'},
-    {name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive/type/${selectedEvent}`, icon: 'overview'},
   ]
   console.log(breadcrumbs);
 
@@ -163,7 +162,7 @@ app.get('/:lang/archive/:uuid', async (req, res) => {
 
   const breadcrumbs = [
     {name: 'Home', url: '/', icon: 'home'},
-    {name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive`, icon: 'overview'},
+    {name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive/type/${selectedEvent}`, icon: 'overview'},
   ]
 
   const [dataEvents, dataPeople] = await Promise.all([
