@@ -9,6 +9,8 @@
     gap: 1rem;
     width: 85rem;
     padding: 1rem;
+    background: white;
+    z-index: 107;
   }
 
   .category-list {
@@ -40,6 +42,8 @@
         display: block;
         padding: 0.5rem;
         background: none;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        border-radius: 5px;
       }
 
       .category-image {
@@ -53,49 +57,49 @@
 
       .category-image.expositie,
       .category-image.exhibition {
-        border: solid 1px #e53935;
+        border: solid 2px #e53935;
       }
 
       .category-image.lancering,
       .category-image.launch {
-        border: solid 1px #fb8c00;
+        border: solid 2px #fb8c00;
       }
 
       .category-image.debat,
       .category-image.debate {
-        border: solid 1px #fdd835;
+        border: solid 2px #fdd835;
       }
 
       .category-image.symposium {
-        border: solid 1px #43a047;
+        border: solid 2px #43a047;
       }
 
       .category-image.exhibition-program,
       .category-image.expositie-programma {
-        border: solid 1px #1e88e5;
+        border: solid 2px #1e88e5;
       }
 
       .category-image.public-program,
       .category-image.publiek-programma {
-        border: solid 1px #3949ab;
+        border: solid 2px #3949ab;
       }
 
       .category-image.performance {
-        border: solid 1px #8e24aa;
+        border: solid 2px #8e24aa;
       }
 
       .category-image.film-screening,
       .category-image.filmvertoning {
-        border: solid 1px #6a1b9a;
+        border: solid 2px #6a1b9a;
       }
 
       .category-image.talk {
-        border: solid 1px #b83e6b;
+        border: solid 2px #b83e6b;
       }
 
       .category-image.educational-program,
       .category-image.educatief-programma {
-        border: solid 1px #00acc1;
+        border: solid 2px #00acc1;
       }
     }
 
@@ -217,14 +221,14 @@
     }
   }
 
-  .type {
+  .archive-type {
     display: flex;
     gap: 0.2rem;
     align-items: center;
     height: fit-content;
 
     .types{
-      width: 0.6rem;
+      width: 0.45rem;
       aspect-ratio: 1/1;
       border-radius: 50%;
     }
@@ -246,14 +250,30 @@
   }
 }
 
+/* pagination */
+#eventTypeSelect, #itemsPerPage{
+  padding: .25rem .5rem;
+  border-radius: 5px;
+}
+
+
+.pagination-container{
+  display: flex;
+  flex-direction: row;
+  gap: .5rem;
+  align-items: center;
+
+}
 .pagination {
   display: flex;
   flex-direction: row;
   gap: 0.3rem;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
 }
+
+.pagination.pagination-top{justify-content: flex-end;}
+.pagination.pagination-bottom{justify-content: flex-start;}
 
 .pagination button {
   margin: 0 2px;
@@ -267,6 +287,16 @@
   background: #e3e3e3;
   cursor: default;
 }
+.pagination button.active {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  border-color: #333;
+}
+.pagination button:not(.active):hover {
+  background-color: #ddd;
+}
+
 
 @media (max-width: 900px) {
   .category {
@@ -286,13 +316,13 @@
         height: 5rem;
       }
 
-      .category-image {
-        border: solid 1px red;
-      }
-
       tbody {
         grid-template-columns: repeat(4, 1fr) !important;
       }
+    }
+
+    tbody{
+      gap: .8rem;
     }
 
     tr {
@@ -304,6 +334,8 @@
         "left-date-s right-item"
         "left-date-e right-item"
         "left-rels right-item";
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        border-radius: 5px;
 
       td:nth-child(2) {
         grid-area: left-title;
