@@ -133,7 +133,7 @@
 
   img{
     /* 🔗 https://clamp-generator.netlify.app/ */
-    width: calc(clamp(3.438rem, 9.444vw + 1.667rem, 13rem));
+    width: calc(clamp(4.688rem, 8.21vw + 3.148rem, 13rem));
     aspect-ratio: 1/1;
   }
 }
@@ -180,6 +180,7 @@
       flex-direction: row;
       padding: .5rem;
       letter-spacing: 1.5px;
+
     p{
       font-weight: 600;
       /* 🔗: https://clamp.font-size.app/  */
