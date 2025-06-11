@@ -21,6 +21,24 @@
     --rotate-time: 2s;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(footer) {
+  z-index: 1;
+  animation: none;
+}
+
+::view-transition-group(root) {
+  animation-duration: 0.3s;
+}
+
+
+::view-transition-group(.image) {
+  animation-duration: 0.6s;
+}
+
 body {
   width: 100vw;
   height: 100%;

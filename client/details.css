@@ -131,6 +131,11 @@ main {
     width: 40%;
 }
 
+.cover-image {
+    view-transition-name: var(--vt);
+    view-transtion-class: image;
+}
+
 /* The li with the participated artists and exhibitions, with classes 'artist' and 'exhibitions' */
 /* get a different lay-out, because they have way more content */
 /* The content is flexed into a row instead of column with the first child taking up the whole width of the li, to keep the heading on it's own rule */
