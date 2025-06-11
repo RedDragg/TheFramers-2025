@@ -55,7 +55,7 @@ main {
             border-radius: var(--border-radius-button);
         }
 
-        & > summary {
+        &>summary {
             width: fit-content;
             height: fit-content;
             text-align: center;
@@ -73,7 +73,7 @@ main {
             left: 0;
             top: 4rem;
             position: absolute;
-        } 
+        }
     }
 }
 
@@ -85,7 +85,7 @@ main {
 
         /* Make the gap/spacing between the diff elements bigger */
         details {
-            
+
             &::details-content {
                 gap: 2.5rem;
             }
@@ -147,7 +147,7 @@ main {
     flex-wrap: wrap;
     gap: .5rem 1rem;
 
-    & > :first-child {
+    &> :first-child {
         width: 100%;
     }
 }
@@ -184,7 +184,7 @@ main {
     }
 
     .line {
-        order: 4; 
+        order: 4;
     }
 
     .type,
@@ -259,6 +259,12 @@ hr {
     border: none;
 }
 
+hr.line-footer {
+    background-color: white;
+}
+
+
+
 /* Hide the video's in the hardcoded data */
 details iframe {
     display: none;
@@ -332,8 +338,13 @@ details img {
 }
 
 /* On larger screens, the individual content will take up 45% of the ul it's in, the relations-list */
-@media screen and (min-width: 600px) {
-    .relations li { 
+@media screen and (min-width: 570px) {
+    .relations li {
         width: 45%;
+    }
+
+    hr.line-footer {
+        width: .5rem;
+        height: auto;
     }
 }
