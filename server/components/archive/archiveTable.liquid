@@ -99,9 +99,9 @@
         {% endif %}
 
         {% if selectedEvent == "all" or not selectedEvent or eventTypeToCheck == selectedEvent %}
-        <tr class="archive-item" tabindex="0">
-          <td><a href="/{{ lang }}/archive/{{ eventTypeToCheck }}/{{ item.event.uuid }}" class="link-detail"></a></td>
-          <td>
+        <tr class="archive-item">
+          <td tabindex="-1"><a href="/{{ lang }}/archive/{{ eventTypeToCheck }}/{{ item.event.uuid }}" class="link-detail"></a></td>
+          <td tabindex="0">
             <h2>
               {% if lang == "EN" %}
                 {{ eventTitleToShow | downcase | replace: 'exhibition', '' | replace: 'launch', '' | replace: 'debate', '' | replace: 'symposium', '' | replace: 'public program', '' | replace: 'performance', '' | replace: 'film screening', '' | replace: 'talk', '' | replace: 'educational program', '' | replace: ':', '' | strip }}
@@ -110,11 +110,11 @@
               {% endif %}
             </h2>
           </td>
-          <td class="archive-type">
+          <td class="archive-type" tabindex="0">
             <div class="types {{ eventTypeToCheck | downcase }}"></div>
             <p>{{ eventTypeToCheck }}</p>
           </td>
-          <td>
+          <td tabindex="0">
             {% assign start = item.event.date_start %}
             {% assign end = item.event.date_end %}
 
@@ -132,7 +132,7 @@
               {% endif %}
             {% endif %}
           </td>
-          <td class="participants">
+          <td class="participants"  tabindex="0">
             {% assign relevant_artists = '' | split: ',' %}
             {% for rel in item.relationships %}
             {% if rel.node == "Person" %}
@@ -147,7 +147,7 @@
             {{ name }}{% unless forloop.last %}, {% endunless %}
             {% endfor %}
           </td>
-          <td><img src="{{ item.imageUrl }}" alt="{{ eventTitleToShow }}"
+          <td><img src="{{ item.imageUrl }}" alt="{{ eventTitleToShow }}"  tabindex="0"
               class="category-image {{ eventTypeToCheck | downcase }}" loading="lazy"></td>
         </tr>
         {% endif %}
