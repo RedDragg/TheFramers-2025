@@ -1,11 +1,14 @@
 /* CUSTOM PROPERTIES */
 :root {
     --deep-black: #121212;
+    --empty-grey: #676767;
     --border-radius-button: 0.5rem;
 
     --detail-content-width-large-screens: clamp(26.25rem, 15.75rem + 52.5vw, 63rem);
     --breadcrumbs-margin: clamp(1rem, -0.1429rem + 5.7143vw, 5rem);
     --button-gap: .8rem;
+
+    --empty-stroke-color: white;
 }
 
 /* /////////////////////// */
@@ -77,7 +80,7 @@ main {
 /* 📁📁📁 DETAILS 📁📁📁 */
 /* /////////////////// */
 
-.back-arrow {
+/* .back-arrow {
     width: fit-content;
     height: auto;
     display: flex;
@@ -86,7 +89,7 @@ main {
     align-items: center;
     gap: 1.5rem;
     margin-left: var(--back-arrow-margin-left);
-}
+} */
 
 /* Wrapper around all the detail information to position it center */
 .details-position {
@@ -322,8 +325,6 @@ hr.line-footer {
     background-color: white;
 }
 
-
-
 /* Hide the video's in the hardcoded data */
 details iframe {
     display: none;
@@ -375,6 +376,18 @@ details img {
     gap: 2rem;
 }
 
+/* When there are no relations and the list is empty */
+.empty-list {
+    width: 100%;
+    padding: 5rem 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+    color: var(--empty-grey);
+}
+
 /* Styling of the individual related artists/persons or events */
 /* With the image and title vertically layed-out */
 .relations li {
@@ -400,6 +413,10 @@ details img {
 @media screen and (min-width: 570px) {
     .relations li {
         width: 45%;
+    }
+
+    .relations .empty-list{
+        width: 100%;
     }
 
     hr.line-footer {
