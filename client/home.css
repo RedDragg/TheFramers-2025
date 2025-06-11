@@ -99,7 +99,7 @@
 
       img {
         view-transition-name: var(--vt);
-        view-transtion-class: image;
+        view-transition-class: image;
       }
 
       &:last-child{

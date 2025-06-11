@@ -133,7 +133,7 @@ main {
 
 .cover-image {
     view-transition-name: var(--vt);
-    view-transtion-class: image;
+    view-transition-class: image;
 }
 
 /* The li with the participated artists and exhibitions, with classes 'artist' and 'exhibitions' */

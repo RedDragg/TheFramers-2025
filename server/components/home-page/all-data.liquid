@@ -58,14 +58,14 @@
             {% if event_type_name == type_name %}
               {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
 
-              <li class="content-card" tabindex="0" style="--vt: image-{{ item.event.uuid }}">
+              <li class="content-card" tabindex="0">
                 <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
                   <div>
                     <p>{{ event_title }}</p> 
                     <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
                   </div>
                   {% if item.imageUrl and item.imageUrl != "" %}
-                    <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
+                    <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy" style="--vt: image-{{ item.event.uuid }}">
                   {% else %}
                     <!-- Placeholder images for when no image is available -->
                     <img src="/images/placeholder-black.png" alt="{{ event_title }}" class="category-image" loading="lazy">
