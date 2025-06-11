@@ -115,11 +115,21 @@ document.addEventListener("DOMContentLoaded", () => {
   //archive-pagination
 document.addEventListener("DOMContentLoaded", function () {
   class Pagination {
-    constructor(itemSelector, itemsPerPage, paginationClass) {
+    constructor(itemSelector, paginationClass, statsClass, perPageSelector) {
       this.items = Array.from(document.querySelectorAll(itemSelector));
-      this.itemsPerPage = itemsPerPage;
       this.paginationContainers = document.querySelectorAll("." + paginationClass);
+      this.statsContainers = document.querySelectorAll("." + statsClass);
+      this.perPageSelector = document.getElementById(perPageSelector);
+      this.itemsPerPage = parseInt(this.perPageSelector.value, 10);
       this.currentPage = 1;
+
+      this.perPageSelector.addEventListener("change", () => {
+        this.itemsPerPage = parseInt(this.perPageSelector.value, 10);
+        this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
+        this.currentPage = 1;
+        this.render();
+      });
+
       this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
       this.render();
     }
@@ -127,58 +137,78 @@ document.addEventListener("DOMContentLoaded", function () {
     showPage(page) {
       this.currentPage = page;
       this.items.forEach((item, index) => {
-        if (
-          index >= (page - 1) * this.itemsPerPage &&
-          index < page * this.itemsPerPage
-        ) {
-          item.style.display = "";
-        } else {
-          item.style.display = "none";
-        }
+        item.style.display =
+          index >= (page - 1) * this.itemsPerPage && index < page * this.itemsPerPage
+            ? ""
+            : "none";
       });
       this.renderPagination();
       this.renderStats();
     }
 
-    renderPagination() {
-      this.paginationContainers.forEach(container => {
-        container.innerHTML = "";
+   renderPagination() {
+  this.paginationContainers.forEach(container => {
+    container.innerHTML = "";
 
-        // Previous button
-        const prev = document.createElement("button");
-        prev.innerText = "←";
-        prev.disabled = this.currentPage === 1;
-        prev.onclick = () => this.showPage(this.currentPage - 1);
-        container.appendChild(prev);
+    const total = this.totalPages;
+    const current = this.currentPage;
 
-        // Page numbers
-        for (let i = 1; i <= this.totalPages; i++) {
-          const btn = document.createElement("button");
-          btn.innerText = i;
-          if (i === this.currentPage) btn.disabled = true;
-          btn.onclick = () => this.showPage(i);
-          container.appendChild(btn);
-        }
+    const appendButton = (label, disabled, onClick, isCurrent = false) => {
+      const btn = document.createElement("button");
+      btn.innerText = label;
+      btn.disabled = disabled;
+      if (isCurrent) btn.classList.add("active");
+      btn.onclick = onClick;
+      container.appendChild(btn);
+    };
 
-        // Next button
-        const next = document.createElement("button");
-        next.innerText = "→";
-        next.disabled = this.currentPage === this.totalPages;
-        next.onclick = () => this.showPage(this.currentPage + 1);
-        container.appendChild(next);
-      });
+    const appendEllipsis = () => {
+      const span = document.createElement("span");
+      span.innerText = "...";
+      span.className = "ellipsis";
+      container.appendChild(span);
+    };
+
+    // ← Prev
+    appendButton("←", current === 1, () => this.showPage(current - 1));
+
+    // First page
+    appendButton(1, false, () => this.showPage(1), current === 1);
+
+    if (current > 4) {
+      appendEllipsis();
     }
+
+    // Middle pages (only show around current)
+    const start = Math.max(2, current - 1);
+    const end = Math.min(total - 1, current + 1);
+
+    for (let i = start; i <= end; i++) {
+      appendButton(i, false, () => this.showPage(i), i === current);
+    }
+
+    if (current < total - 3) {
+      appendEllipsis();
+    }
+
+    // Last page (if total > 1 and not already added)
+    if (total > 1) {
+      appendButton(total, false, () => this.showPage(total), current === total);
+    }
+
+    // → Next
+    appendButton("→", current === total, () => this.showPage(current + 1));
+  });
+}
+
 
     renderStats() {
       const startItem = (this.currentPage - 1) * this.itemsPerPage + 1;
       const endItem = Math.min(this.currentPage * this.itemsPerPage, this.items.length);
       const totalItems = this.items.length;
 
-      this.paginationContainers.forEach(container => {
-        const statsDiv = document.createElement("div");
-        statsDiv.classList.add("pagination-stats");
-        statsDiv.innerHTML = `${startItem}-${endItem}`;
-        container.appendChild(statsDiv);
+      this.statsContainers.forEach(container => {
+        container.textContent = `${startItem}-${endItem} of ${totalItems} events`;
       });
     }
 
@@ -187,6 +217,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Start pagination na DOM load, gebruik nu een class!
-  new Pagination(".archive-item", 12, "pagination");
+  new Pagination("tr.archive-item", "pagination", "pagination-stats", "itemsPerPage");
 });
