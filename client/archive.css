@@ -141,12 +141,13 @@
 
     tr {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 2fr 0.5fr;
+      grid-template-columns: 0.1fr 1fr 0.5fr 1fr 2fr 0.5fr;
       text-align: left;
       gap: 1rem;
       position: relative;
       padding: 1rem;
       color: var(--color-text);
+      align-items: center;
 
       td:has(.link-detail) {
         position: absolute;
@@ -273,7 +274,7 @@
 }
 
 .pagination.pagination-top{justify-content: flex-end;}
-.pagination.pagination-bottom{justify-content: flex-start;}
+.pagination.pagination-bottom{justify-content: center;}
 
 .pagination button {
   margin: 0 2px;
@@ -333,28 +334,38 @@
       grid-template-columns: 0.8fr 1.2fr !important;
       grid-template-rows: repeat(6, auto);
       grid-template-areas:
-        "left-title left-title"
-        "left-type right-item"
-        "left-date-s right-item"
-        "left-date-s  right-item"
-        "left-rels right-item";
+        "archive-title archive-title"
+        "archive-type  archive-image"
+        "archive-date  archive-image"
+        "archive-date  archive-image"
+        "archive-rels archive-iamge";
         box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         border-radius: 5px;
-
+        position: relative;
       td:nth-child(2) {
-        grid-area: left-title;
+        grid-area: archive-number;
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+
+        .archive-number{
+          font-weight: bold;
+        }
       }
       td:nth-child(3) {
-        grid-area: left-type;
+        grid-area: archive-title;
       }
       td:nth-child(4) {
-        grid-area: left-date-s;
+        grid-area: archive-type;
       }
       td:nth-child(5) {
-        grid-area: left-rels;
+        grid-area: archive-date;
       }
       td:nth-child(6) {
-        grid-area: right-item;
+        grid-area: archive-rels;
+      }
+      td:nth-child(7) {
+        grid-area: archive-image;
         img {
           width: 100% !important;
           height: auto !important;
