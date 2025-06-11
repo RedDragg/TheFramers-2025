@@ -28,6 +28,12 @@
       --color-background: #ffffff;
       --color-muted: #5f6368;
 
+      /* nav reset and save buttons */
+      --nav-save-button-bg: gray;
+      --nav-save-button-bg-hover: rgb(112, 112, 112);
+      --nav-reset-button-bg: gray;
+      --nav-reset-button-bg-hover: rgb(112, 112, 112);
+
       /* logo colors */
       --framer-framed-logo: black;
       --svg-color:white;
@@ -66,6 +72,8 @@
 
       /* breadcrumbs color */
       --breadcrumbs-color: #555;
+
+
 
 }
 

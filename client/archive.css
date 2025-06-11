@@ -141,7 +141,7 @@
 
     tr {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 2fr 0.5fr;
+      grid-template-columns: 1fr 1fr 1fr 2fr 0.5fr;
       text-align: left;
       gap: 1rem;
       position: relative;

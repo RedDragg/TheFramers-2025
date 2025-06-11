@@ -75,7 +75,7 @@ header {
   color: white;
 
   svg {
-    color: white;
+    color: var(--framer-framed-logo);
     stroke: var(--framer-framed-logo);
     fill: var(--framer-framed-logo);
   }
@@ -329,6 +329,10 @@ header {
       border: none;
       border-radius: 5px;
       cursor: pointer;
+
+      &:hover{
+        background: rgb(112, 112, 112);
+      }
     }
 
     .save-button {
@@ -340,6 +344,10 @@ header {
       border-radius: 5px;
       padding: 0.5rem 1rem;
       cursor: pointer;
+
+      &:hover{
+        background: rgb(112, 112, 112);
+      }
     }
   }
 }
