@@ -1,0 +1,214 @@
+/* ////////////////////////////// */
+/* 🪩🪩🪩 HOME PAGE STYLING 🪩🪩🪩  */
+/* ////////////////////////////// */
+
+
+/* colors type category */
+.type-label{ 
+
+  /* 🔗: https://getcssscan.com/css-buttons-examples */
+  font-size: 1rem;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+
+  border: .05rem solid;
+  max-height: 2rem;
+  text-align: center;
+  padding: 0.25em 0.5em;
+  box-shadow: 2px 2px 0px 0px;
+}
+
+/* Colors per type */
+
+
+.type-label.expositie, 
+.type-label.exhibition {
+  background-color: #E53935;
+}
+
+.type-label.lancering,
+.type-label.launch {
+  background-color: #FB8C00;
+}
+
+.type-label.debat,
+.type-label.debate {
+  background-color: #FDD835;
+}
+
+.type-label.symposium {
+  background-color: #43A047;
+}
+
+.type-label.exhibition-program,
+.type-label.expositie-programma {
+  background-color: #1E88E5;
+}
+
+.type-label.public-program,
+.type-label.publiek-programma {
+  background-color: #3949AB;
+}
+
+.type-label.performance {
+  background-color: #8E24AA;
+}
+
+.type-label.film-screening,
+.type-label.filmvertoning {
+  background-color: #6A1B9A;
+}
+
+.type-label.talk {
+  background-color: #D81B60;
+}
+
+.type-label.educational-program,
+.type-label.educatief-programma {
+  background-color: #00ACC1;
+}
+
+
+
+/* section */
+.data-carousel {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+
+  overflow: clip;
+  transition: opacity var(--updown-time) var(--rotate-delay) ease-out;
+
+  /* li */
+  .content-card {
+      height: 100%;
+      /* 🔗 https://clamp-generator.netlify.app/ */
+      width: calc(clamp(20rem, 19.643vw + 16.071rem, 40.625rem));
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      /* border: solid 1px black; */
+      transform: rotate(calc(var(--slides-angle) * 1));
+      scroll-snap-align: center;
+
+      &:last-child{
+        margin-bottom: 50rem;
+      }
+
+      &:hover{
+          z-index: 3;
+
+      }
+
+      &:focus{
+          z-index: 3;
+      }
+  }
+}
+
+/* Carousel for category */
+.all-category{
+  /* 🔗 https://clamp-generator.netlify.app/ */
+  gap: calc(clamp(10rem, 1.235vw + 9.769rem, 11.25rem));
+
+    div {
+     gap: 1rem;
+     flex-wrap: wrap;
+
+     /* 🔗 https://clamp-generator.netlify.app/ */
+     width:calc(clamp(17.5rem, 25.926vw + 12.639rem, 43.75rem));
+
+    }
+
+  img{
+    /* 🔗 https://clamp-generator.netlify.app/ */
+    width: calc(clamp(3.438rem, 9.444vw + 1.667rem, 13rem));
+    aspect-ratio: 1/1;
+  }
+}
+
+/* Carousel for all data  */
+.all-data{
+
+  img{
+    width: 100%;
+  }
+
+}
+
+
+/* ul */
+.scroll-carousel{
+  display: flex;
+  flex-direction: column;
+  transform: rotate(39.5deg);
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  height: 200%;
+  width: 200%;
+  padding-inline: 30rem;
+  padding-top: 50rem;
+  padding-bottom: 10rem;
+
+
+  list-style-type: "";
+    /* scroll behaviour  */
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+
+  img {
+      border-radius: 8px;
+      border: .5px solid black;
+  }
+
+  div {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      padding: .5rem;
+      letter-spacing: 1.5px;
+  }
+
+  .title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-transform: capitalize;
+  }
+
+  .type {
+      padding: .3rem 1rem;
+      background: grey;
+      border-radius: 5px;
+      text-transform: capitalize;
+  }
+
+  .data-carousel .item {
+      width: 60vw;
+  }
+
+  .scroll-carousel{
+      padding-inline: .5vw;
+  }
+
+  .title {
+      font-size: 1.2rem;
+  }
+
+  .type {
+      font-size: 0.9rem;
+      padding: 0.2rem 0.6rem;
+  }
+
+  img {
+      max-width: 100%;
+      height: auto;
+  }
+}

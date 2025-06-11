@@ -1,0 +1,21 @@
+{% comment %} ⭐️⭐️ BASE LIQUID LAYOUT ⭐️⭐️ {% endcomment %}
+{% layout "server/layouts/base.liquid" %}
+
+{% block content %}
+
+{% comment %} 🎀 DETAIL PAGE 🎀 {% endcomment %}
+{% comment %} ✨ Page with more information ✨ {% endcomment %}
+
+
+<main>
+{% render '../components/detail-page/details.liquid', 
+  title: title, 
+  event: event, 
+  person: person, 
+  allArtists: allArtists, 
+  allEvents: allEvents, 
+  lang: lang, 
+  currentPath: currentPath, %}
+</main>
+
+{% endblock %}

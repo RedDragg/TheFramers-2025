@@ -1,47 +1,32 @@
+{% comment %} ⭐️⭐️ BASE LIQUID LAYOUT ⭐️⭐️ {% endcomment %}
 {% layout "server/layouts/base.liquid" %}
 
+
+
+{% comment %} 🎀 HOME PAGE 🎀 {% endcomment %}
+{% comment %} ✨ Option to choose between all data or data per category ✨ {% endcomment %}
+
 {% block content %}
-<main> 
 
-    <h1>Titel</h1>
-    <ul>
-    {% assign unique_types = "" | split: "," %}
-
-{% for type in allEventTypes %}
-  {% if type.nl and type.nl != "" and type.nl != blank %}
-    {% unless unique_types contains type.nl %}
-      {% assign unique_types = unique_types | push: type.nl %}
-      <li>
-        <h2>{{ type.nl }}</h2>
-        <ul>
-          {% for item in allEvents %}
-            {% if item.event.type_nl == type.nl %}
-              <li>
-                <a href="/archive/:id">
-            <strong>{{ item.event.title_nl }}</strong> - {{ item.event.type_nl }} - 
-            {% for rel in item.relationships %}
-              {% if rel.node == "Person" %}
-                {% for artist in allArtists %}
-                  {% if rel.uuid == artist.person.uuid %}
-                    {{ artist.person.name }}
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-            {% endfor %}
-                </a>
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </li>
-     
-      
-    {% endunless %}
+  {% if view == 'categories' %}
+    {% render '../components/home-page/all-category.liquid' 
+    allEvents: allEvents, 
+    allArtists: allArtists,
+    allEventTypes: allEventTypes,
+    title: title,
+    lang: lang,
+    currentPath: currentPath
+    %}
+  {% else %}
+    {% render '../components/home-page/all-data.liquid' 
+      allEvents: allEvents, 
+      allArtists: allArtists,
+      allEventTypes: allEventTypes,
+      title: title,
+      lang: lang,
+      currentPath: currentPath
+    %}
   {% endif %}
-{% endfor %}
-</ul>
-       
-</main>
 
 {% endblock %}
 
