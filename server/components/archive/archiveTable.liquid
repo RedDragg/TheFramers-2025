@@ -97,7 +97,7 @@
 
         {% if selectedEvent == "all" or not selectedEvent or eventTypeToCheck == selectedEvent %}
         <tr class="archive-item" tabindex="0">
-          <td><a href="/{{ lang }}/archive/{{ item.event.uuid }}" class="link-detail"></a></td>
+          <td><a href="/{{ lang }}/archive/{{ eventTypeToCheck }}/{{ item.event.uuid }}" class="link-detail"></a></td>
           <td>
             <h2>{{ eventTitleToShow }}</h2>
           </td>
