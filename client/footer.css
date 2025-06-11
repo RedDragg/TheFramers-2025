@@ -4,11 +4,9 @@
 /* /////////////////////////// */
 
 footer {
-  height: 20dvh;
+
 
   .footer-container {
-    position: fixed;
-    bottom: 0;
     display: flex;
     justify-content: space-between;
     gap: 2rem;
