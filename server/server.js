@@ -135,6 +135,7 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
   console.log('Selected Event:', selectedEvent);
 
   return res.send(renderTemplate('server/views/archive.liquid', {
+    breadcrumbs,
     title: 'Archive',
     allEvents: filteredEvents,
     allArtists: filteredArtists,
@@ -153,6 +154,10 @@ app.get('/:lang/archive/:uuid', async (req, res) => {
   const { uuid, lang } = req.params;
   const upperLang = lang.toUpperCase();
 
+  const breadcrumbs = [
+    {name: 'Home', url: '/', icon: 'home'},
+    {name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive`, icon: 'overview'},
+  ]
 
   const [dataEvents, dataPeople] = await Promise.all([
     fetch(eventsAPI),

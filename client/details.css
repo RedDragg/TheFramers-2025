@@ -4,7 +4,66 @@
     --border-radius-button: 0.5rem;
 
     --detail-content-width-large-screens: clamp(26.25rem, 15.75rem + 52.5vw, 63rem);
-    --back-arrow-margin-left: clamp(1rem, -0.1429rem + 5.7143vw, 5rem);
+    --breadcrumbs-margin: clamp(1rem, -0.1429rem + 5.7143vw, 5rem);
+    --button-gap: .8rem;
+}
+
+/* /////////////////////// */
+/* 🍞🍞🍞 BREADCRUMBS 🍞🍞🍞 */
+/* /////////////////////// */
+
+.breadcrumbs {
+    width: 100%;
+    height: auto;
+    display: flex;
+    margin-left: var(--breadcrumbs-margin);
+    margin-right: var(--breadcrumbs-margin);
+    margin-bottom: 1rem;
+    gap: .8rem;
+    flex-wrap: wrap;
+}
+
+/* .breadcrumbs .crumb {
+    align-content: center;
+} */
+
+.breadcrumbs a {
+    color: var(--deep-black);
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: var(--button-gap);
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs .is-current {
+    font-weight: 800;
+    width: 30%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-content: center;
+}
+
+/* Update back-arrow to prevent conflicts */
+/* .back-arrow {
+    text-decoration: none;
+    color: var(--deep-black);
+    transition: opacity 0.2s ease;
+}
+
+.back-arrow:hover {
+    opacity: 0.7;
+} */
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    .breadcrumbs {
+        margin-bottom: 0.5rem;
+    }
 }
 
 /* MAIN */
