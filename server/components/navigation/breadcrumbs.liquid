@@ -1,0 +1,33 @@
+<ul class="breadcrumbs">
+  {% for crumb in breadcrumbs %}
+    {% if crumb.icon == 'home' %}
+        <li class="crumb">
+            <a href="{{ crumb.url }}">
+                {% render '../icons/home.liquid' %}
+                {{ crumb.name }}
+            </a>
+        </li>
+        <li>
+    {% render '../icons/arrow-right.liquid' %}
+  </li>
+    {% elsif crumb.icon == 'overview' %}
+        <li class="crumb">
+            <a href="{{ crumb.url }}">
+                {% render '../icons/overview.liquid' %}
+                {{ crumb.name }}
+            </a>
+        </li>
+    {% endif %}
+  {% endfor %}
+  <li>
+    {% render '../icons/arrow-right.liquid' %}
+  </li>
+  <li class="crumb is-current">
+     {% if type == 'event' %}
+        {% render '../icons/event.liquid' %}
+     {% elsif type == 'artist' %}
+        {% render '../icons/artist.liquid' %}  
+    {% endif %}
+    {{ title }}
+  </li>
+</ul>
