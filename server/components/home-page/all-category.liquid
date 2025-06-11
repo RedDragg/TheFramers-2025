@@ -34,9 +34,8 @@
           
           {% if items_with_image.size > 0 %}
             <li class="content-card" tabindex="0">
-              <a href="/{{ lang }}/archive/type/{{ type_name }}">
               <div>
-                <p>{{ items_with_image.size }} {% if lang == 'EN' %}projects{% else %}projecten{% endif %}</p>
+                <strong>{{ items_with_image.size }} {% if lang == 'EN' %}projects{% else %}projecten{% endif %}</strong>
                 <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
               </div>
               <div class="image-gallery">
@@ -46,11 +45,18 @@
                   {% else %}
                     {% assign event_title = item.event.title_nl %}
                   {% endif %}
+                  <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
+                  {% if item.imageUrl and item.imageUrl != "" %}
                     <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
+                  {% else %}
+                    <!-- Placeholder images for when no image is available -->
+                    <img src="/images/placeholder-black.png" alt="{{ event_title }}" class="category-image" loading="lazy">
+                    <img src="/images/placeholder-white.png" alt="{{ event_title }}" class="category-image" loading="lazy">
+                  {% endif %}
+                  
+                  </a>
                 {% endfor %}
               </div>
-
-              </a>
             </li>
           {% endif %}
 

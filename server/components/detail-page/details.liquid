@@ -73,7 +73,7 @@
       
       {% if event %}
       <ul>
-        <li class="cover-image" style="--vt: image-{{ event.event.uuid }}">
+        <li class="cover-image">
           <img src="{{ event.imageUrl }}" {% if lang == 'EN' %}alt="Cover image of {{ title }}" {% else %} alt="Omslag en hoofdfoto van {{ title }}"{% endif %} class="category-image" loading="lazy">
         </li>
         <li class="type">

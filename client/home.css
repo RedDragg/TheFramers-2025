@@ -97,11 +97,6 @@
       transform: rotate(calc(var(--slides-angle) * 1));
       scroll-snap-align: center;
 
-      img {
-        view-transition-name: var(--vt);
-        view-transtion-class: image;
-      }
-
       &:last-child{
         margin-bottom: 50rem;
       }
@@ -180,11 +175,6 @@
       flex-direction: row;
       padding: .5rem;
       letter-spacing: 1.5px;
-    p{
-      font-weight: 600;
-      /* 🔗: https://clamp.font-size.app/  */
-      font-size: clamp(0.875rem, 0.8516rem + 0.125vw, 1rem);;
-    }
   }
 
   .title {
