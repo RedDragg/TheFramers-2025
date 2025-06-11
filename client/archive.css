@@ -24,7 +24,7 @@
       }
 
       td:has(a):hover{
-        border: solid 1px black;
+        border: solid 1px var(--color-border-td-archive);
       }
 
       tr:not(:has(.category-image)) {
@@ -55,49 +55,49 @@
 
       .category-image.expositie,
       .category-image.exhibition {
-        border: solid 2px #e53935;
+        border: solid 2px var(--exhibition-color);
       }
 
       .category-image.lancering,
       .category-image.launch {
-        border: solid 2px #fb8c00;
+        border: solid 2px var(--launch-color);
       }
 
       .category-image.debat,
       .category-image.debate {
-        border: solid 2px #fdd835;
+        border: solid 2px var(--debat-color);
       }
 
       .category-image.symposium {
-        border: solid 2px #43a047;
+        border: solid 2px var(--symposium-color);
       }
 
       .category-image.exhibition-program,
       .category-image.expositie-programma {
-        border: solid 2px #1e88e5;
+        border: solid 2px var( --exhibition-program-color);
       }
 
       .category-image.public-program,
       .category-image.publiek-programma {
-        border: solid 2px #3949ab;
+        border: solid 2px var(--public-program-color);
       }
 
       .category-image.performance {
-        border: solid 2px #8e24aa;
+        border: solid 2px var(--performance-color);
       }
 
       .category-image.film-screening,
       .category-image.filmvertoning {
-        border: solid 2px #6a1b9a;
+        border: solid 2px var(--film-screening-color);
       }
 
       .category-image.talk {
-        border: solid 2px #b83e6b;
+        border: solid 2px var(--talk-color);
       }
 
       .category-image.educational-program,
       .category-image.educatief-programma {
-        border: solid 2px #00acc1;
+        border: solid 2px var(--educational-color);
       }
     }
 
@@ -134,8 +134,9 @@
     .table-header {
       position: sticky;
       top: 0;
-      background: white;
+      background: var(--color-background);
       z-index: 10000;
+      margin-bottom: 1rem;
     }
 
     tr {
@@ -145,6 +146,7 @@
       gap: 1rem;
       position: relative;
       padding: 1rem;
+      color: var(--color-text);
 
       td:has(.link-detail) {
         position: absolute;
@@ -158,14 +160,14 @@
         }
       }
       &:has(.link-detail:hover):is(:nth-child(odd), :nth-child(even)) {
-        background: rgba(255, 0, 0, 0.1);
+        background: var(--table-tr-background-hover);
       }
 
       &:not(.table-header) {
-        background: #eaeaea;
+        background: var(--table-tr-background);
 
         &:nth-child(odd) {
-          background: #f5f5f5;
+          background: var(--table-tr-background-odd);
         }
       }
 
@@ -204,7 +206,7 @@
 
   .breadcrumbs {
     font-size: 0.8rem;
-    color: #555;
+    color: var(--breadcrumbs-color);
     display: flex;
     gap: 0.5rem;
     display: flex;
@@ -234,7 +236,7 @@
 
   a {
     text-decoration: none;
-    color: #000;
+    color: var(--color-text);
   }
 
   .participants {
@@ -277,23 +279,27 @@
   margin: 0 2px;
   padding: 0.3em 0.7em;
   border-radius: 4px;
-  border: 1px solid #aaa;
-  background: #f9f9f9;
+  border: 1px solid var(--pagination-buttons-bg);
+  background: var(--pagination-buttons-border);
   cursor: pointer;
 }
+
 .pagination button:disabled {
-  background: #e3e3e3;
+  background: var(--pagination-buttons-bg-disabled);
   cursor: default;
 }
+
 .pagination button.active {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--pagination-buttons-bg-active);
+  color: var(--pagination-buttons-color-active);
   font-weight: bold;
-  border-color: #333;
+  border-color: var(--pagination-buttons-border-color-active);
 }
+
 .pagination button:not(.active):hover {
-  background-color: #ddd;
+  background-color: var(--pagination-buttons-color-hover);
 }
+
 
 
 @media (max-width: 900px) {
@@ -364,47 +370,48 @@
 /* types color */
 .types.expositie,
 .types.exhibition {
-  background-color: #e53935;
+  background-color: var(--exhibition-color);
 }
 
 .types.lancering,
 .types.launch {
-  background-color: #fb8c00;
+  background-color: var(--launch-color);
 }
 
 .types.debat,
 .types.debate {
-  background-color: #fdd835;
+  background-color: var(--debat-color);
 }
 
 .types.symposium {
-  background-color: #43a047;
+  background-color: var(--symposium-color);
 }
 
 .types.exhibition-program,
 .types.expositie-programma {
-  background-color: #1e88e5;
+  background-color: var(--exhibition-program-color);
 }
 
 .types.public-program,
 .types.publiek-programma {
-  background-color: #3949ab;
+  background-color: var(--public-program-color);
 }
 
 .types.performance {
-  background-color: #8e24aa;
+  background-color: var(--performance-color);
 }
 
 .types.film-screening,
 .types.filmvertoning {
-  background-color: #6a1b9a;
+  background-color: var(--film-screening-color);
 }
 
 .types.talk {
-  background-color: #b83e6b;
+  background-color: var(--talk-color);
 }
 
 .types.educational-program,
 .types.educatief-programma {
-  background-color: #00acc1;
+  background-color: var(--educational-color);
 }
+

@@ -1,35 +1,25 @@
 /* //////////////////////// */
 /* 🪩🪩🪩  NAVIGATION 🪩🪩🪩  */
 /* //////////////////////// */
-
 :root {
   /* Default : ✨ light-mode  */
-  --bg-color: #f8fafc;
-  --text-color: #1e293b;
-  --header-bg: #e2e8f0;
-  --btn-bg: #3b82f6;
-  --btn-text: #ffffff;
   --toggle-bg: #94a3b8;
   --toggle-circle: #ffffff;
 }
 
 /* 🖤 Dark-mode  */
 :has(#dark-mode-toggle:checked) {
-  --bg-color: #0f172a;
-  --text-color: #e2e8f0;
-  --header-bg: #1e293b;
-  --btn-bg: #14b8a6;
-  --btn-text: #0f172a;
   --toggle-bg: #475569;
   --toggle-circle: #0f172a;
-
 }
-
 /* 🖤🖤 Dark Mode Toggle 🖤🖤 */
 #dark-mode-toggle {
   display: none;
 }
 
+body:has(#theme:checked) header {
+  z-index: 1000000;
+}
 
 .toggle {
   display: inline-block;
@@ -55,10 +45,9 @@
   transition: transform 0.3s;
 }
 
-#dark-mode-toggle:checked+.toggle::before {
+#dark-mode-toggle:checked + .toggle::before {
   transform: translateX(30px);
 }
-
 
 .light-dark::after {
   content: "Toggle dark mode";
@@ -68,14 +57,12 @@
   content: "Toggle light mode";
 }
 
-
 /* HEADER */
 header {
   position: sticky;
   top: 0;
   z-index: 9999;
 }
-
 
 .home-menu {
   display: grid;
@@ -89,7 +76,8 @@ header {
 
   svg {
     color: white;
-    stroke: white;
+    stroke: var(--framer-framed-logo);
+    fill: var(--framer-framed-logo);
   }
 
   /* nav-container */
@@ -131,9 +119,8 @@ header {
     align-items: center;
     text-align: left;
     cursor: pointer;
-    padding: .2rem .5rem;
+    padding: 0.2rem 0.5rem;
   }
-
 
   /* Hides all general paragraphs */
   p {
@@ -155,7 +142,7 @@ header {
     padding: 1rem 0.85rem 1rem 0;
     gap: 1rem;
     border-radius: 1.3rem 0 0 1.3rem;
-    background: black;
+    background: var(--nav-bg-color);
     transform: translate(1rem, 1rem);
     transition: opacity 1s ease;
 
@@ -221,7 +208,8 @@ header {
       height: 1em;
       width: 1em;
       border-radius: 50em;
-      background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+      background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+        no-repeat 50% 50%;
       background-size: contain;
     }
   }
@@ -269,13 +257,14 @@ header {
     position: absolute;
     right: 0;
     top: 10rem;
-    color: white;
     background: black;
     height: auto;
     width: 100%;
     transition: transform 0.5s ease;
     display: none;
-    padding: 1rem;
+    padding: 2rem;
+    border-radius: 0 0 8px 8px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
     a {
       color: white;
@@ -339,6 +328,7 @@ header {
       background: gray;
       border: none;
       border-radius: 5px;
+      cursor: pointer;
     }
 
     .save-button {
@@ -349,6 +339,7 @@ header {
       background: gray;
       border-radius: 5px;
       padding: 0.5rem 1rem;
+      cursor: pointer;
     }
   }
 }
@@ -364,8 +355,8 @@ header {
 
     p {
       display: block;
-      color: white;
       font-weight: 200;
+      color: var(--menu-color);
     }
 
     label:has(p):hover p {
@@ -377,10 +368,7 @@ header {
       align-items: center;
       display: flex;
       flex-direction: row;
-
-      background: black;
       border-radius: 0 0 1.3rem 1.3rem;
-      color: white;
       padding: 0 1rem 0.5rem 1rem;
       transform: translate(0, 0);
       height: min-content;
@@ -391,8 +379,8 @@ header {
       }
 
       svg {
-        color: white;
-        stroke: white;
+        color: var(--svg-color);
+        stroke: var(--svg-color);
       }
 
       /* view layouts allcontent - categories */
@@ -403,13 +391,11 @@ header {
         gap: 0.5rem;
       }
 
-      &:has(#all-content:checked) {
-        .categories-home {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.25rem;
-        }
+      .categories-home {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
       }
 
       label:has(#theme) {
