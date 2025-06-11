@@ -93,6 +93,10 @@ app.post('/:lang/search', async (req, res) => {
 app.get('/:lang/archive/type/:eventType', async (req, res) => {
   const { lang, eventType } = req.params;
   const queryEventType = req.query.eventType;
+  const breadcrumbs = [
+    {name: 'Home', url: '/', icon: 'home'},
+    {name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive`, icon: 'overview'},
+  ]
 
   // Kies eventType uit query of params, query gaat voor
   const selectedEventRaw = queryEventType || eventType || 'all';
@@ -123,6 +127,7 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
   console.log('Selected Event:', selectedEvent);
 
   return res.send(renderTemplate('server/views/archive.liquid', { 
+    breadcrumbs,
     title: 'Archive', 
     allEvents: filteredEvents, 
     allArtists: filteredArtists, 
@@ -134,13 +139,13 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
 });
 
 
-
+// Route: Detail page for events or persons
 app.get('/:lang/archive/:uuid', async (req, res) => {
   const { uuid, lang } = req.params;
   const upperLang = lang.toUpperCase();
   const breadcrumbs = [
     {name: 'Home', url: '/', icon: 'home'},
-    {name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive`, icon: 'overview'}
+    {name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive`, icon: 'overview'},
   ]
 
   const [dataEvents, dataPeople] = await Promise.all([

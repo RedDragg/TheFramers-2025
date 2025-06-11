@@ -3,7 +3,14 @@
 {% block content %}
 <main class="category">
   <div class="category-wrapper">
-    <div class="breadcrumbs">
+
+    {% render '../components/navigation/breadcrumbs.liquid', 
+      breadcrumbs: breadcrumbs,
+      currentName: title,
+      currentIcon: crumbType
+    %}
+
+    {% comment %} <div class="breadcrumbs">
       <a href="/">Home</a> &gt;
       <form method="GET" action="/{{ lang }}/archive/type/all">
       <label for="eventTypeSelect"></label>
@@ -31,7 +38,7 @@
       </select>
     </form>
 
-    </div>
+    </div> {% endcomment %}
     <section class="category-list">
       <!-- <a href="/">Back</a> -->
       <div class="category-header">

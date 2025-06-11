@@ -10,7 +10,10 @@
 {% assign content = event.event.content_nl %}
 {% endif %}
 
-{%if person %}
+{% assign crumbType = 'event' %}
+
+{% if person %}
+  {% assign crumbType = 'person' %}
   {% if lang == 'EN' %}
     {% assign title = "Artist: " | append: person.person.name %}
   {% else %}
@@ -20,8 +23,8 @@
 
 {% render '../navigation/breadcrumbs.liquid', 
   breadcrumbs: breadcrumbs,
-  title: title,
-  type: person ? 'person' : 'event',
+  currentName: title,
+  currentIcon: crumbType
 %}
 
 

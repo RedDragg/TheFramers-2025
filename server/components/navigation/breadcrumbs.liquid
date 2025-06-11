@@ -8,8 +8,8 @@
             </a>
         </li>
         <li>
-    {% render '../icons/arrow-right.liquid' %}
-  </li>
+            {% render '../icons/arrow-right.liquid' %}
+        </li>
     {% elsif crumb.icon == 'overview' %}
         <li class="crumb">
             <a href="{{ crumb.url }}">
@@ -23,11 +23,13 @@
     {% render '../icons/arrow-right.liquid' %}
   </li>
   <li class="crumb is-current">
-     {% if type == 'event' %}
-        {% render '../icons/event.liquid' %}
-     {% elsif type == 'artist' %}
-        {% render '../icons/artist.liquid' %}  
+    {% if currentIcon == 'person'  %}
+      {% render '../icons/artist.liquid' %}
+    {% elsif currentIcon == 'event' %}
+      {% render '../icons/event.liquid' %}
+    {% else %}
+      {% render '../icons/overview.liquid' %}
     {% endif %}
-    {{ title }}
+    {{ currentName }}
   </li>
 </ul>

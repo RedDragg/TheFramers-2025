@@ -22,9 +22,9 @@
     flex-wrap: wrap;
 }
 
-.breadcrumbs .crumb {
+/* .breadcrumbs .crumb {
     align-content: center;
-}
+} */
 
 .breadcrumbs a {
     color: var(--deep-black);
@@ -44,6 +44,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    align-content: center;
 }
 
 /* Update back-arrow to prevent conflicts */
