@@ -1,3 +1,7 @@
+/* ///////////////////// */
+/* 🪩🪩🪩 Server.js 🪩🪩🪩 */
+/* ///////////////////// */
+
 import 'dotenv/config'; // Load environment variables from a .env file
 import { App } from '@tinyhttp/app'; // Tinyhttp app framework
 import bodyParser from 'body-parser'; // Middleware for parsing request bodies
@@ -45,7 +49,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// Route: Home page - all data
+
+/* /////////////////////////////////////// */
+/* 🐆🐆🐆 Route: Home page - all data 🐆🐆🐆 */
+/* /////////////////////////////////////// */
+
 app.get('/:lang', async (req, res) => {
   const lang = req.params.lang.toUpperCase();
   const view = req.query.view || 'categories'; // default naar 'all-data' als het ontbreekt
@@ -66,19 +74,21 @@ app.get('/:lang', async (req, res) => {
   const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, lang));
 
 
-  return res.send(renderTemplate('server/views/index.liquid', { 
-    title: 'Home', 
-    allEvents: filteredEvents, 
-    allArtists: filteredArtists, 
+  return res.send(renderTemplate('server/views/index.liquid', {
+    title: 'Home',
+    allEvents: filteredEvents,
+    allArtists: filteredArtists,
     allEventTypes,
     lang,
     currentPath: req.path,
-    view 
+    view
   }));
 });
 
 
-// Route: Search functionality
+/* ////////////////////////////////////////// */
+/* 🐆🐆🐆 Route: Search  - functionality 🐆🐆🐆 */
+/* ////////////////////////////////////////// */
 app.post('/:lang/search', async (req, res) => {
   const searchQuery = req.body.search; // Get the search query from the request body
   console.log(searchQuery);
@@ -89,7 +99,9 @@ app.post('/:lang/search', async (req, res) => {
 
 
 
-// Route: Archive page
+/* /////////////////////////////// */
+/* 🐆🐆🐆 Route: Archive page 🐆🐆🐆 */
+/* /////////////////////////////// */
 app.get('/:lang/archive/type/:eventType', async (req, res) => {
   const { lang, eventType } = req.params;
   const queryEventType = req.query.eventType;
@@ -122,11 +134,11 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
 
   console.log('Selected Event:', selectedEvent);
 
-  return res.send(renderTemplate('server/views/archive.liquid', { 
-    title: 'Archive', 
-    allEvents: filteredEvents, 
-    allArtists: filteredArtists, 
-    allEventTypes, 
+  return res.send(renderTemplate('server/views/archive.liquid', {
+    title: 'Archive',
+    allEvents: filteredEvents,
+    allArtists: filteredArtists,
+    allEventTypes,
     selectedEvent,
     lang: upperLang,
     currentPath: req.path,
@@ -134,11 +146,13 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
 });
 
 
-
+/* /////////////////////////////// */
+/* 🐆🐆🐆 Route: Detail  page 🐆🐆🐆 */
+/* /////////////////////////////// */
 app.get('/:lang/archive/:uuid', async (req, res) => {
   const { uuid, lang } = req.params;
   const upperLang = lang.toUpperCase();
-  
+
 
   const [dataEvents, dataPeople] = await Promise.all([
     fetch(eventsAPI),
@@ -167,11 +181,11 @@ app.get('/:lang/archive/:uuid', async (req, res) => {
   }
 
   const title =
-  (upperLang === 'EN'
-    ? event?.event?.title_en
-    : event?.event?.title_nl) || person?.person?.name || 'Detail';
+    (upperLang === 'EN'
+      ? event?.event?.title_en
+      : event?.event?.title_nl) || person?.person?.name || 'Detail';
 
-    console.log(upperLang, event, person);
+  console.log(upperLang, event, person);
 
   return res.send(renderTemplate('server/views/detail-page.liquid', {
     title,
@@ -183,9 +197,6 @@ app.get('/:lang/archive/:uuid', async (req, res) => {
     currentPath: req.path,
   }));
 });
-
-
-
 
 
 // Utility function to render templates with data

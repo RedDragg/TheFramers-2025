@@ -1,273 +1,380 @@
+.category {
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
 
+  .category-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 85rem;
+    padding: 1rem;
+  }
 
-        .category {
-            display: flex;
-            width: 100dvw;
-            justify-content: center;
-            padding-top: 5rem;
+  .category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
 
-            .category-wrapper {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-                width: 85rem;
-                padding: 1rem;
+    &:has(#images-only:checked) {
+      td:not(:has(:is(.category-image, a))) {
+        display: none;
+      }
+
+      td:has(a):hover{
+        border: solid 1px black;
+      }
+
+      tr:not(:has(.category-image)) {
+        display: none;
+      }
+
+      tbody {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+
+      tr {
+        display: block;
+        padding: 0.5rem;
+        background: none;
+      }
+
+      .category-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      /* category-image border */
+
+      .category-image.expositie,
+      .category-image.exhibition {
+        border: solid 1px #e53935;
+      }
+
+      .category-image.lancering,
+      .category-image.launch {
+        border: solid 1px #fb8c00;
+      }
+
+      .category-image.debat,
+      .category-image.debate {
+        border: solid 1px #fdd835;
+      }
+
+      .category-image.symposium {
+        border: solid 1px #43a047;
+      }
+
+      .category-image.exhibition-program,
+      .category-image.expositie-programma {
+        border: solid 1px #1e88e5;
+      }
+
+      .category-image.public-program,
+      .category-image.publiek-programma {
+        border: solid 1px #3949ab;
+      }
+
+      .category-image.performance {
+        border: solid 1px #8e24aa;
+      }
+
+      .category-image.film-screening,
+      .category-image.filmvertoning {
+        border: solid 1px #6a1b9a;
+      }
+
+      .category-image.talk {
+        border: solid 1px #b83e6b;
+      }
+
+      .category-image.educational-program,
+      .category-image.educatief-programma {
+        border: solid 1px #00acc1;
+      }
+    }
+
+    .category-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      ul {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        list-style: none;
+
+        li {
+          label {
+            cursor: pointer;
+            padding: 0.2rem 0.4rem;
+
+            &:has(input:checked) {
+              border: solid 1px #000;
+              border-radius: 5px;
             }
-
-            .category-list {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-                width: 100%;
-
-                &:has(#images-only:checked) {
-                    td:not(:has(.category-image)) {
-                        display: none;
-                    }
-
-                    tr:not(:has(.category-image)) {
-                        display: none;
-                    }
-
-                    tbody {
-                        display: grid;
-                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                    }
-
-                    tr {
-                        display: block;
-                        padding: .5rem;
-                        background: none;
-                    }
-
-                    .category-image {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: 5px;
-                        border: solid 1px red;
-                    }
-                }
-
-                .category-header {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-
-                    ul {
-                        display: flex;
-                        flex-direction: row;
-                        gap: 1rem;
-                        list-style: none;
-
-                        li {
-                            label {
-                                cursor: pointer;
-                                padding: .2rem .4rem;
-
-                                &:has(input:checked) {
-                                    border: solid 1px #000;
-                                    border-radius: 5px;
-                                }
-                            }
-                        }
-                    }
-
-                }
-
-                tbody {
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                .table-header{
-                    position: sticky;
-                    top: 0;
-                    background: white;
-                    z-index: 10;
-                }
-
-                tr {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr 1fr 2fr .5fr;
-                    text-align: left;
-                    gap: 1rem;
-                    position: relative;
-                    padding: 1rem;
-
-                    td:has(.link-detail){
-                        position: absolute;
-                        inset: 0;
-
-                        a{
-                            position: absolute;
-                            inset: 0;
-                            z-index: 1;
-                            display: block;
-                        }
-                    }
-                    &:has(.link-detail:hover):is(:nth-child(odd), :nth-child(even)) {
-                        background: rgba(255, 0, 0, 0.1);
-                    }
-
-                    &:not(.table-header){
-                        background: #eaeaea;
-
-                        &:nth-child(odd) {
-                            background: #f5f5f5;
-                        }
-                    }
-
-                    &:nth-child(2) {
-                        border-radius: 5px 5px 0 0;
-                    }
-
-                    &:last-child {
-                        border-radius: 0 0 5px 5px;
-                    }
-
-
-
-                    h2{
-                        font-size: 1.1rem;
-                    }
-
-                    td:has(img) {
-                        text-align: right;
-                    }
-
-                    td:has(.participants) {
-                        width: max-content;
-                    }
-
-                    td:has(a){
-                        text-align: center;
-                    }
-                }
-
-                .category-image {
-                    width: 2.5rem;
-                    height: 2.5rem;
-                    object-fit: cover;
-                    border-radius: 5px;
-                }
-            }
-
-            .breadcrumbs {
-                font-size: 0.8rem;
-                color: #555;
-                display: flex;
-                gap: 0.5rem;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                padding: 0 1rem;
-
-
-
-                .active {
-                    border: solid 1px #000;
-                    border-radius: 5px;
-                    padding: .2rem .4rem;
-                }
-            }
-
-
-
-            .type {
-                display: flex;
-                gap: 0.2rem;
-                align-items: center;
-                height: fit-content;
-            }
-
-            .types {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-            }
-
-
-            a {
-                text-decoration: none;
-                color: #000;
-            }
-
-            .participants {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-
-                p{
-                    width: max-content;
-                }
-
-            }
+          }
         }
+      }
+    }
 
-        @media (max-width: 900px) {
+    tbody {
+      display: flex;
+      flex-direction: column;
+    }
 
-            .category{
-                .table-header {
-                    display: none!important;
-                }
+    .table-header {
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+    }
 
-                &:has(#images-only:checked){
-                    tr{
-                        padding: 0!important;
-                        border: none!important;
-                        background: none!important;
-                    }
+    tr {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 2fr 0.5fr;
+      text-align: left;
+      gap: 1rem;
+      position: relative;
+      padding: 1rem;
 
-                    td:has(img){
-                        width:5rem;
-                        height: 5rem;
-                    }
+      td:has(.link-detail) {
+        position: absolute;
+        inset: 0;
 
-                    .category-image {
-                        border: solid 1px red;
-                    }
-
-                    tbody{
-                        grid-template-columns: repeat(4, 1fr)!important;
-                    }
-
-                }
-
-                tr{
-                    grid-template-columns: .8fr 1.2fr!important;
-                    grid-template-rows: repeat(6, auto);
-                    grid-template-areas: "left-title left-title"
-                                        "left-type right-item"
-                                        "left-date-s right-item"
-                                        "left-date-e right-item"
-                                        "left-rels right-item";
-
-                    td:nth-child(2) {
-                        grid-area: left-title;
-                    }
-                    td:nth-child(3) {
-                        grid-area: left-type;
-                    }
-                    td:nth-child(4) {
-                        grid-area: left-date-s;
-                    }
-                    td:nth-child(5) {
-                        grid-area: left-date-e;
-                    }
-                    td:nth-child(6) {
-                        grid-area: left-rels;
-                    }
-                    td:nth-child(7) {
-                        grid-area: right-item;
-                        img{
-                            width: 100%!important;
-                            height: auto!important;
-                        }
-                    }
-
-                }
-            }
-
+        a {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          display: block;
         }
+      }
+      &:has(.link-detail:hover):is(:nth-child(odd), :nth-child(even)) {
+        background: rgba(255, 0, 0, 0.1);
+      }
+
+      &:not(.table-header) {
+        background: #eaeaea;
+
+        &:nth-child(odd) {
+          background: #f5f5f5;
+        }
+      }
+
+      &:nth-child(2) {
+        border-radius: 5px 5px 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 5px 5px;
+      }
+
+      h2 {
+        font-size: 1.1rem;
+      }
+
+      td:has(img) {
+        text-align: right;
+      }
+
+      td:has(.participants) {
+        width: max-content;
+      }
+
+      td:has(a) {
+        text-align: center;
+      }
+    }
+
+    .category-image {
+      width: 5.5rem;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+
+  .breadcrumbs {
+    font-size: 0.8rem;
+    color: #555;
+    display: flex;
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1rem;
+
+    .active {
+      border: solid 1px #000;
+      border-radius: 5px;
+      padding: 0.2rem 0.4rem;
+    }
+  }
+
+  .type {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+    height: fit-content;
+
+    .types{
+      width: 0.6rem;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .participants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    p {
+      width: max-content;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination button {
+  margin: 0 2px;
+  padding: 0.3em 0.7em;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+.pagination button:disabled {
+  background: #e3e3e3;
+  cursor: default;
+}
+
+@media (max-width: 900px) {
+  .category {
+    .table-header {
+      display: none !important;
+    }
+
+    &:has(#images-only:checked) {
+      tr {
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+      }
+
+      td:has(img) {
+        width: 5rem;
+        height: 5rem;
+      }
+
+      .category-image {
+        border: solid 1px red;
+      }
+
+      tbody {
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+    }
+
+    tr {
+      grid-template-columns: 0.8fr 1.2fr !important;
+      grid-template-rows: repeat(6, auto);
+      grid-template-areas:
+        "left-title left-title"
+        "left-type right-item"
+        "left-date-s right-item"
+        "left-date-e right-item"
+        "left-rels right-item";
+
+      td:nth-child(2) {
+        grid-area: left-title;
+      }
+      td:nth-child(3) {
+        grid-area: left-type;
+      }
+      td:nth-child(4) {
+        grid-area: left-date-s;
+      }
+      td:nth-child(5) {
+        grid-area: left-date-e;
+      }
+      td:nth-child(6) {
+        grid-area: left-rels;
+      }
+      td:nth-child(7) {
+        grid-area: right-item;
+        img {
+          width: 100% !important;
+          height: auto !important;
+        }
+      }
+    }
+  }
+}
+
+/* types color */
+.types.expositie,
+.types.exhibition {
+  background-color: #e53935;
+}
+
+.types.lancering,
+.types.launch {
+  background-color: #fb8c00;
+}
+
+.types.debat,
+.types.debate {
+  background-color: #fdd835;
+}
+
+.types.symposium {
+  background-color: #43a047;
+}
+
+.types.exhibition-program,
+.types.expositie-programma {
+  background-color: #1e88e5;
+}
+
+.types.public-program,
+.types.publiek-programma {
+  background-color: #3949ab;
+}
+
+.types.performance {
+  background-color: #8e24aa;
+}
+
+.types.film-screening,
+.types.filmvertoning {
+  background-color: #6a1b9a;
+}
+
+.types.talk {
+  background-color: #b83e6b;
+}
+
+.types.educational-program,
+.types.educatief-programma {
+  background-color: #00acc1;
+}

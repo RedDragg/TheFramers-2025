@@ -1,4 +1,12 @@
 
+{% comment %} 
+/* /////////////////////////////////////// */
+/* 🪩🪩🪩 DATA CAROUSEL ON HOME PAGE  🪩🪩🪩 */
+           /* ✨ FOR CATEGORY ✨ */
+/* /////////////////////////////////////// */ 
+{% endcomment %}
+
+
 <section class="data-carousel">
   <ul class="scroll-carousel all-category">
 
@@ -23,14 +31,15 @@
           {% assign items_with_image = matching_items | where_exp: "item", "item.imageUrl and item.imageUrl != ''" %}
           {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
 
+          
           {% if items_with_image.size > 0 %}
             <li class="content-card" tabindex="0">
               <div>
-                <strong>{{ items_with_image.size }} projects</strong>
+                <strong>{{ items_with_image.size }} {% if lang == 'EN' %}projects{% else %}projecten{% endif %}</strong>
                 <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
               </div>
               <div class="image-gallery">
-                {% for item in items_with_image limit: 3 %}
+                {% for item in items_with_image limit: 6 %}
                   {% if lang == 'EN' %}
                     {% assign event_title = item.event.title_en %}
                   {% else %}
