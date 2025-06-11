@@ -64,7 +64,13 @@
                     <strong>{{ event_title }}</strong> 
                     <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
                   </div>
-                  <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
+                  {% if item.imageUrl and item.imageUrl != "" %}
+                    <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
+                  {% else %}
+                    <!-- Placeholder images for when no image is available -->
+                    <img src="/images/placeholder-black.png" alt="{{ event_title }}" class="category-image" loading="lazy">
+                    <img src="/images/placeholder-white.png" alt="{{ event_title }}" class="category-image" loading="lazy">
+                  {% endif %}
                 </a>
               </li>
 
