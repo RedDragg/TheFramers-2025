@@ -1,7 +1,6 @@
 .category {
   display: flex;
   justify-content: center;
-  flex-direction: column;
   padding-top: 5rem;
 
   .category-wrapper {
@@ -337,7 +336,7 @@
         "left-title left-title"
         "left-type right-item"
         "left-date-s right-item"
-        "left-date-e right-item"
+        "left-date-s  right-item"
         "left-rels right-item";
         box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         border-radius: 5px;
@@ -352,12 +351,9 @@
         grid-area: left-date-s;
       }
       td:nth-child(5) {
-        grid-area: left-date-e;
-      }
-      td:nth-child(6) {
         grid-area: left-rels;
       }
-      td:nth-child(7) {
+      td:nth-child(6) {
         grid-area: right-item;
         img {
           width: 100% !important;

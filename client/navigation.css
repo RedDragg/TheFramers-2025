@@ -74,10 +74,15 @@ header {
 
   color: white;
 
-  svg {
+  .framer-framed-logo {
     color: var(--framer-framed-logo);
     stroke: var(--framer-framed-logo);
     fill: var(--framer-framed-logo);
+  }
+
+    svg:not(.framer-framed-logo) {
+    color: var(--svg-color);
+    stroke: var(--svg-color);
   }
 
   /* nav-container */
@@ -112,7 +117,13 @@ header {
     }
   }
 
-  label:not([for][for*="range"]):not(:is(.toggle, .save-button)) {
+  label:has(#theme){
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+  }
+
+  label:not([for][for*="range"]):not(:is(.toggle, .save-button, :has(#theme))) {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
