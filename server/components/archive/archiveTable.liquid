@@ -106,17 +106,21 @@
             <p>{{ eventTypeToCheck }}</p>
           </td>
           <td>
-            {% if item.event.date_start == "null" or item.event.date_start == blank %}
-            -
+            {% assign start = item.event.date_start %}
+            {% assign end = item.event.date_end %}
+
+            {% if start == "null" or start == blank or start == nil or end == blank or end == nil %}
+              {% if lang == 'EN' %}
+                <p>One day event</p>
+              {% else %}
+                <p>Eendaags event</p>
+              {% endif %}
             {% else %}
-            <p class="text">{{ item.event.date_start | date: "%-d %B %Y" }}</p>
-            {% endif %}
-          </td>
-          <td>
-            {% if item.event.date_end == nil or item.event.date_end == blank %}
-            -
-            {% else %}
-            <p>{{ item.event.date_end | date: "%-d %B %Y" }}</p>
+              {% if lang == 'EN' %}
+                <p>{{ start | date: "%-d %B %Y" }} till {{ end | date: "%-d %B %Y" }}</p>
+              {% else %}
+                <p>{{ start | date: "%-d %B %Y" }} t/m {{ end | date: "%-d %B %Y" }}</p>
+              {% endif %}
             {% endif %}
           </td>
           <td class="participants">

@@ -1,6 +1,7 @@
 .category {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   padding-top: 5rem;
 
   .category-wrapper {
