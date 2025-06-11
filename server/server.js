@@ -156,8 +156,9 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
 /* /////////////////////////////// */
 /* 🐆🐆🐆 Route: Detail  page 🐆🐆🐆 */
 /* /////////////////////////////// */
-app.get('/:lang/archive/:uuid', async (req, res) => {
+app.get('/:lang/archive/:eventType/:uuid', async (req, res) => {
   const { uuid, lang } = req.params;
+  const selectedEvent = req.params.eventType || 'all'; // Use eventType from params or default to 'all'
   const upperLang = lang.toUpperCase();
 
   const breadcrumbs = [

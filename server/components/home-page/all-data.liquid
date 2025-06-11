@@ -35,7 +35,7 @@
               {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
 
               <li class="content-card" tabindex="0">
-                <a href="/{{ lang }}/archive/{{ item.event.uuid }}">
+                <a href="/{{ lang }}/archive/{{ type_name }}/{{ item.event.uuid }}">
                   <div>
                     <p>{{ event_title | capitalize }}</p>
                     <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
