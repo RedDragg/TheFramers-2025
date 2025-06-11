@@ -31,10 +31,11 @@
           {% assign items_with_image = matching_items | where_exp: "item", "item.imageUrl and item.imageUrl != ''" %}
           {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
 
+          
           {% if items_with_image.size > 0 %}
             <li class="content-card" tabindex="0">
               <div>
-                <strong>{{ items_with_image.size }} projects</strong>
+                <strong>{{ items_with_image.size }} {% if lang == 'EN' %}projects{% else %}projecten{% endif %}</strong>
                 <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
               </div>
               <div class="image-gallery">

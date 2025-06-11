@@ -24,53 +24,34 @@
           {% for item in allEvents %}
             {% if lang == 'EN' %}
               {% assign event_type_name = item.event.type_en %}
-              {% assign event_title = item.event.title_en 
-                | replace: 'Exhibition', '' 
+              {% assign event_title = item.event.title_en | downcase 
                 | replace: 'exhibition', '' 
-                | replace: 'Launch', '' 
                 | replace: 'launch', '' 
-                | replace: 'Debate', '' 
                 | replace: 'debate', '' 
-                | replace: 'Symposium', '' 
                 | replace: 'symposium', '' 
-                | replace: 'Public program', '' 
                 | replace: 'public program', '' 
-                | replace: 'Performance', '' 
                 | replace: 'performance', '' 
-                | replace: 'Film screening', '' 
                 | replace: 'film screening', '' 
-                | replace: 'Talk', '' 
                 | replace: 'talk', '' 
-                | replace: 'Educational program', '' 
                 | replace: 'educational program', '' 
                 | replace: ':', '' 
-                | strip
+                | strip 
               %}
             {% else %}
               {% assign event_type_name = item.event.type_nl %}
-              {% assign event_title = item.event.title_nl 
-                | replace: 'Expositie programma', '' 
+              {% assign event_title = item.event.title_nl | downcase 
                 | replace: 'expositie programma', '' 
-                | replace: 'Expositie', '' 
                 | replace: 'expositie', '' 
-                | replace: 'Lancering', '' 
                 | replace: 'lancering', '' 
-                | replace: 'Debat', '' 
                 | replace: 'debat', '' 
-                | replace: 'Symposium', '' 
                 | replace: 'symposium', '' 
-                | replace: 'Publiek programma', '' 
                 | replace: 'publiek programma', '' 
-                | replace: 'Performance', '' 
                 | replace: 'performance', '' 
-                | replace: 'Film vertoning', '' 
                 | replace: 'film vertoning', '' 
-                | replace: 'Lezing', '' 
                 | replace: 'lezing', '' 
-                | replace: 'Educatief programma', '' 
                 | replace: 'educatief programma', '' 
                 | replace: ':', '' 
-                | strip
+                | strip 
               %}
             {% endif %}
 
