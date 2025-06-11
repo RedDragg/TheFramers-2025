@@ -6,8 +6,7 @@
 footer {
   view-transition-name: footer;
   
-
-  .footer-container {
+  & .footer-container {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
@@ -28,10 +27,12 @@ footer {
 }
 
 /* MEDIA QUERIES */
-@media (max-width: 571px) {
+@media (max-width: 600px) {
+
   footer {
     height: 30dvh;
   }
+
   .footer-container {
     flex-direction: column;
   }
