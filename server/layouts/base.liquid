@@ -5,11 +5,6 @@
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
   {% comment %} ⭐️ TITLE  ⭐️{% endcomment %}
-  {% assign title = "Theaterfestival Boulevard" | append: " - " | append: view.title %}
-  {% if lang == 'nl' %}
-    {% assign title = title | append: " - " | append: "Theaterfestival Boulevard" %}
-  {% endif %}
-
   {% block head %}
     <title>{{ title }}</title>
   {% endblock %}

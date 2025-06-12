@@ -54,34 +54,39 @@ app.use((req, res, next) => {
 /* /////////////////////////////////////// */
 
 app.get('/:lang', async (req, res) => {
-  const lang = req.params.lang.toUpperCase();
-  const view = req.query.view || 'categories'; // default naar 'all-data' als het ontbreekt
+  try {
+    const lang = req.params.lang.toUpperCase();
+    const view = req.query.view || 'categories'; // default naar 'all-data' als het ontbreekt
 
-  const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
-    fetch(eventsAPI),
-    fetch(eventTypesAPI),
-    fetch(personAPI)
-  ]);
-  const [allEventsRaw, allEventTypes, allPeople] = await Promise.all([
-    dataEvents.json(),
-    dataEventTypes.json(),
-    dataPeople.json()
-  ]);
+    const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
+      fetch(eventsAPI).catch(err => { throw new Error(`Failed to fetch events: ${err.message}`); }),
+      fetch(eventTypesAPI).catch(err => { throw new Error(`Failed to fetch event types: ${err.message}`); }),
+      fetch(personAPI).catch(err => { throw new Error(`Failed to fetch persons: ${err.message}`); })
+    ]);
 
-  const allEvents = eventImageUrls(allEventsRaw);
-  const filteredEvents = filterEventsByLang(allEvents, lang);
-  const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, lang));
+    const [allEventsRaw, allEventTypes, allPeople] = await Promise.all([
+      dataEvents.json().catch(err => { throw new Error(`Failed to parse events JSON: ${err.message}`); }),
+      dataEventTypes.json().catch(err => { throw new Error(`Failed to parse event types JSON: ${err.message}`); }),
+      dataPeople.json().catch(err => { throw new Error(`Failed to parse persons JSON: ${err.message}`); })
+    ]);
 
+    const allEvents = eventImageUrls(allEventsRaw);
+    const filteredEvents = filterEventsByLang(allEvents, lang);
+    const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, lang));
 
-  return res.send(renderTemplate('server/views/index.liquid', {
-    title: 'Home',
-    allEvents: filteredEvents,
-    allArtists: filteredArtists,
-    allEventTypes,
-    lang,
-    currentPath: req.path,
-    view
-  }));
+    return res.send(renderTemplate('server/views/index.liquid', {
+      title: 'Home',
+      allEvents: filteredEvents,
+      allArtists: filteredArtists,
+      allEventTypes,
+      lang,
+      currentPath: req.path,
+      view
+    }));
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 
@@ -89,120 +94,126 @@ app.get('/:lang', async (req, res) => {
 /* 🐆🐆🐆 Route: Archive page 🐆🐆🐆 */
 /* /////////////////////////////// */
 app.get('/:lang/archive/type/:eventType', async (req, res) => {
-  const { lang, eventType } = req.params;
-  const queryEventType = req.query.eventType;
+  try {
+    const { lang, eventType } = req.params;
+    const queryEventType = req.query.eventType;
 
-  // Kies eventType uit query of params, query gaat voor
-  const selectedEventRaw = queryEventType || eventType || 'all';
-  const selectedEvent = selectedEventRaw.toLowerCase() === 'all' ? 'all' : selectedEventRaw;
-  const upperLang = lang.toUpperCase();
+    const selectedEventRaw = queryEventType || eventType || 'all';
+    const selectedEvent = selectedEventRaw.toLowerCase() === 'all' ? 'all' : selectedEventRaw;
+    const upperLang = lang.toUpperCase();
 
-  // Add the breadcrumbs 
-  const breadcrumbs = [
-    {name: 'Home', url: '/', icon: 'home'},
-  ]
+    const breadcrumbs = [
+      { name: 'Home', url: '/', icon: 'home' },
+    ];
 
-  // Fetch data
-  const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
-    fetch(eventsAPI),
-    fetch(eventTypesAPI),
-    fetch(personAPI)
-  ]);
-  const [allEventsRaw, allEventTypes, allPeople] = await Promise.all([
-    dataEvents.json(),
-    dataEventTypes.json(),
-    dataPeople.json()
-  ]);
+    const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
+      fetch(eventsAPI).catch(err => { throw new Error(`Failed to fetch events: ${err.message}`); }),
+      fetch(eventTypesAPI).catch(err => { throw new Error(`Failed to fetch event types: ${err.message}`); }),
+      fetch(personAPI).catch(err => { throw new Error(`Failed to fetch persons: ${err.message}`); })
+    ]);
 
-  const allEvents = eventImageUrls(allEventsRaw);
-  const filteredEvents = filterEventsByLang(allEvents, upperLang)
-    .filter(e => {
-      const type = upperLang === 'EN' ? e.event.type_en : e.event.type_nl;
-      return selectedEvent === 'all' || type === selectedEvent;
-    });
+    const [allEventsRaw, allEventTypes, allPeople] = await Promise.all([
+      dataEvents.json().catch(err => { throw new Error(`Failed to parse events JSON: ${err.message}`); }),
+      dataEventTypes.json().catch(err => { throw new Error(`Failed to parse event types JSON: ${err.message}`); }),
+      dataPeople.json().catch(err => { throw new Error(`Failed to parse persons JSON: ${err.message}`); })
+    ]);
 
-  const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, upperLang));
+    const allEvents = eventImageUrls(allEventsRaw);
+    const filteredEvents = filterEventsByLang(allEvents, upperLang)
+      .filter(e => {
+        const type = upperLang === 'EN' ? e.event.type_en : e.event.type_nl;
+        return selectedEvent === 'all' || type === selectedEvent;
+      });
 
-  console.log('Selected Event:', selectedEvent);
+    const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, upperLang));
 
-  return res.send(renderTemplate('server/views/archive.liquid', {
-    breadcrumbs,
-    title: 'Archive',
-    allEvents: filteredEvents,
-    allArtists: filteredArtists,
-    allEventTypes,
-    selectedEvent,
-    lang: upperLang,
-    currentPath: req.path,
-  }));
+    return res.send(renderTemplate('server/views/archive.liquid', {
+      breadcrumbs,
+      title: 'Archive',
+      allEvents: filteredEvents,
+      allArtists: filteredArtists,
+      allEventTypes,
+      selectedEvent,
+      lang: upperLang,
+      currentPath: req.path,
+    }));
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 
 /* /////////////////////////////// */
-/* 🐆🐆🐆 Route: Detail  page 🐆🐆🐆 */
+/* 🐆🐆🐆 Route: Detail page 🐆🐆🐆 */
 /* /////////////////////////////// */
 app.get('/:lang/archive/:eventType/:uuid', async (req, res) => {
-  const { uuid, lang } = req.params;
-  const selectedEvent = req.params.eventType || 'all'; // Use eventType from params or default to 'all'
-  const upperLang = lang.toUpperCase();
+  try {
+    const { uuid, lang } = req.params;
+    const selectedEvent = req.params.eventType || 'all';
+    const upperLang = lang.toUpperCase();
 
-  const breadcrumbs = [
-    {name: 'Home', url: '/', icon: 'home'},
-    {name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive/type/${selectedEvent}`, icon: 'overview'},
-  ]
+    const breadcrumbs = [
+      { name: 'Home', url: '/', icon: 'home' },
+      { name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive/type/${selectedEvent}`, icon: 'overview' },
+    ];
 
-  const [dataEvents, dataPeople] = await Promise.all([
-    fetch(eventsAPI),
-    fetch(personAPI)
-  ]);
+    const [dataEvents, dataPeople] = await Promise.all([
+      fetch(eventsAPI).catch(err => { throw new Error(`Failed to fetch events: ${err.message}`); }),
+      fetch(personAPI).catch(err => { throw new Error(`Failed to fetch persons: ${err.message}`); })
+    ]);
 
-  const [allEventsRaw, allPeopleRaw] = await Promise.all([
-    dataEvents.json(),
-    dataPeople.json()
-  ]);
+    const [allEventsRaw, allPeopleRaw] = await Promise.all([
+      dataEvents.json().catch(err => { throw new Error(`Failed to parse events JSON: ${err.message}`); }),
+      dataPeople.json().catch(err => { throw new Error(`Failed to parse persons JSON: ${err.message}`); })
+    ]);
 
-  // Voeg afbeelding URL's toe
-  const allEventsWithImages = eventImageUrls(allEventsRaw);
-  const allPeopleWithImages = personImageUrls(allPeopleRaw);
+    const allEventsWithImages = eventImageUrls(allEventsRaw);
+    const allPeopleWithImages = personImageUrls(allPeopleRaw);
 
-  // Filter op taal
-  const filteredEvents = filterEventsByLang(allEventsWithImages, upperLang);
-  const filteredArtists = filterPersonsByLang(allPeopleWithImages, upperLang);
+    const filteredEvents = filterEventsByLang(allEventsWithImages, upperLang);
+    const filteredArtists = filterPersonsByLang(allPeopleWithImages, upperLang);
 
-  // Zoek het specifieke event of person via uuid (in de ongefilterde lijst, zodat ook verborgen content kan worden benaderd)
-  const event = allEventsWithImages.find(e => e.event.uuid === uuid);
-  const person = allPeopleWithImages.find(p => p.person.uuid === uuid);
+    const event = allEventsWithImages.find(e => e.event.uuid === uuid);
+    const person = allPeopleWithImages.find(p => p.person.uuid === uuid);
 
-  if (!event && !person) {
-    return res.status(404).send('Not found');
+    if (!event && !person) {
+      return res.status(404).send('Not found');
+    }
+
+    const title =
+      (upperLang === 'EN'
+        ? event?.event?.title_en
+        : event?.event?.title_nl) || person?.person?.name || 'Detail';
+
+    return res.send(renderTemplate('server/views/detail-page.liquid', {
+      breadcrumbs,
+      title,
+      event,
+      person,
+      allArtists: filteredArtists,
+      allEvents: filteredEvents,
+      lang: upperLang,
+      currentPath: req.path,
+    }));
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Internal Server Error');
   }
-
-  const title =
-    (upperLang === 'EN'
-      ? event?.event?.title_en
-      : event?.event?.title_nl) || person?.person?.name || 'Detail';
-
-  console.log(upperLang, event, person);
-
-  return res.send(renderTemplate('server/views/detail-page.liquid', {
-    breadcrumbs,
-    title,
-    event,
-    person,
-    allArtists: filteredArtists,
-    allEvents: filteredEvents,
-    lang: upperLang,
-    currentPath: req.path,
-  }));
 });
 
 
 // Utility function to render templates with data
 const renderTemplate = (template, data) => {
-  const templateData = {
-    NODE_ENV: process.env.NODE_ENV || 'production', // Add environment variable to template data
-    ...data, // Merge additional data
-  };
+  try {
+    const templateData = {
+      NODE_ENV: process.env.NODE_ENV || 'production',
+      ...data,
+    };
 
-  return engine.renderFileSync(template, templateData); // Render the template synchronously
+    return engine.renderFileSync(template, templateData);
+  } catch (error) {
+    console.error(`Failed to render template: ${error.message}`);
+    throw new Error('Template rendering failed');
+  }
 };

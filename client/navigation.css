@@ -323,7 +323,7 @@ header {
       }
 
       /* view layouts allcontent - categories */
-      .all-content {
+      .all-content-button {
         display: flex;
         align-items: center;
         justify-content: center;
