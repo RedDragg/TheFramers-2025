@@ -250,11 +250,11 @@
       <ul class="relations-list">
         {% if person %}
           {% for rel in person.relationships %}
-            {% if rel.type == 'HAS_PARTICIPANT' %}
+            {% if rel.node == 'Event' %}
               {% for event in allEvents %}
                 {% if rel.uuid == event.event.uuid %}
                   <li>
-                    <a href="/{{ lang }}/archive/{{ event.event.uuid }}">
+                    <a href="/{{ lang }}/archive/{% if lang == 'EN' %}{{ event.event.type_en }}{% else %}{{ event.event.type_nl }}{% endif %}/{{ event.event.uuid }}">
                       <img src="{{ event.imageUrl }}" class="relation-img" {% if lang == 'EN' %}alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}" {% else %}alt="Portret foto van {{ artist.person.name }}, die een rol heeft gespeeld bij dit project"{% endif %} loading="lazy">
                       {% if lang == 'EN' %}
                         <h3>{{ event.event.title_en }}</h3>
@@ -276,7 +276,7 @@
                   {% if rel.uuid == artist.person.uuid %}
                     {% assign matchFound = true %}
                     <li>
-                      <a href="/{{ lang }}/archive/{{ rel.uuid }}">
+                      <a href="/{{ lang }}/archive/{{ type }}/{{ rel.uuid }}">
                         <img src="{{ artist.imageUrl }}" class="relation-img" {% if lang == 'EN' %}alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}" {% else %}alt="Portret foto van {{ artist.person.name }}, die een rol heeft gespeeld bij dit project"{% endif %}>
                         <h3>{{ artist.person.name }}</h3>
                       </a>
