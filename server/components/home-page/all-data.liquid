@@ -37,7 +37,7 @@
               <li class="content-card" tabindex="0">
                 <a href="/{{ lang }}/archive/{{ type_name }}/{{ item.event.uuid }}">
                   <div>
-                    <p>{{ event_title | capitalize }}</p>
+                    <p class="text">{{ event_title | capitalize }}</p>
                     <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
                   </div>
                   {% if item.imageUrl and item.imageUrl != "" %}

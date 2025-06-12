@@ -164,6 +164,8 @@ body:has(#dark-mode-toggle:checked) {
 
   --archive-grid-list-border: solid 1px white;
 
+  --deep-black: white;
+
 
   transition: color 0.5s ease, background 0.5s ease;
 }
@@ -195,10 +197,6 @@ main {
 body:not(.home-menu) a {
   text-decoration: none;
   color: var(--color-text);
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 /* a:hover {
