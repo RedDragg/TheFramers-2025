@@ -1,4 +1,9 @@
-// utils.js
+
+/* /////////////////////////////////////// */
+         /* 🪩🪩🪩 Utils 🪩🪩🪩 */
+/* /////////////////////////////////////// */
+
+
 
 // Utility function to add image URLs to events
 export function eventImageUrls(events) {
@@ -6,7 +11,7 @@ export function eventImageUrls(events) {
       const assetRel = event.relationships?.find(rel => rel.node === 'Asset');
       const imageUrl = assetRel 
         ? `https://archive.framerframed.nl/assets/${assetRel.uuid}/hd.webp`
-        : '/images/placeholder.webp'; // fallback image in public/images
+        : undefined 
       return {
         ...event,
         imageUrl

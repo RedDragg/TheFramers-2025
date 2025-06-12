@@ -9,21 +9,35 @@
   list-style: none;
 }
 
-
 :root {
-    /* custom properties voor home page */
-    --slides-angle: -40deg;
-    --slides-spacing: -15em;
-    --slides-margin: 2em;
-    --slide-height: 30em;
+  /* custom properties voor home page */
+  --slides-angle: -40deg;
+  --slides-spacing: -15em;
+  --slides-margin: 2em;
+  --slide-height: 30em;
 
-    --updown-time: .5s;
-    --rotate-time: 2s;
+  --updown-time: 0.5s;
+  --rotate-time: 2s;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(footer) {
+  z-index: 1;
+  animation: none;
+}
+
+::view-transition-group(root) {
+  animation-duration: 0.3s;
+}
+
+::view-transition-group(.image) {
+  animation-duration: 0.6s;
 }
 
 body {
-  width: 100vw;
-  height: 100%;
   font-family: "Favorit", sans-serif;
 }
 
@@ -31,9 +45,9 @@ ul {
   list-style: none;
 }
 
-main{
+main {
   background: white;
-  height:auto!important;
+  height: auto !important;
 }
 
 :root {
@@ -58,25 +72,116 @@ main{
     Primary button
     Secondary button */
 
-    /* Colors */
-      --color-primary: #1a73e8;
-      --color-primary-hover: #1669c1;
-      --color-secondary: #e8f0fe;
-      --color-text: #202124;
-      --color-background: #ffffff;
-      --color-muted: #5f6368;
+  /* Colors */
+  --color-primary: #1a73e8;
+  --color-primary-hover: #1669c1;
+  --color-secondary: #e8f0fe;
+  --color-text: var(--deep-black);
+  --color-background: #ffffff;
+  --color-muted: #5f6368;
 
-        /* Grayscale (accent grey) */
-      --gray-50:  #f9f9f9;
-      --gray-100: #f2f2f2;
-      --gray-200: #e5e5e5;
-      --gray-300: #d4d4d4;
-      --gray-400: #a3a3a3;
-      --gray-500: #737373;
-      --gray-600: #525252;
-      --gray-700: #404040;
-      --gray-800: #262626;
-      --gray-900: #171717;
+  --deep-black: #121212;
+  --bright-white: white;
+
+  /* nav reset and save buttons */
+  --nav-save-button-bg: gray;
+  --nav-save-button-bg-hover: rgb(112, 112, 112);
+  --nav-reset-button-bg: gray;
+  --nav-reset-button-bg-hover: rgb(112, 112, 112);
+
+  /* logo colors */
+  --framer-framed-logo: black;
+  --svg-color: white;
+  --nav-bg-color: black;
+  --nav-color: white;
+
+  --menu-color: white;
+
+  /* archive styling */
+  --color-border-td-archive: black;
+
+  --table-tr-background: #eaeaea;
+  --table-tr-background-odd: #f5f5f5;
+  --table-tr-background-hover: rgb(255, 0, 0, 0.1);
+
+  /* archive pagination */
+  --pagination-buttons-bg: #aaa;
+  --pagination-buttons-border: #f9f9f9;
+  --pagination-buttons-bg-disabled: #e3e3e3;
+  --pagination-buttons-bg-active: #333;
+  --pagination-buttons-color-active: #fff;
+  --pagination-buttons-border-color-active: #333;
+  --pagination-buttons-color-hover: #ddd;
+
+      /* types color */
+      --exhibition-color: #e53935;
+      --launch-color: #fb8c00;
+      --debat-color: #fdd835;
+      --symposium-color: #43a047;
+      --exhibition-program-color: #1e88e5;
+      --public-program-color: #3949ab;
+      --performance-color: #8e24aa;
+      --film-screening-color: #6a1b9a;
+      --talk-color: #b83e6b;
+      --educational-color: #00acc1;
+
+              /* Transparantie variabele */
+      --archive-table-bg-hover-alpha: .2;
+
+      /* Kleuren in rgb (zonder # en zonder rgb() wrapper) */
+      --archive-exhibition-color-hover: 229, 57, 53;    /* #e53935 */
+      --archive-launch-color-hover: 251, 140, 0;        /* #fb8c00 */
+      --archive-debat-color-hover: 253, 216, 53;        /* #fdd835 */
+      --archive-symposium-color-hover: 67, 160, 71;     /* #43a047 */
+      --archive-exhibition-program-color-hover: 30, 136, 229;  /* #1e88e5 */
+      --archive-public-program-color-hover: 57, 73, 171;       /* #3949ab */
+      --archive-performance-color-hover: 142, 36, 170;  /* #8e24aa */
+      --archive-film-screening-color-hover: 106, 27, 154; /* #6a1b9a */
+      --archive-talk-color-hover: 184, 62, 107;         /* #b83e6b */
+      --archive-educational-color-hover: 0, 172, 193;   /* #00acc1 */
+
+  /* breadcrumbs color */
+  --breadcrumbs-color: #555;
+
+  /* Spacing & responsiveness */
+  --padding-content-mobile: 1.1rem;
+}
+
+/* darkmode active */
+body:has(#dark-mode-toggle:checked) {
+  --color-text: #e8eaed;
+  --color-background: #121212;
+  --color-muted: #9aa0a6;
+
+  /* navigatie */
+  --color-border-td-archive: #e8eaed;
+  --framer-framed-logo: white;
+  --svg-color:rgb(255, 255, 255);
+  /* archive table */
+  --table-tr-background-hover: rgb(65, 0, 0);
+  --table-tr-background: #2c2c2c;
+  --table-tr-background-odd: #1f1f1f;
+
+  transition: color 0.5s ease, background 0.5s ease;
+}
+
+
+
+body {
+  font-family: "Favorit", sans-serif;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition: color 0.5s ease, background 0.5s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+main {
+  background: var(--color-background);
+  height: auto !important;
+  transition: background 0.5s ease;
 }
 
 /* //////////////// */
@@ -84,68 +189,32 @@ main{
 /* //////////////// */
 
 /* nav menu styling */
-    a{
-    text-decoration: none;
-    color: black
+body:not(.home-menu) a {
+  text-decoration: none;
+  color: var(--color-text);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* a:hover {
+    text-decoration: underline;
+
+} */
+
+p {
+  color: var(--color-text);
 }
 
 /* /////////////////////////// */
 /* 🪐🪐🪐 TEXT FORMATTING 🪐🪐🪐 */
 /* /////////////////////////// */
-.types.expositie,
-.types.exhibition {
-  background-color: #E53935;
-}
-
-.types.lancering,
-.types.launch {
-  background-color: #FB8C00;
-}
-
-.types.debat,
-.types.debate {
-  background-color: #FDD835;
-}
-
-.types.symposium {
-  background-color: #43A047;
-}
-
-.types.exhibition-program,
-.types.expositie-programma {
-  background-color: #1E88E5;
-}
-
-.types.public-program,
-.types.publiek-programma {
-  background-color: #3949AB;
-}
-
-.types.performance {
-  background-color: #8E24AA;
-}
-
-.types.film-screening,
-.types.filmvertoning {
-  background-color: #6A1B9A;
-}
-
-.types.talk {
-  background-color: #b83e6b;
-}
-
-.types.educational-program,
-.types.educatief-programma {
-  background-color: #00ACC1;
-}
-
 
 @media (prefers-reduced-motion: reduce) {
-*{
-  transition: none !important;
-  animation: none !important;
-  scroll-behavior: auto !important;
+  * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
 }
-}
-
-

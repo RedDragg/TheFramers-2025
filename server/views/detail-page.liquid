@@ -9,6 +9,7 @@
 
 <main>
 {% render '../components/detail-page/details.liquid', 
+  breadcrumbs: breadcrumbs,
   title: title, 
   event: event, 
   person: person, 
@@ -19,10 +20,3 @@
 </main>
 
 {% endblock %}
-
-
-{% comment %} kan dit weg??? {% endcomment %}
-
-
-{% comment %} <p>{{ event.event.title_nl }}</p>
-<p>{{ lang }}</p> {% endcomment %}

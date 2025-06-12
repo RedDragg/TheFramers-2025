@@ -21,74 +21,77 @@ document.addEventListener("DOMContentLoaded", () => {
         navOpacity.style.opacity = window.scrollY === 0 ? '1' : '0.5';
       });
     }
+  });
 
     // TYPOGRAFIE SLIDERS
-    const sizeSlider = document.getElementById("sizeSlider");
-    const lineHeightSlider = document.getElementById("lineHeightSlider");
-    const weightSlider = document.getElementById("weightSlider");
-    const letterSpacingSlider = document.getElementById("letterSpacingSlider");
-    const text = document.querySelector(".text");
+document.addEventListener("DOMContentLoaded", function () {
+  const sizeSlider = document.getElementById("sizeSlider");
+  const lineHeightSlider = document.getElementById("lineHeightSlider");
+  const sizeValue = document.getElementById("sizeValue");
+  const lineHeightValue = document.getElementById("lineHeightValue");
+  const darkModeToggle = document.getElementById("dark-mode-toggle"); // <== Checkbox
 
-    const sizeValue = document.getElementById("sizeValue");
-    const lineHeightValue = document.getElementById("lineHeightValue");
-    const weightValue = document.getElementById("weightValue");
-    const letterSpacingValue = document.getElementById("letterSpacingValue");
+  function updateStyles() {
+    const textElements = document.querySelectorAll(".text");
 
-    if (
-      sizeSlider && lineHeightSlider && weightSlider && letterSpacingSlider &&
-      text && sizeValue && lineHeightValue && weightValue && letterSpacingValue
-    ) {
-      function updateStyles() {
-        text.style.fontSize = sizeSlider.value + "px";
-        text.style.lineHeight = lineHeightSlider.value;
-        text.style.fontWeight = weightSlider.value;
-        text.style.letterSpacing = letterSpacingSlider.value + "px";
+    textElements.forEach(text => {
+      text.style.fontSize = sizeSlider.value + "px";
+      text.style.lineHeight = lineHeightSlider.value;
+    });
 
-        sizeValue.textContent = sizeSlider.value + "px";
-        lineHeightValue.textContent = lineHeightSlider.value;
-        weightValue.textContent = weightSlider.value;
-        letterSpacingValue.textContent = letterSpacingSlider.value + "px";
+    sizeValue.textContent = sizeSlider.value + "px";
+    lineHeightValue.textContent = lineHeightSlider.value;
 
-        saveSettings();
-      }
+    saveSettings();
+  }
 
-      function saveSettings() {
-        localStorage.setItem("textSettings", JSON.stringify({
-          fontSize: sizeSlider.value,
-          lineHeight: lineHeightSlider.value,
-          fontWeight: weightSlider.value,
-          letterSpacing: letterSpacingSlider.value
-        }));
-      }
+  function saveSettings() {
+    localStorage.setItem("textSettings", JSON.stringify({
+      fontSize: sizeSlider.value,
+      lineHeight: lineHeightSlider.value,
+    }));
+  }
 
-      function applySavedSettings() {
-        const saved = JSON.parse(localStorage.getItem("textSettings"));
-        if (saved) {
-          sizeSlider.value = saved.fontSize;
-          lineHeightSlider.value = saved.lineHeight;
-          weightSlider.value = saved.fontWeight;
-          letterSpacingSlider.value = saved.letterSpacing;
-        }
-        updateStyles();
-      }
-
-      function resetToDefault() {
-        sizeSlider.value = 16;
-        lineHeightSlider.value = 1.5;
-        weightSlider.value = 400;
-        letterSpacingSlider.value = 0;
-        updateStyles();
-        localStorage.removeItem("textSettings");
-      }
-
-      sizeSlider.addEventListener("input", updateStyles);
-      lineHeightSlider.addEventListener("input", updateStyles);
-      weightSlider.addEventListener("input", updateStyles);
-      letterSpacingSlider.addEventListener("input", updateStyles);
-
-      applySavedSettings();
+  function applySavedSettings() {
+    const saved = JSON.parse(localStorage.getItem("textSettings"));
+    if (saved) {
+      sizeSlider.value = saved.fontSize;
+      lineHeightSlider.value = saved.lineHeight;
     }
-  });
+    updateStyles();
+  }
+
+  function resetToDefault() {
+    sizeSlider.value = 16;
+    lineHeightSlider.value = 1.5;
+    updateStyles();
+    localStorage.removeItem("textSettings");
+  }
+
+  // Checkbox-status opslaan en toepassen
+  if (darkModeToggle) {
+    const checked = localStorage.getItem("dark-mode-checked");
+    darkModeToggle.checked = checked === "true";
+
+    darkModeToggle.addEventListener("change", () => {
+      localStorage.setItem("dark-mode-checked", darkModeToggle.checked);
+    });
+  }
+
+  window.resetToDefault = resetToDefault;
+
+  if (
+    sizeSlider && lineHeightSlider && sizeValue && lineHeightValue
+  ) {
+    sizeSlider.addEventListener("input", updateStyles);
+    lineHeightSlider.addEventListener("input", updateStyles);
+
+    applySavedSettings();
+  }
+});
+
+
+    //scroll-nav
 
     document.addEventListener("DOMContentLoaded", function () {
     const footer = document.querySelector('.footer-container');
@@ -109,3 +112,119 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  //archive-pagination
+document.addEventListener("DOMContentLoaded", function () {
+  class Pagination {
+    constructor(itemSelector, paginationClass, statsClass, perPageSelector) {
+      this.items = Array.from(document.querySelectorAll(itemSelector));
+      this.paginationContainers = document.querySelectorAll("." + paginationClass);
+      this.statsContainers = document.querySelectorAll("." + statsClass);
+      this.perPageSelector = document.getElementById(perPageSelector);
+      this.itemsPerPage = parseInt(this.perPageSelector.value, 10);
+      this.currentPage = 1;
+
+      this.perPageSelector.addEventListener("change", () => {
+        this.itemsPerPage = parseInt(this.perPageSelector.value, 10);
+        this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
+        this.currentPage = 1;
+        this.render();
+      });
+
+      this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
+      this.render();
+    }
+
+  showPage(page) {
+    this.currentPage = page;
+
+    this.items.forEach((item, index) => {
+      item.style.display =
+        index >= (page - 1) * this.itemsPerPage && index < page * this.itemsPerPage
+          ? ""
+          : "none";
+    });
+
+    this.renderPagination();
+    this.renderStats();
+
+    // Scroll naar boven bij pagina wissel
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+
+   renderPagination() {
+  this.paginationContainers.forEach(container => {
+    container.innerHTML = "";
+
+    const total = this.totalPages;
+    const current = this.currentPage;
+
+    const appendButton = (label, disabled, onClick, isCurrent = false) => {
+      const btn = document.createElement("button");
+      btn.innerText = label;
+      btn.disabled = disabled;
+      if (isCurrent) btn.classList.add("active");
+      btn.onclick = onClick;
+      container.appendChild(btn);
+    };
+
+    const appendEllipsis = () => {
+      const span = document.createElement("span");
+      span.innerText = "...";
+      span.className = "ellipsis";
+      container.appendChild(span);
+    };
+
+    // ← Prev
+    appendButton("←", current === 1, () => this.showPage(current - 1));
+
+    // First page
+    appendButton(1, false, () => this.showPage(1), current === 1);
+
+    if (current > 4) {
+      appendEllipsis();
+    }
+
+    // Middle pages (only show around current)
+    const start = Math.max(2, current - 1);
+    const end = Math.min(total - 1, current + 1);
+
+    for (let i = start; i <= end; i++) {
+      appendButton(i, false, () => this.showPage(i), i === current);
+    }
+
+    if (current < total - 3) {
+      appendEllipsis();
+    }
+
+    // Last page (if total > 1 and not already added)
+    if (total > 1) {
+      appendButton(total, false, () => this.showPage(total), current === total);
+    }
+
+    // → Next
+    appendButton("→", current === total, () => this.showPage(current + 1));
+  });
+}
+
+
+    renderStats() {
+      const startItem = (this.currentPage - 1) * this.itemsPerPage + 1;
+      const endItem = Math.min(this.currentPage * this.itemsPerPage, this.items.length);
+      const totalItems = this.items.length;
+
+      this.statsContainers.forEach(container => {
+        container.textContent = `${startItem}-${endItem} of ${totalItems} events`;
+      });
+    }
+
+    render() {
+      this.showPage(this.currentPage);
+    }
+  }
+  const pagination = document.querySelector(".pagination");
+  if (pagination) {
+    new Pagination("tr.archive-item", "pagination", "pagination-stats", "itemsPerPage");
+  }
+});
