@@ -6,6 +6,11 @@ body:has(.category) header{
   background: linear-gradient(to bottom, var(--color-background) 18%, transparent 0);
 }
 
+body:has(.category) .home-menu{
+  li:has(#theme) a{
+    display: none;
+  }
+}
 /* ==========================================================================
    MAIN .CATEGORY
    ========================================================================== */
