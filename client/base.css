@@ -77,6 +77,7 @@ main {
   --color-primary-hover: #1669c1;
   --color-secondary: #e8f0fe;
   --color-text: var(--deep-black);
+  --color-text-light: white;
   --color-background: #ffffff;
   --color-muted: #5f6368;
 
@@ -150,6 +151,7 @@ main {
 /* darkmode active */
 body:has(#dark-mode-toggle:checked) {
   --color-text: #e8eaed;
+  --color-text-light: #121212;
   --color-background: #121212;
   --color-muted: #9aa0a6;
 
@@ -196,7 +198,7 @@ main {
 /* nav menu styling */
 body:not(.home-menu) a {
   text-decoration: none;
-  color: var(--color-text);
+  color: var(--color-text-light);
 }
 
 /* a:hover {

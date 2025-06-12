@@ -322,6 +322,11 @@ header {
         stroke: var(--svg-color);
       }
 
+      .all-content{
+        display: flex;
+        gap: .2rem;
+      }
+
       /* view layouts allcontent - categories */
       .all-content-button {
         display: flex;

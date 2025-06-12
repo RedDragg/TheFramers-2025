@@ -338,7 +338,7 @@ hr {
 }
 
 hr.line-footer {
-    background-color: white;
+    background-color: var(--color-text-light);
 }
 
 

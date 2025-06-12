@@ -15,11 +15,11 @@ footer {
   view-transition-name: footer;
 
   & p {  
-    color: var(--bright-white);
+    color: var(--color-text-light);
   }
 
   & a {
-    color: var(--bright-white);
+    color: var(--color-text-light);
     
     &:hover{
       text-decoration: underline;
