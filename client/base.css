@@ -235,10 +235,7 @@ h2 {
 
 p {
   font-family: var(--favorit-regular);
-  font-size: var(--p);
   color: var(--color-text);
-  font-weight: var(--text-weight);
-  line-height: 1.4em;
 }
 
 @media (prefers-reduced-motion: reduce) {

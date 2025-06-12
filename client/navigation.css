@@ -78,14 +78,7 @@ header {
 
 
   .framer-framed-logo {
-    color: var(--framer-framed-logo);
-    stroke: var(--framer-framed-logo);
-    fill: var(--framer-framed-logo);
-    padding-top: .5rem;
-
-    &:hover{
-      transform: scale(1.05);
-    }
+    width: 100%;
   }
 
   svg:not(.framer-framed-logo) {
@@ -94,10 +87,10 @@ header {
   }
 
   /* nav-container */
-  li:nth-child(1) {
+  > li:nth-child(1) {
     grid-area: nav-logo;
-    width: fit-content;
-    height: fit-content;
+    width: 7.85rem;
+    transform: translate(.35rem, .85rem);
   }
 
   li:nth-child(2) {
@@ -153,7 +146,7 @@ header {
     display: block;
     color: var(--menu-color);
   }
-/* 
+/*
   li:has(.settings){
     transform: translate(1rem, 1rem);
     padding: 1rem .75rem 1rem 0.25rem;
@@ -374,4 +367,13 @@ header {
       width: clamp(1rem, 100%, 25rem);
     }
   }
+}
+
+@media (min-width: 770px){
+ .home-menu{
+  >li:nth-child(1){
+      width: 13.7rem;
+      transform: translate(1.6rem, 1rem);
+  }
+ }
 }
