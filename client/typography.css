@@ -4,10 +4,8 @@
 
 
 @font-face {
-  font-family: 'Favorit';
+  font-family: 'Favorit regular';
   src: url('./fonts-favorit/Favorit_Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
 }
 
 @font-face {

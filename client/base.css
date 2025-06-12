@@ -41,20 +41,19 @@ body {
   font-family: "Favorit", sans-serif;
 }
 
-ul {
-  list-style: none;
-}
-
 main {
   background: white;
   height: auto !important;
 }
 
 :root {
-  /* Fonts
-    Arial, Helvetica, sans-serif */
+  /* Fonts */
+  --favorit-regular: 'Favorit regular', Arial, Helvetica, sans-serif;
 
-  /* Font sizes – mobile  */
+  /* Styling & weight */
+  --regular-weight: 300;
+
+  /* Font sizes – mobile */
   --h1-small: 2rem;
   --h2-small: 1.75rem;
   --h3-small: 1.5rem;
@@ -63,7 +62,7 @@ main {
 
   /* Font sizes – desktop */
   --h1: 3rem;
-  --h2: 2.25rem;
+  --h2: 1.3rem;
   --h3: 1.75rem;
   --h4: 1.5rem;
   --p: 1.125rem;
@@ -203,6 +202,10 @@ body:not(.home-menu) a {
 
 } */
 
+a:-webkit-any-link {
+  cursor: pointer;
+}
+
 p {
   color: var(--color-text);
 }
@@ -210,6 +213,14 @@ p {
 /* /////////////////////////// */
 /* 🪐🪐🪐 TEXT FORMATTING 🪐🪐🪐 */
 /* /////////////////////////// */
+
+h2 {
+  font-family: var(--favorit-regular);
+  font-size: var(--h2);
+  font-weight: var(--regular-weight);
+  text-decoration: none;
+  letter-spacing: normal;
+}
 
 @media (prefers-reduced-motion: reduce) {
   * {
