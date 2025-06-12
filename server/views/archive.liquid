@@ -53,7 +53,18 @@
         <option value="48">48</option>
       </select></label>
   </div>
-<h1>{{ selectedEvent }}</h1>
+<h1>
+  {% if selectedEvent == "all" or selectedEvent == null %}
+    {% if lang == "NL" %}
+      Alle Evenementen
+    {% else %}
+      All Events
+    {% endif %}
+  {% else %}
+    {{ selectedEvent }}
+  {% endif %}
+</h1>
+
 
   <!-- <a href="/">Back</a> -->
   <div class="category-header-container">
