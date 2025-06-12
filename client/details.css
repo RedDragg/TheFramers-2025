@@ -54,14 +54,18 @@
 
 .breadcrumbs .is-current {
     font-weight: 800;
-    width: 30%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    
     display: flex;
     align-items: center;
     gap: .75rem;
+}
+
+.crumb-name {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 15rem;
+    text-overflow: ellipsis;
+    min-width: 0;
+    flex: 1 1 0%;
 }
 
 /* Update back-arrow to prevent conflicts */
@@ -176,6 +180,7 @@ main {
 .about h2{
         text-transform: capitalize
 }
+
 /* Styling of the .about 'button' */
 .about summary {
     display: flex;
@@ -346,8 +351,6 @@ hr.line-footer {
     background-color: var(--color-text-light);
 }
 
-
-
 /* Hide the video's in the hardcoded data */
 details iframe {
     display: none;
@@ -386,6 +389,23 @@ details img {
         width: 1.5rem;
         display: inline-block;
     }
+}
+
+/* Dark mode icons */
+body:has(#dark-mode-toggle:checked) {
+    .breadcrumbs .add-arrow::after {
+        content: url("/public/images/arrow-right-white.svg");
+    }
+
+
+    .about summary::before {
+        content: url("/public/images/about-icon-white.svg");
+    }
+
+    .relations summary::before {
+        content: url("/public/images/relations-icon-white.svg");
+    }
+
 }
 
 /* Styling of all the related content */

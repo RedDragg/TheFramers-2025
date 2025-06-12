@@ -178,8 +178,6 @@ body:has(#dark-mode-toggle:checked) {
   transition: color 0.5s ease, background 0.5s ease;
 }
 
-
-
 body {
   font-family: "Favorit", sans-serif;
   color: var(--color-text);
