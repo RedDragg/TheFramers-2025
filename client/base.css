@@ -99,7 +99,7 @@ main {
 
   /* archive styling */
   --color-border-td-archive: black;
-
+  --archive-grid-list-border: solid 1px black;
   --table-tr-background: #eaeaea;
   --table-tr-background-odd: #f5f5f5;
   --table-tr-background-hover: rgb(255, 0, 0, 0.1);
@@ -161,6 +161,9 @@ body:has(#dark-mode-toggle:checked) {
   --table-tr-background-hover: rgb(65, 0, 0);
   --table-tr-background: #2c2c2c;
   --table-tr-background-odd: #1f1f1f;
+
+  --archive-grid-list-border: solid 1px white;
+
 
   transition: color 0.5s ease, background 0.5s ease;
 }

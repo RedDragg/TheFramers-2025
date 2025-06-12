@@ -169,7 +169,7 @@ body:has(.category) .home-menu{
 
             /* Wanneer er een input checked is geef dan een border om de label heen */
             &:has(input:checked) {
-              border: solid 1px #000;
+              border: var(--archive-grid-list-border);
               border-radius: 5px;
             }
           }

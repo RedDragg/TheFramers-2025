@@ -29,7 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const lineHeightSlider = document.getElementById("lineHeightSlider");
   const sizeValue = document.getElementById("sizeValue");
   const lineHeightValue = document.getElementById("lineHeightValue");
-  const darkModeToggle = document.getElementById("dark-mode-toggle"); // <== Checkbox
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+  // ✅ Stoppen als vereiste elementen ontbreken
+  if (!sizeSlider || !lineHeightSlider || !sizeValue || !lineHeightValue) return;
 
   function updateStyles() {
     const textElements = document.querySelectorAll(".text");
@@ -68,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.removeItem("textSettings");
   }
 
-  // Checkbox-status opslaan en toepassen
+  // ✅ Dark mode toggle veilig afhandelen (mag buiten early return blijven)
   if (darkModeToggle) {
     const checked = localStorage.getItem("dark-mode-checked");
     darkModeToggle.checked = checked === "true";
@@ -78,17 +81,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Globale reset functie beschikbaar maken
   window.resetToDefault = resetToDefault;
 
-  if (
-    sizeSlider && lineHeightSlider && sizeValue && lineHeightValue
-  ) {
-    sizeSlider.addEventListener("input", updateStyles);
-    lineHeightSlider.addEventListener("input", updateStyles);
+  sizeSlider.addEventListener("input", updateStyles);
+  lineHeightSlider.addEventListener("input", updateStyles);
 
-    applySavedSettings();
-  }
+  applySavedSettings();
 });
+
 
 
     //scroll-nav
@@ -121,11 +122,19 @@ document.addEventListener("DOMContentLoaded", function () {
       this.paginationContainers = document.querySelectorAll("." + paginationClass);
       this.statsContainers = document.querySelectorAll("." + statsClass);
       this.perPageSelector = document.getElementById(perPageSelector);
+
+      // ✅ Herstel opgeslagen itemsPerPage
+      const savedPerPage = localStorage.getItem("itemsPerPage");
+      if (savedPerPage && this.perPageSelector) {
+        this.perPageSelector.value = savedPerPage;
+      }
+
       this.itemsPerPage = parseInt(this.perPageSelector.value, 10);
-      this.currentPage = 1;
+      this.currentPage = parseInt(localStorage.getItem("currentPage"), 10) || 1;
 
       this.perPageSelector.addEventListener("change", () => {
         this.itemsPerPage = parseInt(this.perPageSelector.value, 10);
+        localStorage.setItem("itemsPerPage", this.itemsPerPage); // ✅ Opslaan
         this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
         this.currentPage = 1;
         this.render();
@@ -135,8 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
       this.render();
     }
 
+
   showPage(page) {
+
     this.currentPage = page;
+    localStorage.setItem("currentPage", page);
 
     this.items.forEach((item, index) => {
       item.style.display =
@@ -228,3 +240,29 @@ document.addEventListener("DOMContentLoaded", function () {
     new Pagination("tr.archive-item", "pagination", "pagination-stats", "itemsPerPage");
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const gridRadio = document.getElementById("images-only");
+  const listRadio = document.getElementById("list-items");
+
+  // Stop als geen van de elementen aanwezig is
+  if (!gridRadio || !listRadio) return;
+
+  // Herstel view mode uit localStorage
+  const savedView = localStorage.getItem("viewMode");
+  if (savedView === "grid") {
+    gridRadio.checked = true;
+    gridRadio.dispatchEvent(new Event("change"));
+  } else if (savedView === "list") {
+    listRadio.checked = true;
+    listRadio.dispatchEvent(new Event("change"));
+  }
+
+  // Sla nieuwe keuze op
+  [gridRadio, listRadio].forEach(radio => {
+    radio.addEventListener("change", () => {
+      localStorage.setItem("viewMode", radio.id === "images-only" ? "grid" : "list");
+    });
+  });
+});
+
