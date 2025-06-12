@@ -12,6 +12,7 @@
   --toggle-bg: #475569;
   --toggle-circle: #0f172a;
 }
+
 /* 🖤🖤 Dark Mode Toggle 🖤🖤 */
 #dark-mode-toggle {
   display: none;
@@ -45,7 +46,7 @@ body:has(#theme:checked) header {
   transition: transform 0.3s;
 }
 
-#dark-mode-toggle:checked + .toggle::before {
+#dark-mode-toggle:checked+.toggle::before {
   transform: translateX(30px);
 }
 
@@ -74,13 +75,20 @@ header {
 
   color: white;
 
+
+
   .framer-framed-logo {
     color: var(--framer-framed-logo);
     stroke: var(--framer-framed-logo);
     fill: var(--framer-framed-logo);
+    padding-top: .5rem;
+
+    &:hover{
+      transform: scale(1.05);
+    }
   }
 
-    svg:not(.framer-framed-logo) {
+  svg:not(.framer-framed-logo) {
     color: var(--svg-color);
     stroke: var(--svg-color);
   }
@@ -118,7 +126,7 @@ header {
     }
   }
 
-  label:has(#theme){
+  label:has(#theme) {
     padding: .5rem;
     display: flex;
     align-items: center;
@@ -132,7 +140,7 @@ header {
     align-items: center;
     text-align: left;
     cursor: pointer;
-    padding: 0.2rem 0.5rem;
+    /* padding: 0.2rem 0.5rem; */
   }
 
   /* Hides all general paragraphs */
@@ -145,19 +153,25 @@ header {
     display: block;
     color: var(--menu-color);
   }
+/* 
+  li:has(.settings){
+    transform: translate(1rem, 1rem);
+    padding: 1rem .75rem 1rem 0.25rem;
+  } */
 
   /* MID menu */
-  li:nth-child(2) {
+  > li:nth-child(2) {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     padding: 1rem .75rem 1rem 0.25rem;
+    transform: translate(1rem, 1rem);
     gap: 1rem;
     border-radius: 1.3rem 0 0 1.3rem;
     background: var(--nav-bg-color);
-    transform: translate(1rem, 1rem);
+    /* transform: translate(1rem, 1rem); */
     transition: opacity 1s ease;
 
     &:hover {
@@ -170,14 +184,6 @@ header {
   label:has(#theme:checked) {
     border-radius: 0.4rem;
   }
-
-  /* LOGO */
-  li:nth-child(1) {
-    padding: 1rem;
-
-    svg {
-      transform: scale(1.2);
-    }
   }
 
   /* settingsmenu */
@@ -259,7 +265,7 @@ header {
       border-radius: 5px;
       cursor: pointer;
 
-      &:hover{
+      &:hover {
         background: rgb(112, 112, 112);
       }
     }
@@ -274,12 +280,12 @@ header {
       padding: 0.5rem 1rem;
       cursor: pointer;
 
-      &:hover{
+      &:hover {
         background: rgb(112, 112, 112);
       }
     }
   }
-}
+
 
 @media (min-width: 479px) {
   .home-menu {
@@ -297,7 +303,7 @@ header {
     }
 
     /* mid menu */
-    li:nth-child(2) {
+    > li:nth-child(2) {
       align-items: center;
       display: flex;
       flex-direction: row;
@@ -340,7 +346,7 @@ header {
       order: 0;
     }
 
-    li:nth-child(3) {
+    > li:nth-child(3) {
       width: fit-content;
       display: flex;
       justify-content: center;
