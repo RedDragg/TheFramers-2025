@@ -23,9 +23,18 @@
     flex-wrap: wrap;
 }
 
-/* .breadcrumbs .crumb {
-    align-content: center;
-} */
+.breadcrumbs .crumb {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.breadcrumbs .add-arrow::after {
+    content: url(/public/images/arrow-right.svg);
+    display: inline-block;
+    width: auto;
+    height: auto;
+}
 
 .breadcrumbs a {
     color: var(--deep-black);
@@ -45,7 +54,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    align-content: center;
+    
+    display: flex;
+    align-items: center;
+    gap: .75rem;
 }
 
 /* Update back-arrow to prevent conflicts */
@@ -114,7 +126,7 @@ main {
             border-radius: var(--border-radius-button);
         }
 
-        &>summary {
+        & > summary {
             width: fit-content;
             height: fit-content;
             text-align: center;
@@ -157,6 +169,9 @@ main {
 /* ///////////////// */
 
 /* 🪩 EVENT */
+.about h2{
+        text-transform: capitalize
+}
 /* Styling of the .about 'button' */
 .about summary {
     display: flex;
