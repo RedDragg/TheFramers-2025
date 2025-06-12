@@ -29,7 +29,8 @@
   {% block content %}{% endblock %}
 
 {% comment %} ⭐️ FOOTER  ⭐️{% endcomment %}
+{%  unless request.path == '/{{ lang }}/archive/{{ eventTypeToCheck }}/{{ item.event.uuid }}' %}
 {% render '../components/footer/footer.liquid' lang: lang, view: view %}
-
+{% endunless %}
 </body>
 </html>
