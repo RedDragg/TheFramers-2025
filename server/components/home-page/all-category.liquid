@@ -1,0 +1,63 @@
+
+{% comment %} 
+/* /////////////////////////////////////// */
+/* 🪩🪩🪩 DATA CAROUSEL ON HOME PAGE  🪩🪩🪩 */
+           /* ✨ FOR CATEGORY ✨ */
+/* /////////////////////////////////////// */ 
+{% endcomment %}
+
+
+<section class="data-carousel">
+  <ul class="scroll-carousel all-category">
+
+    {% assign unique_types = [] %}
+    {% for type in allEventTypes %}
+      {% if lang == 'EN' %}
+        {% assign type_name = type.en %}
+      {% else %}
+        {% assign type_name = type.nl %}
+      {% endif %}
+
+      {% if type_name and type_name != "" and type_name != blank %}
+        {% unless unique_types contains type_name %}
+          {% assign unique_types = unique_types | push: type_name %}
+
+          {% if lang == 'EN' %}
+            {% assign matching_items = allEvents | where: "event.type_en", type_name %}
+          {% else %}
+            {% assign matching_items = allEvents | where: "event.type_nl", type_name %}
+          {% endif %}
+
+          {% assign items_with_image = matching_items | where_exp: "item", "item.imageUrl and item.imageUrl != ''" %}
+          {% assign type_class = type_name | downcase | replace: " ", "-" | replace: "'", "" | replace: ",", "" %}
+
+          
+          {% if items_with_image.size > 0 %}
+            <li class="content-card" tabindex="0">
+              <a href="/{{ lang }}/archive/type/{{ type_name }}">
+              <div>
+                <p>{{ items_with_image.size }} {% if lang == 'EN' %}projects{% else %}projecten{% endif %}</p>
+                <h2 class="type-label {{ type_class }}">{{ type_name }}</h2>
+              </div>
+              <div class="image-gallery">
+                {% for item in items_with_image limit: 6 %}
+                  {% if lang == 'EN' %}
+                    {% assign event_title = item.event.title_en %}
+                  {% else %}
+                    {% assign event_title = item.event.title_nl %}
+                  {% endif %}
+                    <img src="{{ item.imageUrl }}" alt="{{ event_title }}" class="category-image" loading="lazy">
+                {% endfor %}
+              </div>
+
+              </a>
+            </li>
+          {% endif %}
+
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+
+  </ul>
+</section>
+

@@ -1,0 +1,57 @@
+/* /////////////////////////// */
+/* 🪩🪩🪩 FOOTER STYLING 🪩🪩🪩  */
+/* /////////////////////////// */
+body:has(.details-position) main{
+  padding-bottom: 200vh;
+}
+
+body:has(.data-carousel) footer > div{
+  position: absolute;
+  bottom: 0;
+}
+
+
+footer {
+  view-transition-name: footer;
+
+  & p {  
+    color: var(--color-text-light);
+  }
+
+  & a {
+    color: var(--color-text-light);
+    
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.375rem;
+  width: 100%;
+  height: auto;
+  padding: 1.5625rem var(--padding-content-mobile);
+  background-color: var(--deep-black);
+  z-index: 105;
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 600px) {
+
+  .footer-container {
+    flex-direction: row;
+    padding: 1.5625rem 2rem;
+    gap: 2rem;
+  }
+
+  .footer-contacts,
+  .footer-rights,
+  .footer-links {
+    flex-grow: 1;
+    width: calc(100% / 3);
+  }
+}

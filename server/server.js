@@ -1,122 +1,219 @@
-import 'dotenv/config';
-import { App } from '@tinyhttp/app'; // Remove json import
-import bodyParser from 'body-parser'; // Import json middleware from body-parser
-import { logger } from '@tinyhttp/logger';
-import { Liquid } from 'liquidjs';
-import sirv from 'sirv';
-// import events from './events.json' assert { type: 'json' };
-// import artists from './artists.json' assert { type: 'json' };
+/* ///////////////////// */
+/* 🪩🪩🪩 Server.js 🪩🪩🪩 */
+/* ///////////////////// */
 
-const wordPressAPI = `https://framerframed.nl/en/wp-json/wp/v2/pages`;
+import 'dotenv/config'; // Load environment variables from a .env file
+import { App } from '@tinyhttp/app'; // Tinyhttp app framework
+import bodyParser from 'body-parser'; // Middleware for parsing request bodies
+import { logger } from '@tinyhttp/logger'; // Middleware for logging HTTP requests
+import { Liquid } from 'liquidjs'; // Template engine for rendering views
+import sirv from 'sirv'; // Static file server middleware
+import { eventImageUrls, personImageUrls, filterEventsByLang, filterPersonsByLang } from './utils.js';
+
+// API endpoints for fetching data
 const eventsAPI = `https://archive.framerframed.nl/api/ff/events`;
 const personAPI = `https://archive.framerframed.nl/api/ff/persons`;
 const eventTypesAPI = `https://archive.framerframed.nl/api/ff/eventtypes`;
 
+// Initialize the Liquid template engine with .liquid file extension
 const engine = new Liquid({
   extname: '.liquid',
 });
 
+// Create a new Tinyhttp app instance
 const app = new App();
 
+// Middleware setup
 app
-  .use(logger())
-  .use(bodyParser.urlencoded({ extended: true })) // Use body-parser's json middleware
-  .use('/', sirv('dist'))
-  .listen(3000, () => console.log('Server available on http://localhost:3000'));
-
-  app.get('/', async (req, res) => {
-    // Data van events en artists ophalen
-    const dataEvents = await fetch(eventsAPI)
-    const allEvents = await dataEvents.json();
-    console.log(allEvents);
-
-    const dataEventTypes = await fetch(eventTypesAPI);
-    const allEventTypes = await dataEventTypes.json();
-
-    const dataPeople = await fetch(personAPI);
-    const allArtists = await dataPeople.json();
+  .use(logger()) // Log HTTP requests
+  .use(bodyParser.urlencoded({ extended: true })) // Parse URL-encoded request bodies
+  .use('/', sirv('dist')) // Serve static files from the 'dist' directory
+  .listen(3000, () => console.log('Server available on http://localhost:3000')); // Start the server on port 3000
 
 
-    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', allEvents: allEvents, allArtists: allArtists, allEventTypes: allEventTypes  }));
-  });
-
-  app.post('/archives/:type/show-artists', (req, res) => {
-    const type = req.params.type.toLowerCase();
-    const { event_id } = req.body;
-    console.log(event_id)
-  
-    const event = events.events.find(ev => ev.node.ff_id == event_id);
-    const allArtists = artists.artists;
-  
-    if (!event) {
-      console.log('Event not found');
-      return res.redirect('/');
-    }
-  
-    console.log(`--- Artists related to event: ${event.node.title_NL} ---`);
-    event.rels.forEach(rel => {
-      const relatedArtist = allArtists.find(artist => artist.ff_id === rel.ff_id);
-      if (relatedArtist) {
-        console.log(`✔️ ${relatedArtist.name} (ff_id: ${relatedArtist.ff_id})`);
-      } else {
-        console.log(`❌ No artist found for relation uuid: ${rel.uuid}`);
-      }
-    });
-  
-    return res.redirect('/archives/:type');
-  });
-
-app.post('/archives/filter', (req, res) => {
-  const searchQuery = req.body.search;
-  const searchType = req.body.type;
-  console.log(searchQuery);
-  console.log(searchType);
-
-  return res.redirect(`/archives/:type/?search=${searchQuery}&type=${searchType}`);
-})
-
-app.get('/archives/:type', (req, res) => {
-  const type = req.params.type.toLowerCase();
-  console.log(type)
-
-  const allEvents = events.events;
-  const allArtists = artists.artists;
-
-  let filteredEvents = [];
-  let filteredArtists = [];
-
-  if (type === 'all') {
-    filteredEvents = allEvents;
-    filteredArtists = allArtists;
-  } else if (type === 'events') {
-    filteredEvents = allEvents;
-  } else if (type === 'artists') {
-    filteredArtists = allArtists;
-  } else {
-    // Filter alleen events met die specifieke type
-    filteredEvents = allEvents.filter(event => event.type.toLowerCase() === type);
+// Redirect to default lang if missing
+app.use((req, res, next) => {
+  if (!/^\/(EN|NL)(\/|$)/i.test(req.path)) {
+    return res.redirect(`/EN${req.path}`);
   }
+  next();
+});
 
-  return res.send(renderTemplate('server/views/archives.liquid', {
-    title: 'Archives',
-    allEvents: filteredEvents,
-    allArtists: filteredArtists,
-    type: type,
-    query: '',
-    type: type
-  }));
+// Validate lang param if present
+app.use((req, res, next) => {
+  const lang = req.params.lang?.toUpperCase();
+  if (lang && !['EN', 'NL'].includes(lang)) {
+    return res.redirect('/EN');
+  }
+  next();
 });
 
 
+/* /////////////////////////////////////// */
+/* 🐆🐆🐆 Route: Home page - all data 🐆🐆🐆 */
+/* /////////////////////////////////////// */
 
-const renderTemplate = (template, data) => {
-  const templateData = {
-    NODE_ENV: process.env.NODE_ENV || 'production',
-    ...data,
+app.get('/:lang', async (req, res) => {
+  try {
+    const lang = req.params.lang.toUpperCase();
+    const view = req.query.view || 'categories'; // default naar 'all-data' als het ontbreekt
+
+    const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
+      fetch(eventsAPI).catch(err => { throw new Error(`Failed to fetch events: ${err.message}`); }),
+      fetch(eventTypesAPI).catch(err => { throw new Error(`Failed to fetch event types: ${err.message}`); }),
+      fetch(personAPI).catch(err => { throw new Error(`Failed to fetch persons: ${err.message}`); })
+    ]);
+
+    const [allEventsRaw, allEventTypes, allPeople] = await Promise.all([
+      dataEvents.json().catch(err => { throw new Error(`Failed to parse events JSON: ${err.message}`); }),
+      dataEventTypes.json().catch(err => { throw new Error(`Failed to parse event types JSON: ${err.message}`); }),
+      dataPeople.json().catch(err => { throw new Error(`Failed to parse persons JSON: ${err.message}`); })
+    ]);
+
+    const allEvents = eventImageUrls(allEventsRaw);
+    const filteredEvents = filterEventsByLang(allEvents, lang);
+    const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, lang));
+
+    return res.send(renderTemplate('server/views/index.liquid', {
+      title: 'Home',
+      allEvents: filteredEvents,
+      allArtists: filteredArtists,
+      allEventTypes,
+      lang,
+      currentPath: req.path,
+      view
+    }));
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Internal Server Error');
   }
+});
 
-  return engine.renderFileSync(template, templateData);
+
+/* /////////////////////////////// */
+/* 🐆🐆🐆 Route: Archive page 🐆🐆🐆 */
+/* /////////////////////////////// */
+app.get('/:lang/archive/type/:eventType', async (req, res) => {
+  try {
+    const { lang, eventType } = req.params;
+    const queryEventType = req.query.eventType;
+
+    const selectedEventRaw = queryEventType || eventType || 'all';
+    const selectedEvent = selectedEventRaw.toLowerCase() === 'all' ? 'all' : selectedEventRaw;
+    const upperLang = lang.toUpperCase();
+
+    const breadcrumbs = [
+      { name: 'Home', url: '/', icon: 'home' },
+    ];
+
+    const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
+      fetch(eventsAPI).catch(err => { throw new Error(`Failed to fetch events: ${err.message}`); }),
+      fetch(eventTypesAPI).catch(err => { throw new Error(`Failed to fetch event types: ${err.message}`); }),
+      fetch(personAPI).catch(err => { throw new Error(`Failed to fetch persons: ${err.message}`); })
+    ]);
+
+    const [allEventsRaw, allEventTypes, allPeople] = await Promise.all([
+      dataEvents.json().catch(err => { throw new Error(`Failed to parse events JSON: ${err.message}`); }),
+      dataEventTypes.json().catch(err => { throw new Error(`Failed to parse event types JSON: ${err.message}`); }),
+      dataPeople.json().catch(err => { throw new Error(`Failed to parse persons JSON: ${err.message}`); })
+    ]);
+
+    const allEvents = eventImageUrls(allEventsRaw);
+    const filteredEvents = filterEventsByLang(allEvents, upperLang)
+      .filter(e => {
+        const type = upperLang === 'EN' ? e.event.type_en : e.event.type_nl;
+        return selectedEvent === 'all' || type === selectedEvent;
+      });
+
+    const filteredArtists = personImageUrls(filterPersonsByLang(allPeople, upperLang));
+
+    return res.send(renderTemplate('server/views/archive.liquid', {
+      breadcrumbs,
+      title: 'Archive',
+      allEvents: filteredEvents,
+      allArtists: filteredArtists,
+      allEventTypes,
+      selectedEvent,
+      lang: upperLang,
+      currentPath: req.path,
+    }));
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+/* /////////////////////////////// */
+/* 🐆🐆🐆 Route: Detail page 🐆🐆🐆 */
+/* /////////////////////////////// */
+app.get('/:lang/archive/:eventType/:uuid', async (req, res) => {
+  try {
+    const { uuid, lang } = req.params;
+    const selectedEvent = req.params.eventType || 'all';
+    const upperLang = lang.toUpperCase();
+
+    const breadcrumbs = [
+      { name: 'Home', url: '/', icon: 'home' },
+      { name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive/type/${selectedEvent}`, icon: 'overview' },
+    ];
+
+    const [dataEvents, dataPeople] = await Promise.all([
+      fetch(eventsAPI).catch(err => { throw new Error(`Failed to fetch events: ${err.message}`); }),
+      fetch(personAPI).catch(err => { throw new Error(`Failed to fetch persons: ${err.message}`); })
+    ]);
+
+    const [allEventsRaw, allPeopleRaw] = await Promise.all([
+      dataEvents.json().catch(err => { throw new Error(`Failed to parse events JSON: ${err.message}`); }),
+      dataPeople.json().catch(err => { throw new Error(`Failed to parse persons JSON: ${err.message}`); })
+    ]);
+
+    const allEventsWithImages = eventImageUrls(allEventsRaw);
+    const allPeopleWithImages = personImageUrls(allPeopleRaw);
+
+    const filteredEvents = filterEventsByLang(allEventsWithImages, upperLang);
+    const filteredArtists = filterPersonsByLang(allPeopleWithImages, upperLang);
+
+    const event = allEventsWithImages.find(e => e.event.uuid === uuid);
+    const person = allPeopleWithImages.find(p => p.person.uuid === uuid);
+
+    if (!event && !person) {
+      return res.status(404).send('Not found');
+    }
+
+    const title =
+      (upperLang === 'EN'
+        ? event?.event?.title_en
+        : event?.event?.title_nl) || person?.person?.name || 'Detail';
+
+    return res.send(renderTemplate('server/views/detail-page.liquid', {
+      breadcrumbs,
+      title,
+      event,
+      person,
+      allArtists: filteredArtists,
+      allEvents: filteredEvents,
+      lang: upperLang,
+      currentPath: req.path,
+    }));
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+// Utility function to render templates with data
+const renderTemplate = (template, data) => {
+  try {
+    const templateData = {
+      NODE_ENV: process.env.NODE_ENV || 'production',
+      ...data,
+    };
+
+    return engine.renderFileSync(template, templateData);
+  } catch (error) {
+    console.error(`Failed to render template: ${error.message}`);
+    throw new Error('Template rendering failed');
+  }
 };
-
-
-

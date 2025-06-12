@@ -1,14 +1,9 @@
-/* Global styles */
-@import "typography.css";
-
 /* Layout and view styling */
-@import '../server/layouts/base.css';
+@import "base.css";
 
 /* Component styling */
-@import '../server/views/index.css';
-
-
-img {
-    width: 100%;
-    height: 100%;
-}
+@import "home.css";
+@import "archive.css";
+@import "details.css";
+@import "navigation.css";
+@import "footer.css";

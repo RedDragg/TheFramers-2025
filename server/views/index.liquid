@@ -1,24 +1,32 @@
+{% comment %} ⭐️⭐️ BASE LIQUID LAYOUT ⭐️⭐️ {% endcomment %}
 {% layout "server/layouts/base.liquid" %}
 
-{% block content %}
-<main> 
 
-    <h1>Titel</h1>
-   <ul>
-      {% for type in allEventTypes %}
-        <li>
-          <label>
-            <input type="radio" value="{{ type }}" name="eventType" {% if type == selectedType %}checked{% endif %}>
-            {{ type.nl }}
-          </label>
-        </li>
-        {% endfor %}
-   </ul>
-    
-   
-       
-</main>
+
+{% comment %} 🎀 HOME PAGE 🎀 {% endcomment %}
+{% comment %} ✨ Option to choose between all data or data per category ✨ {% endcomment %}
+
+{% block content %}
+
+  {% if view == 'categories' %}
+    {% render '../components/home-page/all-category.liquid' 
+    allEvents: allEvents, 
+    allArtists: allArtists,
+    allEventTypes: allEventTypes,
+    title: title,
+    lang: lang,
+    currentPath: currentPath
+    %}
+  {% else %}
+    {% render '../components/home-page/all-data.liquid' 
+      allEvents: allEvents, 
+      allArtists: allArtists,
+      allEventTypes: allEventTypes,
+      title: title,
+      lang: lang,
+      currentPath: currentPath
+    %}
+  {% endif %}
 
 {% endblock %}
-
 

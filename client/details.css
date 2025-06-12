@@ -1,0 +1,433 @@
+/* CUSTOM PROPERTIES */
+:root {
+    --deep-black: #121212;
+    --border-radius-button: 0.5rem;
+
+    --detail-content-width-large-screens: clamp(26.25rem, 15.75rem + 52.5vw, 63rem);
+    --breadcrumbs-margin: clamp(1rem, -0.1429rem + 5.7143vw, 5rem);
+    --button-gap: .8rem;
+}
+
+/* /////////////////////// */
+/* 🍞🍞🍞 BREADCRUMBS 🍞🍞🍞 */
+/* /////////////////////// */
+
+.breadcrumbs {
+    width: 100%;
+    height: auto;
+    display: flex;
+    margin-left: var(--breadcrumbs-margin);
+    margin-right: var(--breadcrumbs-margin);
+    margin-bottom: 1rem;
+    gap: .8rem;
+    flex-wrap: wrap;
+}
+
+.breadcrumbs .crumb {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    & a {
+        color: var(--text-color);
+    }
+}
+
+.breadcrumbs .add-arrow::after {
+    content: url(/public/images/arrow-right.svg);
+    display: inline-block;
+    width: auto;
+    height: auto;
+}
+
+.breadcrumbs a {
+    color: var(--deep-black);
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: var(--button-gap);
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs .is-current {
+    font-weight: 800;
+    width: 30%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+/* Update back-arrow to prevent conflicts */
+/* .back-arrow {
+    text-decoration: none;
+    color: var(--deep-black);
+    transition: opacity 0.2s ease;
+}
+
+.back-arrow:hover {
+    opacity: 0.7;
+} */
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    .breadcrumbs {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* MAIN */
+main {
+    width: 100%;
+    height: 100%;
+    margin: 2rem 0 0 0;
+}
+
+/* /////////////////// */
+/* 📁📁📁 DETAILS 📁📁📁 */
+/* /////////////////// */
+
+.back-arrow {
+    width: fit-content;
+    height: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: var(--back-arrow-margin-left);
+}
+
+/* Wrapper around all the detail information to position it center */
+.details-position {
+    display: grid;
+    justify-content: center;
+    margin: 2rem 0 0 0;
+}
+
+/* Wrapper for the two detail elements */
+.details-wrapper {
+    width: 100vw;
+    height: 100%;
+    padding: 0 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    position: relative;
+
+    /* The two detail elements inside the wrapper and the styling of their content */
+    details {
+
+        /* Border styling when one of either detail elements is open */
+        &[open] {
+            border: var(--deep-black) 1.5px solid;
+            border-radius: var(--border-radius-button);
+        }
+
+        & > summary {
+            width: fit-content;
+            height: fit-content;
+            text-align: center;
+        }
+
+        /* Styling of the content inside the detail elements */
+        &::details-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 0 1rem;
+        }
+
+        &[open]::details-content {
+            left: 0;
+            top: 4rem;
+            position: absolute;
+        }
+    }
+}
+
+/* Make the wrapper for the to detail elements 70vw when the website is shown on larger screens */
+@media screen and (min-width: 600px) {
+    .details-wrapper {
+        width: var(--detail-content-width-large-screens);
+        padding: 0;
+
+        /* Make the gap/spacing between the diff elements bigger */
+        details {
+
+            &::details-content {
+                gap: 2.5rem;
+            }
+        }
+    }
+}
+
+/* ///////////////// */
+/* 📄📄📄 ABOUT 📄📄📄 */
+/* ///////////////// */
+
+/* 🪩 EVENT */
+.about h2{
+        text-transform: capitalize
+}
+/* Styling of the .about 'button' */
+.about summary {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .2rem .6rem;
+
+    &::marker {
+        content: "";
+    }
+
+    &::before {
+        content: url("/public/images/about-icon.svg");
+        stroke: var(--color-text);
+        height: 1.5rem;
+        width: 1.5rem;
+        display: inline-block;
+    }
+}
+
+/* Styling of the .about info overview up-top  */
+.about ul {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+}
+
+.type {
+    width: 40%;
+}
+
+.cover-image {
+    view-transition-name: var(--vt);
+    view-transition-class: image;
+}
+
+/* The li with the participated artists and exhibitions, with classes 'artist' and 'exhibitions' */
+/* get a different lay-out, because they have way more content */
+/* The content is flexed into a row instead of column with the first child taking up the whole width of the li, to keep the heading on it's own rule */
+/* The content wraps and is placed after each other, also on the same rule, to make it as compact as possible */
+.artist,
+.exhibitions {
+    display: flex;
+    height: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: .5rem 1rem;
+
+    &> :first-child {
+        width: 100%;
+    }
+}
+
+.date {
+    width: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: .5rem 0;
+}
+
+.line {
+    width: 100%;
+}
+
+/* Styling of the content on larger screens */
+/* Order of the elements changes to the info up-top and the img last, because there is more space available */
+@media screen and (min-width: 600px) {
+    .about ul {
+        gap: 2rem 0;
+    }
+
+    .cover-image {
+        order: 5;
+    }
+
+    .type {
+        order: 1;
+    }
+
+    .date {
+        order: 3;
+    }
+
+    .line {
+        order: 4;
+    }
+
+    .type,
+    .date {
+        width: 100%;
+    }
+
+    .type,
+    .date {
+        width: auto;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .artist {
+        order: 2;
+        min-width: auto;
+        max-width: 45%;
+        display: flex;
+        column-gap: 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    /* The text content on the detail page is smaller in width on large screens and placed in the center */
+    .content {
+        width: 70%;
+        align-self: center;
+    }
+}
+
+/* 👱‍♀️ ARTIST/PERSON */
+/* The .about details for an artist have a different/extra link to their personal website */
+.about .person {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    /* Styling of the link to the personal website */
+    & a {
+        display: flex;
+        width: fit-content;
+        gap: 1rem;
+        align-items: center;
+    }
+}
+
+.exhibitions {
+    width: 70%;
+}
+
+@media screen and (min-width: 600px) {
+    .exhibitions {
+        height: 100%;
+    }
+}
+
+/* ////////////////////////// */
+/* 🔒🔒🔒 HARDCODED DATA 🔒🔒🔒 */
+/* ////////////////////////// */
+
+/* Styling of the FF line */
+hr {
+    height: .5rem;
+    background: var(--deep-black);
+    border: none;
+}
+
+hr.line-footer {
+    background-color: var(--color-text-light);
+}
+
+
+
+/* Hide the video's in the hardcoded data */
+details iframe {
+    display: none;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-button);
+    object-fit: cover;
+}
+
+/* Size and border of the images */
+details img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-button);
+    object-fit: cover;
+}
+
+/* ///////////////////// */
+/* 🕯️🕯️🕯️ RELATIONS 🕯️🕯️🕯️ */
+/* //////////////////// */
+
+/* Styling of the related 'button' */
+.relations summary {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .2rem .6rem;
+
+    &::marker {
+        content: "";
+    }
+
+    &::before {
+        content: url("/public/images/relations-icon.svg");
+        height: 1.5rem;
+        width: 1.5rem;
+        display: inline-block;
+    }
+}
+
+/* Styling of all the related content */
+/* Due to flex and wrap, it changes from one column on mobile to two columns on larger screens */
+.relations-list {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+/* Styling of the individual related artists/persons or events */
+/* With the image and title vertically layed-out */
+.relations li {
+    width: 100%;
+    height: auto;
+
+    & a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        gap: 1.5rem;
+    }
+}
+
+.relation-img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: var(--border-radius-button);
+    object-fit: cover;
+}
+
+/* On larger screens, the individual content will take up 45% of the ul it's in, the relations-list */
+@media screen and (min-width: 570px) {
+    .relations li {
+        width: 45%;
+    }
+
+    hr.line-footer {
+        width: .5rem;
+        height: auto;
+    }
+}

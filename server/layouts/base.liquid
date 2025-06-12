@@ -2,25 +2,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
+  {% comment %} ⭐️ TITLE  ⭐️{% endcomment %}
   {% block head %}
     <title>{{ title }}</title>
   {% endblock %}
-  {% if NODE_ENV == "development" %}
-    <script type="module" src="http://localhost:5173/@vite/client" defer></script>
-    <script type="module" src="http://localhost:5173/client/index.js" defer></script>
-  {% else %}
-    {% comment %} <link rel="stylesheet" href="/client/index.css"> {% endcomment %}
-    {% comment %} <script src="/index.js" defer></script> {% endcomment %}
-  {% endif %}
+
+    <link rel="stylesheet" href="/index.css">
+    <script src="/index.js" defer></script>
+
   {% block styles %}{% endblock %}
   {% block scripts %}{% endblock %}
 </head>
 
 <body>
+{% comment %} ⭐️ NAVIGATION  ⭐️{% endcomment %}
+{% render '../components/navigation/navigation.liquid' lang: lang, view: view %}
 
-
+{% comment %} ⭐️ MAIN CONTENT  ⭐️{% endcomment %}
   {% block content %}{% endblock %}
+
+{% comment %} ⭐️ FOOTER  ⭐️{% endcomment %}
+{% render '../components/footer/footer.liquid' lang: lang, view: view %}
 
 </body>
 </html>
