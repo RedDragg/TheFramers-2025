@@ -97,6 +97,8 @@
       transform: rotate(calc(var(--slides-angle) * 1));
       scroll-snap-align: center;
 
+
+
       img {
         view-transition-name: var(--vt);
         view-transition-class: image;
@@ -113,6 +115,10 @@
 
       &:focus{
           z-index: 3;
+      }
+
+      &::before {
+        
       }
   }
 }
@@ -171,7 +177,9 @@
 
   img {
       border-radius: 8px;
-      border: .5px solid black;
+      /* border: .5px solid black; */
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 
   div {

@@ -41,20 +41,20 @@ body {
   font-family: "Favorit", sans-serif;
 }
 
-ul {
-  list-style: none;
-}
-
 main {
   background: white;
   height: auto !important;
 }
 
 :root {
-  /* Fonts
-    Arial, Helvetica, sans-serif */
+  /* Fonts */
+  --favorit-regular: 'Favorit regular', Arial, Helvetica, sans-serif;
 
-  /* Font sizes – mobile  */
+  /* Styling & weight */
+  --text-weight: 200;
+  --regular-weight: 300;
+
+  /* Font sizes – mobile */
   --h1-small: 2rem;
   --h2-small: 1.75rem;
   --h3-small: 1.5rem;
@@ -62,8 +62,8 @@ main {
   --p-small: 1rem;
 
   /* Font sizes – desktop */
-  --h1: 3rem;
-  --h2: 2.25rem;
+  --h1: 2.6rem;
+  --h2: 1.3rem;
   --h3: 1.75rem;
   --h4: 1.5rem;
   --p: 1.125rem;
@@ -204,13 +204,40 @@ body:not(.home-menu) a {
 
 } */
 
-p {
-  color: var(--color-text);
+a:-webkit-any-link {
+  cursor: pointer;
 }
 
 /* /////////////////////////// */
 /* 🪐🪐🪐 TEXT FORMATTING 🪐🪐🪐 */
 /* /////////////////////////// */
+
+h1 {
+  font-family: var(--favorit-regular);
+  font-size: var(--h1);
+  font-weight: var(--regular-weight);
+  text-decoration: none;
+  letter-spacing: normal;
+  line-height: .9em;
+  text-transform: capitalize;
+}
+
+h2 {
+  font-family: var(--favorit-regular);
+  font-size: var(--h2);
+  font-weight: var(--regular-weight);
+  text-decoration: none;
+  letter-spacing: normal;
+  line-height: 1.1em;
+}
+
+p {
+  font-family: var(--favorit-regular);
+  font-size: var(--p);
+  color: var(--color-text);
+  font-weight: var(--text-weight);
+  line-height: 1.4em;
+}
 
 @media (prefers-reduced-motion: reduce) {
   * {
