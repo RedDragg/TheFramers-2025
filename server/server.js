@@ -8,10 +8,9 @@ import bodyParser from 'body-parser'; // Middleware for parsing request bodies
 import { logger } from '@tinyhttp/logger'; // Middleware for logging HTTP requests
 import { Liquid } from 'liquidjs'; // Template engine for rendering views
 import sirv from 'sirv'; // Static file server middleware
-import { eventImageUrls, personImageUrls, filterEventsByLang, filterPersonsByLang, getEventTypeName } from './utils.js';
+import { eventImageUrls, personImageUrls, filterEventsByLang, filterPersonsByLang } from './utils.js';
 
 // API endpoints for fetching data
-const wordPressAPI = `https://framerframed.nl/en/wp-json/wp/v2/pages`;
 const eventsAPI = `https://archive.framerframed.nl/api/ff/events`;
 const personAPI = `https://archive.framerframed.nl/api/ff/persons`;
 const eventTypesAPI = `https://archive.framerframed.nl/api/ff/eventtypes`;
@@ -86,19 +85,6 @@ app.get('/:lang', async (req, res) => {
 });
 
 
-/* ////////////////////////////////////////// */
-/* 🐆🐆🐆 Route: Search  - functionality 🐆🐆🐆 */
-/* ////////////////////////////////////////// */
-app.post('/:lang/search', async (req, res) => {
-  const searchQuery = req.body.search; // Get the search query from the request body
-  console.log(searchQuery);
-
-  // Redirect to the home page with the search query as a query parameter
-  return res.redirect(`/?search=${searchQuery}`);
-});
-
-
-
 /* /////////////////////////////// */
 /* 🐆🐆🐆 Route: Archive page 🐆🐆🐆 */
 /* /////////////////////////////// */
@@ -115,7 +101,6 @@ app.get('/:lang/archive/type/:eventType', async (req, res) => {
   const breadcrumbs = [
     {name: 'Home', url: '/', icon: 'home'},
   ]
-  console.log(breadcrumbs);
 
   // Fetch data
   const [dataEvents, dataEventTypes, dataPeople] = await Promise.all([
