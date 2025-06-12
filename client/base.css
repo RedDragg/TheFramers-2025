@@ -189,7 +189,7 @@ main {
 /* //////////////// */
 
 /* nav menu styling */
-a {
+body:not(.home-menu) a {
   text-decoration: none;
   color: var(--color-text);
 
