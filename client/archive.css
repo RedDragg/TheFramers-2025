@@ -19,16 +19,6 @@ body:has(.category) .home-menu{
   justify-content: center;
   padding-top: 4rem;
 
-  .breadcrumbs {
-    position: absolute;
-    top: -3rem;
-    color: var(--color-text);
-
-    a{
-      color: var(--color-text);
-    }
-  }
-
   /* wrapper voor de width */
   .category-wrapper {
     display: flex;
@@ -398,6 +388,28 @@ body:has(.category) .home-menu{
 
 .pagination button:not(.active):hover {
   background-color: var(--pagination-buttons-color-hover);
+}
+
+.category{
+
+    .breadcrumbs {
+    transform: scale(.9);
+    margin: 0;
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    width: auto;
+    color: var(--color-text);
+
+    a{
+      color: var(--color-text);
+    }
+
+    .crumb.is-current{
+      overflow: visible;
+      width: auto;
+    }
+  }
 }
 
 @media screen and (max-width: 600px) {

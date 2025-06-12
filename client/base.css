@@ -198,7 +198,11 @@ main {
 /* nav menu styling */
 body:not(.home-menu) a {
   text-decoration: none;
-  color: var(--color-text-light);
+  color: var(--color-text);
+}
+
+body:has(.relations) footer{
+  display: none;
 }
 
 /* a:hover {
