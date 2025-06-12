@@ -25,7 +25,7 @@ export function eventImageUrls(events) {
       const assetRel = person.relationships?.find(rel => rel.node === 'Asset');
       const imageUrl = assetRel 
         ? `https://archive.framerframed.nl/assets/${assetRel.uuid}/hd.webp`
-        : '/images/placeholder.webp'; // fallback image in public/images
+        : undefined
       return {
         ...person,
         imageUrl
