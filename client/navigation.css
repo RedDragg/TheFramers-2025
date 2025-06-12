@@ -18,7 +18,7 @@
 }
 
 body:has(#theme:checked) header {
-  z-index: 1000000;
+  z-index: 100;
 }
 
 .toggle {
@@ -61,7 +61,7 @@ body:has(#theme:checked) header {
 header {
   position: sticky;
   top: 0;
-  z-index: 9999;
+  z-index: 8;
 }
 
 .home-menu {
@@ -94,6 +94,10 @@ header {
 
   li:nth-child(2) {
     grid-area: nav-mid;
+
+    a{
+      display: none;
+    }
   }
 
   li:nth-child(3) {
@@ -142,6 +146,7 @@ header {
   /* Toon de <p> als .home-menu.settings een <p> bevat */
   .settings:has(p) p {
     display: block;
+    color: var(--menu-color);
   }
 
   /* MID menu */
@@ -151,7 +156,7 @@ header {
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 1rem 0.85rem 1rem 0;
+    padding: 1rem .75rem 1rem 0.25rem;
     gap: 1rem;
     border-radius: 1.3rem 0 0 1.3rem;
     background: var(--nav-bg-color);
@@ -178,97 +183,12 @@ header {
     }
   }
 
-  /* SEARCH  */
-  .search-container {
-    /* variabelen voor de animatie  */
-    --easing: cubic-bezier(0.4, 0, 0.2, 1);
-    --font-size: 1rem;
-    --transition-time-icon: 0.5s;
-    --transition-time-input: 0.5s 0.25s;
-    order: -5;
-
-    border: 1px solid transparent;
-    background: white;
-    border-radius: 0.8rem;
-    display: flex;
-    transition: border-color var(--transition-time-icon) linear,
-      padding var(--transition-time-input) var(--easing);
-  }
-
-  .search-container:not(:focus-within) {
-    --transition-time-input: 0.7s 0s;
-    background: transparent;
-  }
-
-  .search__input {
-    background: transparent;
-    border: solid 1px black;
-    border-radius: 5px;
-    color: black;
-    font-size: var(--font-size);
-    opacity: 0;
-    outline: none;
-    padding: 0;
-    transition: width var(--transition-time-input) var(--easing),
-      padding var(--transition-time-input) var(--easing),
-      opacity var(--transition-time-input) linear;
-    width: 0;
-
-    /* the usual webkit cancel button stylen */
-    &::-webkit-search-cancel-button {
-      -webkit-appearance: none;
-      height: 1em;
-      width: 1em;
-      border-radius: 50em;
-      background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
-        no-repeat 50% 50%;
-      background-size: contain;
-    }
-  }
-
-  .search__input::placeholder {
-    color: var(--color);
-    opacity: 0.75;
-  }
-
-  .search__label {
-    transition: transform var(--transition-time-icon) var(--easing), color 0.1s;
-  }
-
-  .search__icon-container svg {
-    transition: transform 0.1s ease;
-  }
-
-  .search__icon-container:hover svg {
-    transform: scale(1.1);
-    transition: transform 0.1s ease;
-  }
-
-  .search-container:focus-within .search__input {
-    opacity: 1;
-    padding: 0 0.5rem 0 0.5rem;
-    width: 100%;
-    border: none;
-  }
-
-  /* body:has(.search-container:focus-within) .home-menu > li:nth-child(2){
-              justify-content: flex-end;
-            } */
-
-  li:nth-child(2):has(.search-container:focus-within) {
-    padding: 1rem;
-  }
-
-  .search-container:focus-within .search__label {
-    transform: scale(0.5);
-  }
-
   /* settingsmenu */
 
   .settings {
     position: absolute;
     right: 0;
-    top: 10rem;
+    top: 4rem;
     background: black;
     height: auto;
     width: 100%;
@@ -368,10 +288,6 @@ header {
   .home-menu {
     display: flex;
     justify-content: space-between;
-
-    .search__input {
-      border: none;
-    }
 
     p {
       display: block;

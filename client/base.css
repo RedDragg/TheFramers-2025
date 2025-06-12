@@ -124,6 +124,21 @@ main{
       --talk-color: #b83e6b;
       --educational-color: #00acc1;
 
+              /* Transparantie variabele */
+      --archive-table-bg-hover-alpha: .2;
+
+      /* Kleuren in rgb (zonder # en zonder rgb() wrapper) */
+      --archive-exhibition-color-hover: 229, 57, 53;    /* #e53935 */
+      --archive-launch-color-hover: 251, 140, 0;        /* #fb8c00 */
+      --archive-debat-color-hover: 253, 216, 53;        /* #fdd835 */
+      --archive-symposium-color-hover: 67, 160, 71;     /* #43a047 */
+      --archive-exhibition-program-color-hover: 30, 136, 229;  /* #1e88e5 */
+      --archive-public-program-color-hover: 57, 73, 171;       /* #3949ab */
+      --archive-performance-color-hover: 142, 36, 170;  /* #8e24aa */
+      --archive-film-screening-color-hover: 106, 27, 154; /* #6a1b9a */
+      --archive-talk-color-hover: 184, 62, 107;         /* #b83e6b */
+      --archive-educational-color-hover: 0, 172, 193;   /* #00acc1 */
+
       /* breadcrumbs color */
       --breadcrumbs-color: #555;
 
@@ -140,7 +155,7 @@ body:has(#dark-mode-toggle:checked){
   /* navigatie */
   --color-border-td-archive: #e8eaed;
   --framer-framed-logo: white;
-  --svg-color:black;
+  --svg-color:rgb(255, 255, 255);
   /* archive table */
   --table-tr-background-hover: rgb(65, 0, 0);
   --table-tr-background: #2c2c2c;

@@ -27,11 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", function () {
   const sizeSlider = document.getElementById("sizeSlider");
   const lineHeightSlider = document.getElementById("lineHeightSlider");
-  const letterSpacingSlider = document.getElementById("letterSpacingSlider");
-
   const sizeValue = document.getElementById("sizeValue");
   const lineHeightValue = document.getElementById("lineHeightValue");
-  const letterSpacingValue = document.getElementById("letterSpacingValue");
+  const darkModeToggle = document.getElementById("dark-mode-toggle"); // <== Checkbox
 
   function updateStyles() {
     const textElements = document.querySelectorAll(".text");
@@ -39,22 +37,18 @@ document.addEventListener("DOMContentLoaded", function () {
     textElements.forEach(text => {
       text.style.fontSize = sizeSlider.value + "px";
       text.style.lineHeight = lineHeightSlider.value;
-      text.style.letterSpacing = letterSpacingSlider.value + "px";
     });
 
     sizeValue.textContent = sizeSlider.value + "px";
     lineHeightValue.textContent = lineHeightSlider.value;
-    letterSpacingValue.textContent = letterSpacingSlider.value + "px";
 
     saveSettings();
-
   }
 
   function saveSettings() {
     localStorage.setItem("textSettings", JSON.stringify({
       fontSize: sizeSlider.value,
       lineHeight: lineHeightSlider.value,
-      letterSpacing: letterSpacingSlider.value
     }));
   }
 
@@ -63,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (saved) {
       sizeSlider.value = saved.fontSize;
       lineHeightSlider.value = saved.lineHeight;
-      letterSpacingSlider.value = saved.letterSpacing;
     }
     updateStyles();
   }
@@ -71,21 +64,27 @@ document.addEventListener("DOMContentLoaded", function () {
   function resetToDefault() {
     sizeSlider.value = 16;
     lineHeightSlider.value = 1.5;
-    letterSpacingSlider.value = 0;
     updateStyles();
     localStorage.removeItem("textSettings");
   }
 
-  // Maak toegankelijk buiten deze functie:
+  // Checkbox-status opslaan en toepassen
+  if (darkModeToggle) {
+    const checked = localStorage.getItem("dark-mode-checked");
+    darkModeToggle.checked = checked === "true";
+
+    darkModeToggle.addEventListener("change", () => {
+      localStorage.setItem("dark-mode-checked", darkModeToggle.checked);
+    });
+  }
+
   window.resetToDefault = resetToDefault;
 
   if (
-    sizeSlider && lineHeightSlider && letterSpacingSlider &&
-    sizeValue && lineHeightValue && letterSpacingValue
+    sizeSlider && lineHeightSlider && sizeValue && lineHeightValue
   ) {
     sizeSlider.addEventListener("input", updateStyles);
     lineHeightSlider.addEventListener("input", updateStyles);
-    letterSpacingSlider.addEventListener("input", updateStyles);
 
     applySavedSettings();
   }
@@ -136,17 +135,23 @@ document.addEventListener("DOMContentLoaded", function () {
       this.render();
     }
 
-    showPage(page) {
-      this.currentPage = page;
-      this.items.forEach((item, index) => {
-        item.style.display =
-          index >= (page - 1) * this.itemsPerPage && index < page * this.itemsPerPage
-            ? ""
-            : "none";
-      });
-      this.renderPagination();
-      this.renderStats();
-    }
+  showPage(page) {
+    this.currentPage = page;
+
+    this.items.forEach((item, index) => {
+      item.style.display =
+        index >= (page - 1) * this.itemsPerPage && index < page * this.itemsPerPage
+          ? ""
+          : "none";
+    });
+
+    this.renderPagination();
+    this.renderStats();
+
+    // Scroll naar boven bij pagina wissel
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
 
    renderPagination() {
   this.paginationContainers.forEach(container => {
