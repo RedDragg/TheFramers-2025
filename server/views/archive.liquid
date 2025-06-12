@@ -24,7 +24,7 @@
 
         <!-- "Alle" optie -->
         <option value="all" {% if selectedEvent==null or selectedEvent=="all" %}selected{% endif %}>
-          {% if lang == "NL" %}Alle{% else %}All{% endif %}
+          {% if lang == "NL" %}Alle Evenementen{% else %}All Events{% endif %}
         </option>
 
         {% assign unique_types = "" | split: "," %}

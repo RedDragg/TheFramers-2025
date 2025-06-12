@@ -2,10 +2,6 @@ body:has(.category) {
   overflow-x: clip;
 }
 
-body:has(.category) header{
-  background: linear-gradient(to bottom, var(--color-background) 18%, transparent 0);
-}
-
 body:has(.category) .home-menu{
   li:has(#theme) a{
     display: none;
@@ -252,7 +248,8 @@ body:has(.category) .home-menu{
         background-color: rgba(var(--archive-film-screening-color-hover), var(--archive-table-bg-hover-alpha));
       }
 
-      &:has(.link-detail:hover):is(:nth-child(odd), :nth-child(even)):has(.types.talk) {
+      &:has(.link-detail:hover):is(:nth-child(odd), :nth-child(even)):has(.types.talk),
+      &:has(.link-detail:hover):is(:nth-child(odd), :nth-child(even)):has(.types.lezing) {
         box-shadow: inset 0 0 0 1px var(--talk-color);
         background-color: rgba(var(--archive-talk-color-hover), var(--archive-table-bg-hover-alpha));
       }
@@ -521,7 +518,8 @@ body:has(.category) .home-menu{
   background-color: var(--film-screening-color);
 }
 
-.types.talk {
+.types.talk,
+.types.lezing {
   background-color: var(--talk-color);
 }
 

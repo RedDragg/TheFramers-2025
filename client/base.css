@@ -168,6 +168,12 @@ body:has(#dark-mode-toggle:checked) {
 
   --deep-black: white;
 
+  .home-menu li:has(.framer-framed-logo){
+    background: white;
+    padding: .2rem;
+    transform: translate(1.4rem, 1rem);
+  }
+
 
   transition: color 0.5s ease, background 0.5s ease;
 }
@@ -201,6 +207,10 @@ body:not(.home-menu) a {
   color: var(--color-text);
 }
 
+.footer-links a{
+  color: var(--color-text-light)!important;
+}
+
 body:has(.relations) footer{
   display: none;
 }
@@ -222,9 +232,6 @@ h1 {
   font-family: var(--favorit-regular);
   font-size: var(--h1);
   font-weight: var(--regular-weight);
-  text-decoration: none;
-  letter-spacing: normal;
-  line-height: .9em;
   text-transform: capitalize;
 }
 
@@ -232,9 +239,7 @@ h2 {
   font-family: var(--favorit-regular);
   font-size: var(--h2);
   font-weight: var(--regular-weight);
-  text-decoration: none;
-  letter-spacing: normal;
-  line-height: 1.1em;
+
 }
 
 p {
