@@ -203,62 +203,6 @@ app.get('/:lang/archive/:eventType/:uuid', async (req, res) => {
 });
 
 
-
-app.get('/:lang/archive/person/:uuid', async (req, res) => {
-  try {
-    const { uuid, lang } = req.params;
-    const upperLang = lang.toUpperCase();
-
-    const breadcrumbs = [
-      { name: 'Home', url: '/', icon: 'home' },
-      { name: upperLang === 'EN' ? 'Overview' : 'Overzicht', url: `/${upperLang.toLowerCase()}/archive/type/all`, icon: 'overview' },
-    ];
-
-    const [dataEvents, dataPeople] = await Promise.all([
-      fetch(eventsAPI).catch(err => { throw new Error(`Failed to fetch events: ${err.message}`); }),
-      fetch(personAPI).catch(err => { throw new Error(`Failed to fetch persons: ${err.message}`); })
-    ]);
-
-    const [allEventsRaw, allPeopleRaw] = await Promise.all([
-      dataEvents.json().catch(err => { throw new Error(`Failed to parse events JSON: ${err.message}`); }),
-      dataPeople.json().catch(err => { throw new Error(`Failed to parse persons JSON: ${err.message}`); })
-    ]);
-
-    const allEventsWithImages = eventImageUrls(allEventsRaw);
-    const allPeopleWithImages = personImageUrls(allPeopleRaw);
-
-    const filteredEvents = filterEventsByLang(allEventsWithImages, upperLang);
-    const filteredArtists = filterPersonsByLang(allPeopleWithImages, upperLang);
-
-    const event = allEventsWithImages.find(e => e.event.uuid === uuid);
-    const person = allPeopleWithImages.find(p => p.person.uuid === uuid);
-
-    if (!event && !person) {
-      return res.status(404).send('Not found');
-    }
-
-    const title =
-      (upperLang === 'EN'
-        ? event?.event?.title_en
-        : event?.event?.title_nl) || person?.person?.name || 'Detail';
-
-    return res.send(renderTemplate('server/views/detail-page.liquid', {
-      breadcrumbs,
-      title,
-      event,
-      person,
-      allArtists: filteredArtists,
-      allEvents: filteredEvents,
-      lang: upperLang,
-      currentPath: req.path,
-    }));
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
-
 // Utility function to render templates with data
 const renderTemplate = (template, data) => {
   try {
