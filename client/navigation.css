@@ -94,10 +94,6 @@ header {
 
   li:nth-child(2) {
     grid-area: nav-mid;
-
-    a{
-      display: none;
-    }
   }
 
   li:nth-child(3) {
