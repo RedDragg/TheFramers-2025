@@ -4,7 +4,7 @@
 
 
 /* colors type category */
-.type-label{ 
+.type-label{
 
   /* 🔗: https://getcssscan.com/css-buttons-examples */
   font-size: 1rem;
@@ -23,52 +23,54 @@
 /* Colors per type */
 
 
-.type-label.expositie, 
+.type-label.expositie,
 .type-label.exhibition {
-  background-color: #E53935;
+  background-color: var(--exhibition-color);
 }
 
 .type-label.lancering,
 .type-label.launch {
-  background-color: #FB8C00;
+  background-color: var(--launch-color);
 }
 
 .type-label.debat,
 .type-label.debate {
-  background-color: #FDD835;
+  background-color: var(--debat-color);
 }
 
 .type-label.symposium {
-  background-color: #43A047;
+  background-color: var(--symposium-color);
 }
 
 .type-label.exhibition-program,
 .type-label.expositie-programma {
-  background-color: #1E88E5;
+  background-color: var(--exhibition-program-color);
 }
 
 .type-label.public-program,
 .type-label.publiek-programma {
-  background-color: #3949AB;
+  background-color: var(--public-program-color);
 }
 
 .type-label.performance {
-  background-color: #8E24AA;
+  background-color: var(--performance-color);
 }
 
 .type-label.film-screening,
 .type-label.filmvertoning {
-  background-color: #6A1B9A;
+  background-color: var(--film-screening-color);
 }
 
-.type-label.talk {
-  background-color: #D81B60;
+.type-label.talk,
+.type-label.lezing {
+  background-color: var(--talk-color);
 }
 
 .type-label.educational-program,
 .type-label.educatief-programma {
-  background-color: #00ACC1;
+  background-color: var(--educational-color);
 }
+
 
 
 
@@ -118,7 +120,7 @@
       }
 
       &::before {
-        
+
       }
   }
 }

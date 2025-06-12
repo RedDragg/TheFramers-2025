@@ -115,13 +115,13 @@ main {
   --pagination-buttons-color-hover: #ddd;
 
       /* types color */
-      --exhibition-color: #d55e00;
-      --launch-color: #56b4e9;
-      --debat-color: #009e73;
-      --symposium-color: #f0e442;
-      --exhibition-program-color: #e69f00;
-      --public-program-color: #cc79a7;
-      --performance-color: #56e04e;
+      --exhibition-color: #e53935;
+      --launch-color: #fb8c00;
+      --debat-color: #fdd835;
+      --symposium-color: #43a047;
+      --exhibition-program-color: #1e88e5;
+      --public-program-color: #3949ab;
+      --performance-color: #8e24aa;
       --film-screening-color: #6a1b9a;
       --talk-color: #b83e6b;
       --educational-color: #00acc1;
