@@ -51,6 +51,7 @@ main {
   --favorit-regular: 'Favorit regular', Arial, Helvetica, sans-serif;
 
   /* Styling & weight */
+  --text-weight: 200;
   --regular-weight: 300;
 
   /* Font sizes – mobile */
@@ -61,7 +62,7 @@ main {
   --p-small: 1rem;
 
   /* Font sizes – desktop */
-  --h1: 3rem;
+  --h1: 2.6rem;
   --h2: 1.3rem;
   --h3: 1.75rem;
   --h4: 1.5rem;
@@ -206,13 +207,19 @@ a:-webkit-any-link {
   cursor: pointer;
 }
 
-p {
-  color: var(--color-text);
-}
-
 /* /////////////////////////// */
 /* 🪐🪐🪐 TEXT FORMATTING 🪐🪐🪐 */
 /* /////////////////////////// */
+
+h1 {
+  font-family: var(--favorit-regular);
+  font-size: var(--h1);
+  font-weight: var(--regular-weight);
+  text-decoration: none;
+  letter-spacing: normal;
+  line-height: .9em;
+  text-transform: capitalize;
+}
 
 h2 {
   font-family: var(--favorit-regular);
@@ -220,6 +227,15 @@ h2 {
   font-weight: var(--regular-weight);
   text-decoration: none;
   letter-spacing: normal;
+  line-height: 1.1em;
+}
+
+p {
+  font-family: var(--favorit-regular);
+  font-size: var(--p);
+  color: var(--color-text);
+  font-weight: var(--text-weight);
+  line-height: 1.4em;
 }
 
 @media (prefers-reduced-motion: reduce) {

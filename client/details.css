@@ -217,6 +217,10 @@ main {
 .artist,
 .exhibitions {
     display: flex;
+    height: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     flex-direction: row;
     flex-wrap: wrap;
     gap: .5rem 1rem;

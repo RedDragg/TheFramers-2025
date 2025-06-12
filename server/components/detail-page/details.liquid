@@ -60,17 +60,23 @@
       </summary>
 
       {% if event %}
-        <h2>
+        <h1>
           {% if lang == 'EN' %}
             {{ title | downcase | replace: 'exhibition', '' | replace: 'launch', '' | replace: 'debate', '' | replace: 'symposium', '' | replace: 'public program', '' | replace: 'performance', '' | replace: 'film screening', '' | replace: 'talk', '' | replace: 'educational program', '' | replace: ':', '' | strip }}
           {% else %}
             {{ title | downcase | replace: 'expositie programma', '' | replace: 'expositie', '' | replace: 'lancering', '' | replace: 'debat', '' | replace: 'symposium', '' | replace: 'publiek programma', '' | replace: 'performance', '' | replace: 'film vertoning', '' | replace: 'lezing', '' | replace: 'educatief programma', '' | replace: ':', '' | strip }}
           {% endif %}
-        </h2>
+        </h1>
         
       {% elsif person %}
         <section class="person">
-          <h2>{{ person.person.name }}</h2>
+          <h1>
+            {% if lang == 'EN' %}
+              {{ person.person.name | downcase | replace: 'exhibition', '' | replace: 'launch', '' | replace: 'debate', '' | replace: 'symposium', '' | replace: 'public program', '' | replace: 'performance', '' | replace: 'film screening', '' | replace: 'talk', '' | replace: 'educational program', '' | replace: ':', '' | strip }}
+            {% else %}
+              {{ person.person.name | downcase | replace: 'expositie programma', '' | replace: 'expositie', '' | replace: 'lancering', '' | replace: 'debat', '' | replace: 'symposium', '' | replace: 'publiek programma', '' | replace: 'performance', '' | replace: 'film vertoning', '' | replace: 'lezing', '' | replace: 'educatief programma', '' | replace: ':', '' | strip }}
+            {% endif %}
+          </h1>
           <a href="{{ person.person.guid }}" target="_blank">
             <svg role="graphics-symbol" width="24" height="24" aria-labelledby="artist-website" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 21.5C17.2467 21.5 21.5 17.2467 21.5 12C21.5 6.75329 17.2467 2.5 12 2.5C6.75329 2.5 2.5 6.75329 2.5 12C2.5 17.2467 6.75329 21.5 12 21.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -98,23 +104,23 @@
           <img src="{{ event.imageUrl }}" {% if lang == 'EN' %}alt="Cover image of {{ title }}" {% else %} alt="Omslag en hoofdfoto van {{ title }}"{% endif %} class="category-image" loading="lazy">
         </li>
         <li class="type">
-          <h3>
+          <h2>
             {% if lang == 'EN' %}
             Type
             {% else %}
             Type
             {% endif %}
-          </h3>
+          </h2>
           <p>{{ type }}</p>
         </li>
         <li class="date">
-          <h3>
+          <h2>
             {% if lang == 'EN' %}
               Date
             {% else %}
               Datum
             {% endif %}
-          </h3>
+          </h2>
           {% if item.event.date_start == "null" or item.event.date_start == blank and item.event.date_end == nil or item.event.date_end == blank %}
             {% if lang == 'EN' %}
               <p>One day event</p>
@@ -131,13 +137,13 @@
         </li>
         <li class="artist">
           {% comment %} Better element for this? {% endcomment %}
-          <h3>
+          <h2>
             {% if lang == 'EN' %}
             Artist
             {% else %}
             Artiest
             {% endif %}
-          </h3>
+          </h2>
           {% for rel in event.relationships %}
           {% if rel.node == "Person" %}
           {% for artist in allArtists %}
@@ -170,13 +176,13 @@
     {% elsif person %}
         <ul>
           <li class="exhibitions">
-            <h3>
+            <h2>
               {% if lang == 'EN' %}
               Exhibitions
               {% else %}
               Exposities
               {% endif %}
-            </h3>
+            </h2>
             {% for rel in person.relationships %}
               {% if rel.type == 'HAS_PARTICIPANT' %}
                 {% for event in allEvents %}
@@ -194,13 +200,13 @@
             {% endfor %}
           </li>
           <li class="date">
-            <h3>
+            <h2>
               {% if lang == 'EN' %}
               Year
               {% else %}
               Jaar
               {% endif %}
-            </h3>
+            </h2>
           <p>{{ person.person.year }}</p>
           </li>
         </ul>
@@ -236,10 +242,24 @@
       </summary>
 
       {% if event %}
-      <h2>{{ title }}</h2>
+      <h1>
+        {% if lang == 'EN' %}
+            {{ title | downcase | replace: 'exhibition', '' | replace: 'launch', '' | replace: 'debate', '' | replace: 'symposium', '' | replace: 'public program', '' | replace: 'performance', '' | replace: 'film screening', '' | replace: 'talk', '' | replace: 'educational program', '' | replace: ':', '' | strip }}
+          {% else %}
+            {{ title | downcase | replace: 'expositie programma', '' | replace: 'expositie', '' | replace: 'lancering', '' | replace: 'debat', '' | replace: 'symposium', '' | replace: 'publiek programma', '' | replace: 'performance', '' | replace: 'film vertoning', '' | replace: 'lezing', '' | replace: 'educatief programma', '' | replace: ':', '' | strip }}
+          {% endif %}
+      </h1>
       {% elsif person %}
-      <h2>{{ artist.person.name }}</h2>
+      <h1>
+        {% if lang == 'EN' %}
+              {{ person.person.name | downcase | replace: 'exhibition', '' | replace: 'launch', '' | replace: 'debate', '' | replace: 'symposium', '' | replace: 'public program', '' | replace: 'performance', '' | replace: 'film screening', '' | replace: 'talk', '' | replace: 'educational program', '' | replace: ':', '' | strip }}
+            {% else %}
+              {{ person.person.name | downcase | replace: 'expositie programma', '' | replace: 'expositie', '' | replace: 'lancering', '' | replace: 'debat', '' | replace: 'symposium', '' | replace: 'publiek programma', '' | replace: 'performance', '' | replace: 'film vertoning', '' | replace: 'lezing', '' | replace: 'educatief programma', '' | replace: ':', '' | strip }}
+            {% endif %}
+      </h1>
       {% endif %}
+        
+
 
       {% comment %} 
       /* //////////////////// */
@@ -257,9 +277,9 @@
                     <a href="/{{ lang }}/archive/{{ event.event.uuid }}">
                       <img src="{{ event.imageUrl }}" class="relation-img" {% if lang == 'EN' %}alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}" {% else %}alt="Portret foto van {{ artist.person.name }}, die een rol heeft gespeeld bij dit project"{% endif %} loading="lazy">
                       {% if lang == 'EN' %}
-                        <h3>{{ event.event.title_en }}</h3>
+                        <h2>{{ event.event.title_en }}</h2>
                       {% else %}
-                        <h3>{{ event.event.title_nl }}</h3>
+                        <h2>{{ event.event.title_nl }}</h2>
                       {% endif %}
                     </a>
                   </li>
@@ -278,7 +298,7 @@
                     <li>
                       <a href="/{{ lang }}/archive/{{ rel.uuid }}">
                         <img src="{{ artist.imageUrl }}" class="relation-img" {% if lang == 'EN' %}alt="Portrait picture of {{ artist.person.name }}, who has had a role in this {{ type }}" {% else %}alt="Portret foto van {{ artist.person.name }}, die een rol heeft gespeeld bij dit project"{% endif %}>
-                        <h3>{{ artist.person.name }}</h3>
+                        <h2>{{ artist.person.name }}</h2>
                       </a>
                     </li>
                   {% endif %}
@@ -298,13 +318,13 @@
                   </title>
                   <path d="M36 0.5C35.2031 0.5 34.4375 0.81641 33.875 1.37891C33.3125 1.94532 32.9961 2.70701 32.9961 3.50391C32.9961 4.29688 33.3125 5.06251 33.875 5.62501L41.75 13.5L33.875 21.3789C33.3125 21.9414 32.9961 22.7031 32.9961 23.5C32.9961 24.2969 33.3125 25.0586 33.875 25.6211C34.4375 26.1875 35.2031 26.5039 36 26.5039C36.7969 26.5039 37.5586 26.1875 38.1211 25.6211L45.9961 17.7422L53.8711 25.6211H53.875C54.4375 26.1875 55.1992 26.5039 55.9961 26.5039C56.793 26.5039 57.5547 26.1875 58.1172 25.6211C58.6797 25.0586 58.9961 24.2969 58.9961 23.5C58.9961 22.7031 58.6797 21.9414 58.1172 21.3789L50.2422 13.5L58.1172 5.62501C58.6797 5.06251 58.9961 4.29691 58.9961 3.50391C58.9961 2.70703 58.6797 1.94531 58.1172 1.37891C57.5547 0.81641 56.793 0.5 55.9961 0.5C55.1992 0.5 54.4375 0.81641 53.875 1.37891L46 9.25391L38.125 1.37891H38.1211C37.5586 0.81641 36.7969 0.5 36 0.5ZM7.00001 30.504C3.16801 30.504 0.00390625 33.672 0.00390625 37.5001V66.5041C0.00390625 73.6486 5.85941 79.5041 13.0039 79.5041H79.0079C86.1524 79.5041 92.0039 73.6486 92.0039 66.5041V37.5001C92.0039 33.6681 88.832 30.504 85 30.504H71.504C68.0313 30.504 64.754 32.1798 62.7267 35.0001L56.6447 43.4689C55.7424 44.7267 54.3049 45.4689 52.7541 45.4689H39.2541C37.7072 45.4689 36.258 44.7267 35.3557 43.4689L29.2737 35.0001C27.2464 32.1798 23.9768 30.504 20.5042 30.504H7.00001ZM7.00001 36.5079H20.504C22.0509 36.5079 23.4962 37.2423 24.3985 38.5001L30.4805 46.9767C32.5078 49.797 35.7774 51.4728 39.25 51.4728H52.746C56.2187 51.4728 59.496 49.797 61.5233 46.9767L67.6053 38.5001C68.5076 37.2423 69.9569 36.5079 71.5037 36.5079H84.9997C85.5857 36.5079 86.0036 36.9181 86.0036 37.504V66.508C86.0036 70.4103 82.9059 73.5041 79.0075 73.5041H13.0035C9.10121 73.5041 5.99961 70.4064 5.99961 66.508V37.504C5.99961 36.9181 6.41758 36.5079 7.00351 36.5079H7.00001Z" fill="black"/>
                 </svg>
-                <h3>
+                <h2>
                   {% if lang == 'EN' %}
                     Sorry, there are no relations to this content!
                   {% else %}
                     Excuses, er zijn geen relaties gevonden bij deze content!
                   {% endif %}
-                </h3>
+                </h2>
               </li>
             {% endif %}
           {% endif %}
@@ -312,25 +332,3 @@
     </details>
   </div>
 </div>
-
-<script>
-  // Global template data for use in external JS
-  window.siteTemplateData = {
-    lang: '{% if lang == "EN" %}en{% else %}nl{% endif %}',
-    eventTitle: {% if event %}'{{ title | escape }}'{% else %}null{% endif %},
-    personName: {% if person %}'{{ person.person.name | escape }}'{% else %}null{% endif %},
-    eventUuid: {% if event %}'{{ event.event.uuid }}'{% else %}null{% endif %},
-    personUuid: {% if person %}'{{ person.person.uuid }}'{% else %}null{% endif %},
-    isEnglish: {% if lang == "EN" %}true{% else %}false{% endif %},
-    translations: {
-      home: '{% if lang == "EN" %}Home{% else %}Thuis{% endif %}',
-      back: '{% if lang == "EN" %}Back{% else %}Terug{% endif %}',
-      archive: '{% if lang == "EN" %}Archive{% else %}Archief{% endif %}',
-      details: '{% if lang == "EN" %}Details{% else %}Details{% endif %}',
-      english: '{% if lang == "EN" %}English{% else %}Engels{% endif %}',
-      dutch: '{% if lang == "EN" %}Dutch{% else %}Nederlands{% endif %}'
-    }
-  };
-</script>
-
-<script src="/client/breadcrumbs-nav.js"></script>
