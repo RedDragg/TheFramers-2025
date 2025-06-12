@@ -195,10 +195,6 @@ main {
 body:not(.home-menu) a {
   text-decoration: none;
   color: var(--color-text);
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 /* a:hover {

@@ -1,6 +1,15 @@
 /* /////////////////////////// */
 /* 🪩🪩🪩 FOOTER STYLING 🪩🪩🪩  */
 /* /////////////////////////// */
+body:has(.details-position) main{
+  padding-bottom: 200vh;
+}
+
+body:has(.data-carousel) footer > div{
+  position: absolute;
+  bottom: 0;
+}
+
 
 footer {
   view-transition-name: footer;
@@ -11,6 +20,10 @@ footer {
 
   & a {
     color: var(--bright-white);
+    
+    &:hover{
+      text-decoration: underline;
+    }
   }
 }
 
