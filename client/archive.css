@@ -591,9 +591,10 @@ body:has(.category) .home-menu{
     transform: translateX(20dvh);
     opacity: 0;
     transition: transform .3s ease, opacity 1s ease;
-          background: white;
-      padding: 2rem;
-      z-index: 50;
+    background: white;
+    padding: 2rem;
+    z-index: 50;
+    cursor: pointer;
   }
 
   .legend li {
