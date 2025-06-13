@@ -79,6 +79,8 @@ header {
 
   .framer-framed-logo {
     width: 100%;
+    /* stroke: var(--framer-framed-logo); */
+    fill: var(--framer-framed-logo);
   }
 
   svg:not(.framer-framed-logo) {
@@ -90,7 +92,6 @@ header {
   > li:nth-child(1) {
     grid-area: nav-logo;
     width: 7.85rem;
-    transform: translate(.35rem, .85rem);
   }
 
   li:nth-child(2) {
@@ -295,6 +296,8 @@ header {
       font-weight: 600;
     }
 
+
+
     /* mid menu */
     > li:nth-child(2) {
       align-items: center;
@@ -317,6 +320,7 @@ header {
 
       .all-content{
         display: flex;
+        align-items: center;
         gap: .2rem;
       }
 

@@ -126,7 +126,7 @@ main {
       --talk-color: #b83e6b;
       --educational-color: #00acc1;
 
-              /* Transparantie variabele */
+      /* Transparantie variabele */
       --archive-table-bg-hover-alpha: .2;
 
       /* Kleuren in rgb (zonder # en zonder rgb() wrapper) */
@@ -168,17 +168,9 @@ body:has(#dark-mode-toggle:checked) {
 
   --deep-black: white;
 
-  .home-menu li:has(.framer-framed-logo){
-    background: white;
-    padding: .2rem;
-    transform: translate(1.4rem, 1rem);
-  }
-
 
   transition: color 0.5s ease, background 0.5s ease;
 }
-
-
 
 body {
   font-family: "Favorit", sans-serif;
