@@ -78,8 +78,8 @@ header {
 
 
   .framer-framed-logo {
-    width: 95%;
-    stroke: var(--framer-framed-logo);
+    width: 100%;
+    /* stroke: var(--framer-framed-logo); */
     fill: var(--framer-framed-logo);
   }
 
