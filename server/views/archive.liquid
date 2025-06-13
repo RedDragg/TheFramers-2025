@@ -10,106 +10,140 @@
 <main class="category text">
   <div class="category-wrapper">
 
-  {% render '../components/navigation/breadcrumbs.liquid',
+    {% render '../components/navigation/breadcrumbs.liquid',
     breadcrumbs: breadcrumbs,
     currentName: title,
     currentIcon: crumbType
-  %}
+    %}
 
-<section class="category-list">
-  <div class="filter-container">
-    <form method="GET" action="/{{ lang }}/archive/type/all">
-      <label for="eventTypeSelect"></label>
-      <select name="eventType" id="eventTypeSelect" onchange="this.form.submit()">
+    <section class="category-list">
+      <div class="filter-container">
+        <form method="GET" action="/{{ lang }}/archive/type/all">
+          <label for="eventTypeSelect"></label>
+          <select name="eventType" id="eventTypeSelect" onchange="this.form.submit()">
 
-        <!-- "Alle" optie -->
-        <option value="all" {% if selectedEvent==null or selectedEvent=="all" %}selected{% endif %}>
-          {% if lang == "NL" %}Alle Evenementen{% else %}All Events{% endif %}
-        </option>
+            <!-- "Alle" optie -->
+            <option value="all" {% if selectedEvent==null or selectedEvent=="all" %}selected{% endif %}>
+              {% if lang == "NL" %}Alle Evenementen{% else %}All Events{% endif %}
+            </option>
 
-        {% assign unique_types = "" | split: "," %}
-        {% for type in allEventTypes %}
-        {% if lang == "EN" %}
-        {% assign typeName = type.en %}
+            {% assign unique_types = "" | split: "," %}
+            {% for type in allEventTypes %}
+            {% if lang == "EN" %}
+            {% assign typeName = type.en %}
+            {% else %}
+            {% assign typeName = type.nl %}
+            {% endif %}
+
+            {% if typeName and typeName != "" and typeName != blank %}
+            {% unless unique_types contains typeName %}
+            {% assign unique_types = unique_types | push: typeName %}
+            <option value="{{ typeName }}" {% if typeName==selectedEvent %}selected{% endif %}>
+              <div class="types {{ typeName | downcase }}"></div> {{ typeName }}
+            </option>
+            {% endunless %}
+            {% endif %}
+            {% endfor %}
+          </select>
+        </form>
+        <label for="itemsPerPage"><select id="itemsPerPage">
+            <option value="8">8</option>
+            <option value="12" selected>12</option>
+            <option value="24">24</option>
+            <option value="48">48</option>
+          </select></label>
+      </div>
+      <h1>
+        {% if selectedEvent == "all" or selectedEvent == null %}
+        {% if lang == "NL" %}
+        Alle Evenementen
         {% else %}
-        {% assign typeName = type.nl %}
+        All Events
+        {% endif %}
+        {% else %}
+        {{ selectedEvent }}
+        {% endif %}
+      </h1>
+
+
+      <!-- <a href="/">Back</a> -->
+      <div class="category-header-container">
+        <div class="pagination-container">
+          <div class="pagination-stats"></div>
+        </div>
+        <div class="category-header">
+
+          <ul>
+            <li><label for="images-only"><input type="radio" id="images-only" name="view-category" hidden>Grid</label>
+            </li>
+            <li><label for="list-items"><input type="radio" id="list-items" name="view-category" hidden
+                  checked>List</label>
+            </li>
+          </ul>
+        </div>
+        {% assign event_count = 0 %}
+        {% assign row_index = 0 %}
+        {% for item in allEvents %}
+
+        {% if lang == "EN" %}
+        {% assign eventTypeToCheck = item.event.type_en %}
+        {% else %}
+        {% assign eventTypeToCheck = item.event.type_nl %}
         {% endif %}
 
-        {% if typeName and typeName != "" and typeName != blank %}
-        {% unless unique_types contains typeName %}
-        {% assign unique_types = unique_types | push: typeName %}
-        <option value="{{ typeName }}" {% if typeName==selectedEvent %}selected{% endif %}>
-          <div class="types {{ typeName | downcase }}"></div> {{ typeName }}
-        </option>
-        {% endunless %}
+        {% if selectedEvent == "all" or not selectedEvent or eventTypeToCheck == selectedEvent %}
+        {% assign event_count = event_count | plus: 1 %}
         {% endif %}
         {% endfor %}
-      </select>
-    </form>
-    <label for="itemsPerPage"><select id="itemsPerPage">
-        <option value="8">8</option>
-        <option value="12" selected>12</option>
-        <option value="24">24</option>
-        <option value="48">48</option>
-      </select></label>
-  </div>
-<h1>
-  {% if selectedEvent == "all" or selectedEvent == null %}
-    {% if lang == "NL" %}
-      Alle Evenementen
-    {% else %}
-      All Events
-    {% endif %}
-  {% else %}
-    {{ selectedEvent }}
-  {% endif %}
-</h1>
 
 
-  <!-- <a href="/">Back</a> -->
-  <div class="category-header-container">
-    <div class="pagination-container">
-      <div class="pagination-stats"></div>
-    </div>
-    <div class="category-header">
+      </div>
 
-      <ul>
-        <li><label for="images-only"><input type="radio" id="images-only" name="view-category" hidden>Grid</label>
-        </li>
-        <li><label for="list-items"><input type="radio" id="list-items" name="view-category" hidden checked>List</label>
-        </li>
-      </ul>
-    </div>
-    {% assign event_count = 0 %}
-    {% assign row_index = 0 %}
-    {% for item in allEvents %}
+      {% render '../components/archive/archiveTable.liquid'
+      allEvents: allEvents,
+      allArtists: allArtists,
+      allEventTypes: allEventTypes,
+      title: title,
+      lang: lang,
+      currentPath: currentPath
+      %}
 
-    {% if lang == "EN" %}
-    {% assign eventTypeToCheck = item.event.type_en %}
-    {% else %}
-    {% assign eventTypeToCheck = item.event.type_nl %}
-    {% endif %}
-
-    {% if selectedEvent == "all" or not selectedEvent or eventTypeToCheck == selectedEvent %}
-    {% assign event_count = event_count | plus: 1 %}
-    {% endif %}
-    {% endfor %}
-
-
+    </section>
   </div>
 
-{% render '../components/archive/archiveTable.liquid'
-    allEvents: allEvents,
-    allArtists: allArtists,
-    allEventTypes: allEventTypes,
-    title: title,
-    lang: lang,
-    currentPath: currentPath
- %}
 
- </section>
-</div>
 
 </main>
+<label for="legenda">
+  <input type="checkbox" id="legenda" hidden>
+  <p>  {% if lang == "NL" %}
+    Legenda
+  {% else %}
+    Legend
+  {% endif %}</p>
+</label>
 
+  <label for="legenda">
+    <ul class="legend">
+    {% assign unique_types = "" | split: "," %}
+    {% for type in allEventTypes %}
+    {% if lang == "EN" %}
+    {% assign typeName = type.en %}
+    {% else %}
+    {% assign typeName = type.nl %}
+    {% endif %}
+
+    {% assign typeSlug = typeName | downcase | replace: " ", "-" %}
+
+    {% if typeName and typeName != "" and typeName != blank %}
+    {% unless unique_types contains typeName %}
+    {% assign unique_types = unique_types | push: typeName %}
+    <li>
+      <span class="legend-color {{ typeSlug }}"></span> {{ typeName }}
+    </li>
+    {% endunless %}
+    {% endif %}
+    {% endfor %}
+  </ul>
+  </label>
 {% endblock %}

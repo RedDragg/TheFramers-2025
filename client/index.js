@@ -90,30 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
   applySavedSettings();
 });
 
-
-
-    //scroll-nav
-
-    document.addEventListener("DOMContentLoaded", function () {
-    const footer = document.querySelector('.footer-container');
-
-    if (!footer) return;
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      const totalHeight = document.body.scrollHeight;
-
-      const distanceFromBottom = totalHeight - (scrollY + viewportHeight);
-
-      if (distanceFromBottom <= 16) {
-        footer.style.zIndex = '0';
-      } else {
-        footer.style.zIndex = '-1';
-      }
-    });
-  });
-
   //archive-pagination
 document.addEventListener("DOMContentLoaded", function () {
   class Pagination {

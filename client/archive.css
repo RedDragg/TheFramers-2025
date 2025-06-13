@@ -312,7 +312,7 @@ body:has(.category) .home-menu{
     height: fit-content;
 
     .types {
-      width: 0.45rem;
+      width: 0.7rem;
       aspect-ratio: 1/1;
       border-radius: 50%;
     }
@@ -397,6 +397,7 @@ body:has(.category) .home-menu{
     top: -3rem;
     width: auto;
     color: var(--color-text);
+    flex-wrap: nowrap;
 
     a{
       color: var(--color-text);
@@ -404,6 +405,10 @@ body:has(.category) .home-menu{
 
     .crumb.is-current{
       overflow: visible;
+      width: auto;
+    }
+
+    .crumb-name{
       width: auto;
     }
   }
@@ -477,6 +482,32 @@ body:has(.category) .home-menu{
       }
     }
   }
+
+  label:has(#legenda){
+    bottom: 1rem;
+    left: 1rem;
+    top: inherit!important;
+    right: inherit!important;
+  }
+
+  .legend{
+    top: 10rem!important;
+    right: 0rem!important;
+    left: 0;
+    background: white;
+    border-radius: 5px;
+    padding: 2rem;
+    border: solid 1px black;
+  }
+
+    body:has(#legenda:checked){
+    .category, header, footer{
+        filter: blur(5px);
+        transition: filter 0.3s ease;
+        pointer-events: none;
+    }
+  }
+
 }
 
 /* types color */
@@ -527,3 +558,121 @@ body:has(.category) .home-menu{
 .types.educatief-programma {
   background-color: var(--educational-color);
 }
+
+
+/* legenda */
+    label:has(#legenda){
+        display: flex;
+        padding: .5rem;
+        position: fixed;
+        right: 1rem;
+        top: 5rem;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.5);
+        z-index: 50;
+        border: solid 1px black;
+        cursor: pointer;
+
+        &:hover{
+          background: rgb(165, 165, 165);
+        }
+
+    }
+
+  .legend {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    position: fixed;
+    top: 10rem;
+    right: 2rem;
+    transform: translateX(20dvh);
+    opacity: 0;
+    transition: transform .3s ease, opacity 1s ease;
+          background: white;
+      padding: 2rem;
+      z-index: 50;
+  }
+
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: black;
+  }
+
+  .legend-color {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+.legend-color.expositie,
+.legend-color.exhibition {
+  background-color: var(--exhibition-color);
+}
+
+.legend-color.lancering,
+.legend-color.launch {
+  background-color: var(--launch-color);
+}
+
+.legend-color.debat,
+.legend-color.debate {
+  background-color: var(--debat-color);
+}
+
+.legend-color.symposium {
+  background-color: var(--symposium-color);
+}
+
+.legend-color.exhibition-program,
+.legend-color.expositie-programma {
+  background-color: var(--exhibition-program-color);
+}
+
+.legend-color.public-program,
+.legend-color.publiek-programma {
+  background-color: var(--public-program-color);
+}
+
+.legend-color.performance {
+  background-color: var(--performance-color);
+}
+
+.legend-color.film-screening,
+.legend-color.filmvertoning {
+  background-color: var(--film-screening-color);
+}
+
+.legend-color.talk,
+.legend-color.lezing {
+  background-color: var(--talk-color);
+}
+
+.legend-color.educational-program,
+.legend-color.educatief-programma {
+  background-color: var(--educational-color);
+}
+
+
+  body:has(#legenda:checked){
+
+    label:has(#legenda){
+      background: rgb(168, 168, 168);
+    }
+    .legend{
+        transform: translateX(0);
+        opacity: 1;
+        transition: transform .3s ease, opacity 1s ease;
+    }
+
+    /* .category, header, footer{
+        filter: blur(5px);
+        transition: filter 0.3s ease;
+        pointer-events: none;
+    } */
+  }
+
