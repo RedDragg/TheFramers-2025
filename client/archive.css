@@ -595,6 +595,7 @@ body:has(.category) .home-menu{
     padding: 2rem;
     z-index: 50;
     cursor: pointer;
+    pointer-events: none;
   }
 
   .legend li {
@@ -731,6 +732,7 @@ body:has(.category) .home-menu{
         transform: translateX(0);
         opacity: 1;
         transition: transform .3s ease, opacity 1s ease;
+        pointer-events: inherit;
     }
 
     /* .category, header, footer{
